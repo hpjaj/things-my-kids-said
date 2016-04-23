@@ -37,6 +37,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem 'launchy', '~> 2.4'
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -52,9 +53,9 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
 
 gem 'devise'
 gem 'figaro', '~> 1.1'
+gem 'simple_form'
