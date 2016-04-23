@@ -15,6 +15,4 @@ describe 'Creating a new post' do
 
     expect{ click_button 'Save' }.to change{ Post.count }.by(1)
   end
-
-  it "displays the"
 end
