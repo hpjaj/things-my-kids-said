@@ -11,7 +11,7 @@ RSpec.describe PostsController, type: :controller do
     context "user has one kid" do
       before do
         sign_in user
-        post :create, post: { body: body, kids_ids: kid.id.to_s }
+        post :create, post: { body: body, kid_ids: kid.id.to_s }
       end
 
       it "creates associations between the user and the user's post" do
@@ -35,7 +35,7 @@ RSpec.describe PostsController, type: :controller do
 
       before do
         sign_in user
-        post :create, post: { body: body, kids_ids: [kid.id, kid_2.id] }
+        post :create, post: { body: body, kid_ids: [kid.id, kid_2.id] }
       end
 
       it "user has two kids" do
@@ -54,7 +54,7 @@ RSpec.describe PostsController, type: :controller do
     context "with an invalid kid id" do
       before do
         sign_in user
-        post :create, post: { body: body, kids_ids: kid.id.to_i + 1 }
+        post :create, post: { body: body, kid_ids: kid.id.to_i + 1 }
       end
 
       it "should not create a new post" do

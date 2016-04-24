@@ -30,15 +30,17 @@ class PostsController < ApplicationController
     ActiveRecord::Base.transaction do
       begin
         @post = current_user.posts.create!(post_params)
-        if params[:post][:kids_ids].class == Array
-          params[:post][:kids_ids].each do |kid_id|
-            @post.kids << Kid.find(kid_id) if kid_id.present?
+        if params[:post][:kid_ids].class == Array
+          kids_ids = params[:post][:kid_ids].reject(&:empty?)
+
+          kids_ids.each do |kid_id|
+            @post.kids << Kid.find(kid_id)
           end
         else
-          @post.kids << Kid.find(params[:post][:kids_ids])
+          @post.kids << Kid.find(params[:post][:kid_ids])
         end
       rescue Exception => e
-        logger.error "User #{current_user.id} experience #{e.message} when trying to create a new post"
+        logger.error "Error: User #{current_user.id} experienced '#{e.message}' when trying to create a new post"
         raise ActiveRecord::Rollback
         false
       end
