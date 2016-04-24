@@ -6,6 +6,7 @@ describe 'Creating a new post' do
   Warden.test_mode!
 
   let(:user) { create :user }
+  let!(:kid) { create :kid, users: [user] }
 
   before { sign_into_app user }
 
