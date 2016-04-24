@@ -1,10 +1,16 @@
-<%= simple_form_for @post do |f| %>
-  <% if @kids.size > 1 %>
-    <%= f.association :kids, collection: @kids, as: :check_boxes %>
-  <% else %>
-    <p>Kid: <%= @kids.first.name.titleize %></p>
-    <input name="post[kid_ids]" type="hidden" value="<%= @kids.first.id %>">
+<% if @kids.present? %>
+
+  <%= simple_form_for @post do |f| %>
+    <% if @kids.size > 1 %>
+      <%= f.association :kids, collection: @kids, as: :check_boxes %>
+    <% else %>
+      <p>Kid: <%= @kids.first.name.titleize %></p>
+      <input name="post[kid_ids]" type="hidden" value="<%= @kids.first.id %>">
+    <% end %>
+    <%= f.input :body, label: 'Quote' %>
+    <%= f.submit 'Save' %>
   <% end %>
-  <%= f.input :body, label: 'Quote' %>
-  <%= f.submit 'Save' %>
+
+<% else %>
+  <%= link_to 'Create Your Kid', new_kid_path %>
 <% end %>
