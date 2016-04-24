@@ -73,5 +73,21 @@ describe 'Creating a new post' do
         expect(current_path).to eq new_kid_path
       end
     end
+
+    context "with an empty form" do
+      let(:user) { create :user }
+      let!(:kid) { create :kid, users: [user] }
+
+      before do
+        sign_into_app user
+        visit new_post_path
+      end
+
+      it "displays the error message when saving with invalid data" do
+        click_button 'Save'
+
+        expect(page).to have_content 'There was a problem saving your quote. Please try again.'
+      end
+    end
   end
 end
