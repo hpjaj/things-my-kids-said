@@ -1,0 +1,3 @@
+<% kid = @post.kids.first %>
+
+<h4>When <%= @post.kids.first.name.titleize %> was <%= Age.new(kid.birthdate, @post.created_at).display %></h4>
