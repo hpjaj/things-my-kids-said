@@ -8,6 +8,9 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = current_user.posts.build
+    @kids = current_user.kids
+
     if post_creation_transaction
       redirect_to posts_path
     else

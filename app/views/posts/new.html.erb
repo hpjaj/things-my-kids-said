@@ -1,9 +1,10 @@
 <%= simple_form_for @post do |f| %>
-  <%= f.input :body, label: 'Quote' %>
   <% if @kids.size > 1 %>
     <%= f.association :kids, collection: @kids, as: :check_boxes %>
   <% else %>
-    <input name="post[kids_ids]" type="hidden" value="<%= @kids.first.id %>">
+    <p>Kid: <%= @kids.first.name.titleize %></p>
+    <input name="post[kid_ids]" type="hidden" value="<%= @kids.first.id %>">
   <% end %>
+  <%= f.input :body, label: 'Quote' %>
   <%= f.submit 'Save' %>
 <% end %>

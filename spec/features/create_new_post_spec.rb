@@ -16,4 +16,39 @@ describe 'Creating a new post' do
 
     expect{ click_button 'Save' }.to change{ Post.count }.by(1)
   end
+
+  context "user has one kid" do
+    before { click_link 'New Quote' }
+
+    it "displays the kids name" do
+      expect(page).to have_content "Kid: #{kid.name}"
+    end
+
+    it "sets the kid as the default for the post" do
+      fill_in 'Quote', with: 'you go baffroom?'
+      click_button 'Save'
+
+      expect(Post.first.kids).to eq [kid]
+    end
+  end
+
+  context "user has more than one kid" do
+    let!(:kid_2) { create :kid, users: [user] }
+
+    before { click_link 'New Quote' }
+
+    it "displays all kids names" do
+      expect(page).to have_content kid.name
+      expect(page).to have_content kid_2.name
+    end
+
+    it "let's you pick more than one kid" do
+      find(:css, "#post_kid_ids_#{kid.id}").set(true)
+      find(:css, "#post_kid_ids_#{kid_2.id}").set(true)
+      fill_in 'Quote', with: 'you go baffroom?'
+      click_button 'Save'
+
+      expect(Post.first.kids).to eq [kid, kid_2]
+    end
+  end
 end
