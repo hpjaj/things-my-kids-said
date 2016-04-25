@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :posts, only: [:index, :new, :create, :show]
+  resources :posts
 
   resources :kids, only: [:index, :new, :create]
 end

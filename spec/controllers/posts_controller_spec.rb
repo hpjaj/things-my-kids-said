@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
   include Devise::TestHelpers
 
-  describe "POST :create" do
-    let(:user) { create :user }
-    let!(:kid) { create :kid, users: [user] }
-    let(:body) { "blah blah teleblah" }
+  let(:user) { create :user }
+  let!(:kid) { create :kid, users: [user] }
+  let(:body) { "blah blah teleblah" }
 
+  describe "POST :create" do
     context "user has one kid" do
       before do
         sign_in user
@@ -60,6 +60,25 @@ RSpec.describe PostsController, type: :controller do
       it "should not create a new post" do
         expect(Post.count).to eq 0
       end
+    end
+  end
+
+  describe "POST :update" do
+    let(:quote) { create :post, user: user, kid: kid }
+    let(:kid_2) { create :kid, users: [user] }
+
+    before do
+      sign_in user
+      post :update, id: quote.id.to_s, post: { body: "new and improved", kid_id: kid_2.id.to_s }
+      quote.reload
+    end
+
+    it "updates a Post's body" do
+      expect(quote.body).to eq "new and improved"
+    end
+
+    it "updates a Post's body" do
+      expect(quote.kid_id).to eq kid_2.id
     end
   end
 end

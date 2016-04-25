@@ -1,3 +1,6 @@
 <h4>When <%= @post.kid.name.titleize %> was <%= Age.new(@post.kid.birthdate, @post.created_at).display %></h4>
 
-<p><%= @post.body %></p>
+<p>
+  <%= @post.body %>
+  <span> <%= link_to 'Edit', edit_post_path(@post) %> </span>
+</p>

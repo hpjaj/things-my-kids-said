@@ -24,6 +24,23 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def edit
+    @post = Post.find(params[:id])
+    @kids = current_user.kids
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    @kids = current_user.kids
+
+    if @post.update(post_params)
+      redirect_to posts_path
+    else
+      flash[:error] = 'There was a problem saving your quote.  Please try again.'
+      render :new
+    end
+  end
+
   private
 
   def post_params
