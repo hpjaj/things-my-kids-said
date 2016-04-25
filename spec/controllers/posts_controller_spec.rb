@@ -11,18 +11,18 @@ RSpec.describe PostsController, type: :controller do
     context "user has one kid" do
       before do
         sign_in user
-        post :create, post: { body: body, kid_ids: kid.id.to_s }
+        post :create, post: { body: body, kid_id: kid.id.to_s }
       end
 
       it "creates associations between the user and the user's post" do
         expect(user.posts.count).to eq 1
-        expect(Post.first.users.to_a).to eq [user]
+        expect(Post.first.user).to eq user
       end
 
       it "creates associations between the user's kid and the post" do
         child = user.kids.first
 
-        expect(Post.first.kids.to_a).to eq [child]
+        expect(Post.first.kid).to eq child
       end
 
       it "creates a post with the correct body" do
@@ -35,7 +35,7 @@ RSpec.describe PostsController, type: :controller do
 
       before do
         sign_in user
-        post :create, post: { body: body, kid_ids: [kid.id, kid_2.id] }
+        post :create, post: { body: body, kid_id: kid_2.id }
       end
 
       it "user has two kids" do
@@ -43,7 +43,7 @@ RSpec.describe PostsController, type: :controller do
       end
 
       it "associates the post with the kids that the user selected" do
-        expect(Post.first.kids).to eq [kid, kid_2]
+        expect(Post.first.kid).to eq kid_2
       end
 
       it "creates one post" do
@@ -54,7 +54,7 @@ RSpec.describe PostsController, type: :controller do
     context "with an invalid kid id" do
       before do
         sign_in user
-        post :create, post: { body: body, kid_ids: kid.id.to_i + 1 }
+        post :create, post: { body: body, kid_id: '' }
       end
 
       it "should not create a new post" do

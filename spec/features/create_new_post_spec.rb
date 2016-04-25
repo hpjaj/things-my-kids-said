@@ -29,12 +29,12 @@ describe 'Creating a new post' do
         fill_in 'Quote', with: 'you go baffroom?'
         click_button 'Save'
 
-        expect(Post.first.kids).to eq [kid]
+        expect(Post.first.kid).to eq kid
       end
     end
 
     context "user has more than one kid" do
-      let!(:kid_2) { create :kid, users: [user] }
+      let!(:kid_2) { create :kid, users: [user], name: 'Jackie' }
 
       before { visit new_post_path }
 
@@ -43,13 +43,12 @@ describe 'Creating a new post' do
         expect(page).to have_content kid_2.name
       end
 
-      it "let's you pick more than one kid" do
-        find(:css, "#post_kid_ids_#{kid.id}").set(true)
-        find(:css, "#post_kid_ids_#{kid_2.id}").set(true)
+      it "let's you pick one kid" do
+        page.select(kid.name, :from => "post_kid_id")
         fill_in 'Quote', with: 'you go baffroom?'
         click_button 'Save'
 
-        expect(Post.first.kids).to eq [kid, kid_2]
+        expect(Post.first.kid).to eq kid
       end
     end
   end
@@ -63,7 +62,7 @@ describe 'Creating a new post' do
         visit new_post_path
       end
 
-      it "promps you to create a kid when creating a Post" do
+      it "prompts you to create a kid when creating a Post" do
         expect(page).to have_content "Create Your Kid"
       end
 

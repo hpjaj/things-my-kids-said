@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
-  has_and_belongs_to_many :users
-  has_and_belongs_to_many :kids
+  belongs_to :user
+  belongs_to :kid
 
   validates :body, presence: true
+  validates :kid_id, presence: true
+  validates :user_id, presence: true
 end

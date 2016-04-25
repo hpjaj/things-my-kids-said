@@ -7,7 +7,7 @@ describe "Displays a kid's age when creating a quote" do
 
   let(:user)      { create :user }
   let!(:kid)      { create :kid, users: [user], birthdate: birth_day.strftime("%Y-%m-%d") }
-  let!(:post)     { create :post, users: [user], kids: [kid] }
+  let!(:post)     { create :post, user: user, kid: kid }
   let(:birth_day) { 18.months.ago }
 
   before do

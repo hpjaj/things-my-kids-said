@@ -9,10 +9,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build
+    @post = current_user.posts.build(post_params)
     @kids = current_user.kids
 
-    if post_creation_transaction
+    if @post.save
       redirect_to posts_path
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
@@ -27,27 +27,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body)
+    params.require(:post).permit(:body, :user_id, :kid_id)
   end
 
-  def post_creation_transaction
-    ActiveRecord::Base.transaction do
-      begin
-        @post = current_user.posts.create!(post_params)
-        if params[:post][:kid_ids].class == Array
-          kids_ids = params[:post][:kid_ids].reject(&:empty?)
-
-          kids_ids.each do |kid_id|
-            @post.kids << Kid.find(kid_id)
-          end
-        else
-          @post.kids << Kid.find(params[:post][:kid_ids])
-        end
-      rescue Exception => e
-        logger.error "Error: User #{current_user.id} experienced '#{e.message}' when trying to create a new post"
-        raise ActiveRecord::Rollback
-        false
-      end
-    end
-  end
 end

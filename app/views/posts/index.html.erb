@@ -1,6 +1,6 @@
 <% @posts.each do |post| %>
   <p>
     <%= link_to post.body, post %>
-    <span> - <%= post.kids.first.name %></span>
+    <span> - <%= post.kid.name %></span>
   </p>
 <% end %>

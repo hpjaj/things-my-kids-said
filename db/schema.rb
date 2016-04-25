@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418012700) do
+ActiveRecord::Schema.define(version: 20160425000745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,6 @@ ActiveRecord::Schema.define(version: 20160418012700) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "kids_posts", id: false, force: :cascade do |t|
-    t.integer "kid_id"
-    t.integer "post_id"
-  end
-
-  add_index "kids_posts", ["kid_id"], name: "index_kids_posts_on_kid_id", using: :btree
-  add_index "kids_posts", ["post_id"], name: "index_kids_posts_on_post_id", using: :btree
 
   create_table "kids_users", id: false, force: :cascade do |t|
     t.integer "kid_id"
@@ -44,15 +36,12 @@ ActiveRecord::Schema.define(version: 20160418012700) do
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "kid_id"
   end
 
-  create_table "posts_users", id: false, force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "user_id"
-  end
-
-  add_index "posts_users", ["post_id"], name: "index_posts_users_on_post_id", using: :btree
-  add_index "posts_users", ["user_id"], name: "index_posts_users_on_user_id", using: :btree
+  add_index "posts", ["kid_id"], name: "index_posts_on_kid_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
