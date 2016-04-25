@@ -3,4 +3,5 @@
 <p>
   <%= @post.body %>
   <span> <%= link_to 'Edit', edit_post_path(@post) %> </span>
+  <span> <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' } %> </span>
 </p>

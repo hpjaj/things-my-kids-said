@@ -81,4 +81,14 @@ RSpec.describe PostsController, type: :controller do
       expect(quote.kid_id).to eq kid_2.id
     end
   end
+
+  describe "DELETE :destroy" do
+    let!(:quote) { create :post, user: user, kid: kid }
+
+    before { sign_in user }
+
+    it "successfully deletes a Post" do
+      expect{ delete :destroy, id: quote.id }.to change{ Post.count }.by(-1)
+    end
+  end
 end

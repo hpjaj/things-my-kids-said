@@ -41,6 +41,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+
+    if @post.delete
+      flash[:notice] = 'Your quote was successfully deleted.'
+      redirect_to posts_path
+    else
+      flash[:error] = 'There was a problem deleting your quote. Please try again.'
+      render :show
+    end
+  end
+
   private
 
   def post_params
