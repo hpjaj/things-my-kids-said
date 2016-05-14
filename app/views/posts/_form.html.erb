@@ -8,11 +8,36 @@
       <p>Kid: <%= kids.first.name.titleize %></p>
       <input name="post[kid_id]" type="hidden" value="<%= kids.first.id %>">
     <% end %>
+
+    <div>
+      <label class='required' for="post_kids_age">When did they say this?</label>
       <%= f.input_field :kids_age, label: 'When did they say this?', required: true, collection: timing_choices, selected: timing_choices.first %>
+
+      <span class="custom-age hide-posts-custom-age">
+        <label>How old were they?  Years</label>
+        <%= f.input_field :years_old, label: 'Years', collection: 0..30 %>
+        <label>Months</label>
+        <%= f.input_field :months_old, label: 'Months', collection: 0..11 %>
+      </span>
+    </div>
+
     <%= f.input :body, label: 'Quote' %>
+
     <%= f.submit 'Save' %>
   <% end %>
 
 <% else %>
   <%= link_to 'Create Your Kid', new_kid_path %>
 <% end %>
+
+
+<script>
+  var age = $('#post_kids_age');
+
+  age.on( "change", function() {
+    if (age.val() === 'custom_age') {
+      $('span.custom-age').show();
+    } else  {
+      $('span.custom-age').hide(); }
+  });
+</script>

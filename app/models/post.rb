@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+
+  attr_accessor :years_old, :months_old
+
   belongs_to :user
   belongs_to :kid
 
