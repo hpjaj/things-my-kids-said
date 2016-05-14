@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @posts = current_user.posts
+    kid    = Kid.find(params[:kid_id])
+    @posts = kid.posts
   end
 
   def new
@@ -14,7 +15,7 @@ class PostsController < ApplicationController
     @post.kids_age = set_age(params)
 
     if @post.save
-      redirect_to posts_path
+      redirect_to kid_posts_path(params[:post][:kid_id])
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
       render :new
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
     age   = set_age(params)
 
     if @post.update(post_params.merge(kids_age: age))
-      redirect_to posts_path
+      redirect_to kid_posts_path(params[:post][:kid_id])
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
       render :new
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
 
     if @post.delete
       flash[:notice] = 'Your quote was successfully deleted.'
-      redirect_to posts_path
+      redirect_to kid_posts_path(params[:post][:kid_id])
     else
       flash[:error] = 'There was a problem deleting your quote. Please try again.'
       render :show

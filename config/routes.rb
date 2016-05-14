@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :posts
+  resources :posts, except: :index
 
-  resources :kids
+  resources :kids do
+    resources :posts, only: :index
+  end
+
 end
