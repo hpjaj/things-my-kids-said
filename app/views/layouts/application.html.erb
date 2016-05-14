@@ -26,10 +26,15 @@
   </div>
 
   <div>
-    <%= link_to 'All Quotes', posts_path %>
+    <% if kids = my_kids(current_user) %>
+      <% kids.each do |kid| %>
+        <%= link_to kid.name, kid_posts_path(kid.id) %>
+      <% end %>
+    <% end %>
+
     <%= link_to 'New Quote', new_post_path %>
     <%= link_to 'New Kid', new_kid_path %>
-    <%= link_to 'Your Kids', kids_path %>
+    <%= link_to 'Edit Kids', kids_path %>
   </div>
 
 <%= yield %>
