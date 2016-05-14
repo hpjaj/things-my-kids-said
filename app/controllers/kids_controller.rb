@@ -1,4 +1,5 @@
 class KidsController < ApplicationController
+  load_and_authorize_resource
 
   def index
     @kids = current_user.kids
