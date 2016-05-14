@@ -1,12 +1,12 @@
-<% if @kids.present? %>
 <% kids = users_kids(current_user) %>
+<% if kids.present? %>
 
   <%= simple_form_for @post do |f| %>
-    <% if @kids.size > 1 %>
-      <%= f.input :kid_id, collection: @kids %>
+    <% if kids.size > 1 %>
+      <%= f.input :kid_id, collection: kids, selected: kids.first %>
     <% else %>
-      <p>Kid: <%= @kids.first.name.titleize %></p>
-      <input name="post[kid_id]" type="hidden" value="<%= @kids.first.id %>">
+      <p>Kid: <%= kids.first.name.titleize %></p>
+      <input name="post[kid_id]" type="hidden" value="<%= kids.first.id %>">
     <% end %>
       <%= f.input_field :kids_age, label: 'When did they say this?', required: true, collection: timing_choices, selected: timing_choices.first %>
     <%= f.input :body, label: 'Quote' %>

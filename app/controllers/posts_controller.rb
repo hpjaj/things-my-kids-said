@@ -5,12 +5,10 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.build
-    @kids = current_user.kids
   end
 
   def create
     @post = current_user.posts.build(post_params)
-    @kids = current_user.kids
 
     if @post.save
       redirect_to posts_path
@@ -26,12 +24,10 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @kids = current_user.kids
   end
 
   def update
     @post = Post.find(params[:id])
-    @kids = current_user.kids
 
     if @post.update(post_params)
       redirect_to posts_path
