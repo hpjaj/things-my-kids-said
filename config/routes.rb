@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  resources :kids, only: [:index, :new, :create]
+  resources :kids
 end

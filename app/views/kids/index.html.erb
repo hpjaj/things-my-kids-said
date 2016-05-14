@@ -1,0 +1,7 @@
+<% @kids.each do |kid| %>
+  <p>
+    <%= kid.name %>,
+    <%= kid.birthdate %>
+    <%= link_to 'Edit', edit_kid_path(kid) %>
+  </p>
+<% end %>
