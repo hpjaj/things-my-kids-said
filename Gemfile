@@ -60,3 +60,4 @@ end
 gem 'devise'
 gem 'figaro', '~> 1.1'
 gem 'simple_form'
+gem 'cancancan', '~> 1.10'
