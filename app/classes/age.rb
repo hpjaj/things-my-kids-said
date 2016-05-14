@@ -1,14 +1,16 @@
 class Age
 
-  def initialize(birthdate, post_created_at)
-    @post_date = post_created_at.to_date
+  attr_reader :birthdate, :date_said
+
+  def initialize(birthdate, date_said)
+    @date_said = date_said.to_date
     @birthdate = birthdate
   end
 
-  def display
-    if @birthdate + 2.years > @post_date
+  def calculate
+    if birthdate + 2.years > date_said
       in_months
-    elsif @birthdate + 9.years > @post_date
+    elsif birthdate + 9.years > date_said
       in_years_and_months
     else
       in_years
@@ -18,7 +20,7 @@ class Age
   private
 
   def age_in_days
-    (@post_date - @birthdate).to_i
+    (date_said - birthdate).to_i
   end
 
   def in_months
