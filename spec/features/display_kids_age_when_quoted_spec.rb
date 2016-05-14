@@ -6,9 +6,10 @@ describe "Displays a kid's age when creating a quote" do
   Warden.test_mode!
 
   let(:user)      { create :user }
-  let!(:kid)      { create :kid, users: [user], birthdate: birth_day.strftime("%Y-%m-%d") }
-  let!(:post)     { create :post, user: user, kid: kid }
   let(:birth_day) { 18.months.ago }
+  let!(:kid)      { create :kid, users: [user], birthdate: birth_day.strftime("%Y-%m-%d") }
+  let(:kids_age)  { Age.new(birth_day.to_date, Date.current).set }
+  let!(:post)     { create :post, user: user, kid: kid, kids_age: kids_age }
 
   before do
     sign_into_app user
