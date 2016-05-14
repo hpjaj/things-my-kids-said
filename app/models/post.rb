@@ -5,4 +5,5 @@ class Post < ActiveRecord::Base
   validates :body, presence: true
   validates :kid_id, presence: true
   validates :user_id, presence: true
+  validates :kids_age, presence: true
 end

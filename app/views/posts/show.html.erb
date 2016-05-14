@@ -1,4 +1,4 @@
-<h4>When <%= @post.kid.name.titleize %> was <%= Age.new(@post.kid.birthdate, @post.created_at).display %></h4>
+<h4>When <%= @post.kid.name.titleize %> was <%= @post.kids_age %></h4>
 
 <p>
   <%= @post.body %>
