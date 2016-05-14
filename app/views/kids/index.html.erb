@@ -5,3 +5,7 @@
     <%= link_to 'Edit', edit_kid_path(kid) %>
   </p>
 <% end %>
+
+<% if !@kids.present? %>
+  <p><%= link_to "Enter your kid's information", new_kid_path %></p>
+<% end %>
