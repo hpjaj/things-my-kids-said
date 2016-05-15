@@ -6,4 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_and_belongs_to_many :kids
+
+  has_many :friend_and_families, foreign_key: "follower_id", dependent: :destroy
+  has_many :following, through: :friend_and_families, source: :kid
 end

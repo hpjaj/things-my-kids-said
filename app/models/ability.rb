@@ -11,7 +11,12 @@ class Ability
     if user
       can :manage, Post, user_id: user.id
 
+      can [:index, :read], Post do |post|
+        user.kids.pluck(:id).include?(post.kid.id) || user.following.pluck(:id).include?(post.kid.id)
+      end
+
       can :create, Kid
+
       can [:update, :destroy, :read, :index], Kid do |kid|
         kid.parents.pluck(:id).include? user.id
       end

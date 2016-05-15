@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     kid    = Kid.find(params[:kid_id])
-    @posts = kid.posts
+    @posts = kid.posts.order('created_at DESC')
   end
 
   def new
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
     if @post.delete
       flash[:notice] = 'Your quote was successfully deleted.'
-      redirect_to kid_posts_path(params[:post][:kid_id])
+      redirect_to root_path
     else
       flash[:error] = 'There was a problem deleting your quote. Please try again.'
       render :show
