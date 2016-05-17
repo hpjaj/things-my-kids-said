@@ -1,7 +1,7 @@
 <h4>When <%= @post.kid.name.titleize %> was <%= @post.kids_age %></h4>
 
 <p>
-  <%= @post.body %>
+  <%= highlight_kids_quote(@post.body) %>
   <span> <%= link_to 'Edit', edit_post_path(@post) %> </span>
   <span> <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' } %> </span>
 </p>

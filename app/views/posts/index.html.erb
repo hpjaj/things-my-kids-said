@@ -1,6 +1,6 @@
 <% @posts.each do |post| %>
-  <p>
-    <%= link_to post.body, post %>
-    <span> - <%= post.kid.name %></span>
-  </p>
+  <div>
+    <%= highlight_kids_quote post.body %>
+    <span> <%= link_to "Full quote", post %></span>
+  </div>
 <% end %>
