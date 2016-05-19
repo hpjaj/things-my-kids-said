@@ -1,7 +1,25 @@
-<h4>When <%= @post.kid.name.titleize %> was <%= @post.kids_age %></h4>
+<div class="col-md-2"></div>
 
-<p>
-  <%= highlight_kids_quote(@post.body) %>
-  <span> <%= link_to 'Edit', edit_post_path(@post) %> </span>
-  <span> <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' } %> </span>
-</p>
+<div class="col-md-8">
+    <div class="card card-block">
+      <div class='row'>
+        <div class="col-sm-1 picture"><%= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %></div>
+
+        <div class="col-sm-11">
+          <p class="card-title">When <%= @post.kid.name %> was <%= @post.kids_age %>...</p>
+          <%= highlight_kids_quote @post.body %>
+
+          <span> <%= link_to 'Back', :back, class: 'comment text-muted post-show-buttons' %> </span>
+
+          <% if can? :manage, Post %>
+            <span> <%= link_to 'Edit', edit_post_path(@post), class: 'comment text-muted post-show-buttons' %> </span>
+            <span> <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' }, class: 'comment text-muted post-show-buttons' %> </span>
+          <% end %>
+
+          <span class="pull-xs-right text-muted post-author">captured by <%= @post.user.first_name.titleize %></span>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="col-md-2"></div>

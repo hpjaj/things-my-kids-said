@@ -11,15 +11,19 @@
   background: white;
 }
 
-.card-title {
+.card-title, .post-author {
   font-style: italic;
 }
 
-.comment, .card-title {
+.comment, .card-title, .post-author {
   font-size: .8em;
 }
 
 .markdown-disclaimer {
   text-align: right;
   font-size: .8em;
+}
+
+.post-show-buttons {
+  padding-right: .5em;
 }
