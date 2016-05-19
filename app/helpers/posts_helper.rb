@@ -16,4 +16,12 @@ module PostsHelper
   def users_kids(current_user)
     current_user.kids
   end
+
+  def highlight_kids_quote(quote)
+    quote.gsub!(/<{3}/, "<span class='kid-quote'>")
+    quote.gsub!(/>{3}/, "</span>")
+
+    simple_format(quote, class: "card-text")
+  end
+
 end

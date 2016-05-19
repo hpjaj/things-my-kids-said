@@ -1,6 +1,20 @@
-<% @posts.each do |post| %>
-  <p>
-    <%= link_to post.body, post %>
-    <span> - <%= post.kid.name %></span>
-  </p>
-<% end %>
+<div class="col-md-2"></div>
+
+<div class="col-md-8">
+  <% @posts.each do |post| %>
+    <div class="card card-block">
+      <div class='row'>
+        <div class="col-sm-1 picture"><%= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %></div>
+
+        <div class="col-sm-11">
+          <p class="card-title">When <%= post.kid.name %> was <%= post.kids_age %>...</p>
+          <%= highlight_kids_quote post.body %>
+
+          <%= link_to "Comment", post, class: 'card-link comment text-muted' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="col-md-2"></div>
