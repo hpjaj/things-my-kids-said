@@ -3,7 +3,22 @@
 }
 
 .kid-quote {
-  color: #FF0188;
+  color: #FF0188; // pink
+  // color: #4cc1fc; // blue
+}
+
+.card-block {
+  background: white;
+}
+
+.card-title {
+  font-style: italic;
+}
+
+.comment, .card-title {
+  font-size: .8em;
+}
+
 .markdown-disclaimer {
   text-align: right;
   font-size: .8em;

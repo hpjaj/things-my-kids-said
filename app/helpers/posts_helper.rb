@@ -21,6 +21,7 @@ module PostsHelper
     quote.gsub!(/<{3}/, "<span class='kid-quote'>")
     quote.gsub!(/>{3}/, "</span>")
 
-    simple_format(quote)
+    simple_format(quote, class: "card-text")
   end
+
 end
