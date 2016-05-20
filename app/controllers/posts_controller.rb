@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     kid    = Kid.find(params[:kid_id])
-    @posts = kid.posts.order('created_at DESC')
+    @posts = kid.posts.order('date_said DESC')
   end
 
   def new
