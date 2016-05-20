@@ -11,7 +11,7 @@
 
           <span> <%= link_to 'Back', :back, class: 'comment text-muted post-show-buttons' %> </span>
 
-          <% if can? :manage, Post %>
+          <% if can? :manage, @post %>
             <span> <%= link_to 'Edit', edit_post_path(@post), class: 'comment text-muted post-show-buttons' %> </span>
             <span> <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' }, class: 'comment text-muted post-show-buttons' %> </span>
           <% end %>
