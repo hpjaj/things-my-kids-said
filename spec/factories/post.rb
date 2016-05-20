@@ -3,6 +3,6 @@ FactoryGirl.define do
     body  'Is that a baffroom?'
     user
     kid
-    kids_age '2 years 4 months old'
+    date_said 25.months.ago.to_date
   end
 end

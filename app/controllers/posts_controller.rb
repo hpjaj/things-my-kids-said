@@ -11,8 +11,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post          = current_user.posts.build(post_params)
-    @post.kids_age = set_age(params)
+    @post           = current_user.posts.build(post_params)
+    @post.date_said = determine_date_said(params)
 
     if @post.save
       redirect_to kid_posts_path(params[:post][:kid_id])
@@ -32,9 +32,9 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    age   = set_age(params)
+    date  = determine_date_said(params)
 
-    if @post.update(post_params.merge(kids_age: age))
+    if @post.update(post_params.merge(date_said: date))
       redirect_to kid_posts_path(params[:post][:kid_id])
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
@@ -57,14 +57,17 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old)
+    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said)
   end
 
-  def set_age(params)
+  def determine_date_said(params)
     if params[:post][:kids_age] == 'custom_age'
-      "#{params[:post][:years_old]} years #{params[:post][:months_old]} months old"
+      years_old  = params[:post][:years_old].to_i.years
+      months_old = params[:post][:months_old].to_i.months
+
+      Kid.find(params[:post][:kid_id]).birthdate + years_old + months_old
     else
-      Age.new(Kid.find(params[:post][:kid_id]).birthdate, params[:post][:kids_age]).calculate
+      params[:post][:kids_age].to_date
     end
   end
 

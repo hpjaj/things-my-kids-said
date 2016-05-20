@@ -26,7 +26,7 @@ tommy.parents << john
     body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
     user_id: john.id,
     kid_id: tommy.id,
-    kids_age: "#{Faker::Number.between(1, 7)} years #{Faker::Number.between(0, 11)} months old"
+    date_said: Faker::Date.between(6.years.ago, Date.current)
   )
 end
 

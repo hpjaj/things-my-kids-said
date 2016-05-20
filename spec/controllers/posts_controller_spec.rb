@@ -3,11 +3,10 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
   include Devise::TestHelpers
 
-  let(:user)       { create :user }
-  let!(:kid)       { create :kid, users: [user] }
-  let(:body)       { "blah blah teleblah" }
-  let(:age)        { Date.current }
-  let(:custom_age) { "4 years 11 months old" }
+  let(:user) { create :user }
+  let!(:kid) { create :kid, users: [user] }
+  let(:body) { "blah blah teleblah" }
+  let(:age)  { Date.current }
 
   before { sign_in user }
 
@@ -59,7 +58,9 @@ RSpec.describe PostsController, type: :controller do
       end
 
       it "creates a post with a custom age" do
-        expect(Post.first.kids_age).to eq custom_age
+        date_said = Post.first.kid.birthdate + 4.years + 11.months
+
+        expect(Post.first.date_said).to eq date_said
       end
     end
   end
@@ -89,7 +90,9 @@ RSpec.describe PostsController, type: :controller do
       end
 
       it "updates a post with a custom age" do
-        expect(Post.first.kids_age).to eq custom_age
+        date_said = Post.first.kid.birthdate + 4.years + 11.months
+
+        expect(Post.first.date_said).to eq date_said
       end
     end
   end
