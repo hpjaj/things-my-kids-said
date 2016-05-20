@@ -1,0 +1,23 @@
+<div class="card">
+  <h3 class="card-header side-nav-title">Kids</h3>
+  <div class="card-block">
+    <% if kids = your_kids %>
+      <h5 class="card-title side-nav-sub-titles">Yours</h5>
+      <ul class="side-nav-kids">
+        <% kids.each do |kid| %>
+          <%= content_tag(:li, link_to(kid.name.titleize, kid_posts_path(kid.id)), class: 'side-nav-kids' ) %>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if kids = your_friends_and_family %>
+      <h5 class="card-title side-nav-sub-titles">Friends & Family</h5>
+      <ul class="side-nav-kids">
+        <% kids.each do |kid| %>
+          <%= link_to kid.name.titleize, kid_posts_path(kid.id), class: 'side-nav-kids' %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+
