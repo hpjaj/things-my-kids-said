@@ -17,8 +17,11 @@ module PostsHelper
     current_user.kids
   end
 
-  def highlight_kids_quote(quote)
-    quote.gsub!(/<{3}/, "<span class='kid-quote'>")
+  def highlight_kids_quote(post)
+    post.kid.gender == Kid::GIRL ? gender = 'girl' : gender = 'boy'
+
+    quote = post.body
+    quote.gsub!(/<{3}/, "<span class='#{gender}-quote'>")
     quote.gsub!(/>{3}/, "</span>")
 
     simple_format(quote, class: "card-text")
