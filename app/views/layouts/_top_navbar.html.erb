@@ -1,6 +1,6 @@
 <nav class="navbar navbar-full navbar-dark bg-inverse navbar-fixed-top">
   <div class="container">
-    <%= link_to 'Things My Kids Say', '#', class: 'navbar-brand' %>
+    <%= link_to 'Things My Kids Said', '#', class: 'navbar-brand' %>
 
       <button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#navbar-ul">
     &#9776;
@@ -9,8 +9,7 @@
     <div class="collapse navbar-toggleable-xs" id="navbar-ul">
       <ul class="nav navbar-nav pull-sm-right">
         <% if current_user %>
-          <%= content_tag(:li, link_to('New Quote', new_post_path, class: 'nav-link'), class: 'nav-item') %>
-          <%= content_tag(:li, link_to('New Kid', new_kid_path, class: 'nav-link'), class: 'nav-item') %>
+          <%= content_tag(:li, link_to('+ Create A Quote', new_post_path, class: 'nav-link'), class: 'nav-item') %>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your Kids</a>
@@ -19,10 +18,12 @@
                 <% kids.each do |kid| %>
                   <%= link_to kid.name.titleize, kid_posts_path(kid.id), class: 'dropdown-item' %>
                 <% end %>
+                <div class="dropdown-divider"></div>
+                  <%= link_to "New Kid", new_kid_path, class: 'dropdown-item' %>
+                </div>
               <% else %>
-                <%= link_to "Create Kid", new_kid_path, class: 'dropdown-item' %>
+                <%= link_to "New Kid", new_kid_path, class: 'dropdown-item' %>
               <% end %>
-            </div>
           </li>
 
           <li class="nav-item nav-link"><%= current_user.first_name %></li>
