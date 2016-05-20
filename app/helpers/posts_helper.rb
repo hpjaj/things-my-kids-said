@@ -24,4 +24,20 @@ module PostsHelper
     simple_format(quote, class: "card-text")
   end
 
+  def headline(post)
+    age_in_words = Age.new(post.kid.birthdate, post.date_said).calculate
+
+    "Around #{display_date post.date_said}, when #{post.kid.name.titleize} was #{age_in_words}…"
+  end
+
+  private
+
+  def display_date(date)
+    if date.year == Date.current.year
+      date.strftime("%b %e")
+    else
+      date.strftime("%b %e, %Y")
+    end
+  end
+
 end

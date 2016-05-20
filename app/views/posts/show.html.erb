@@ -6,7 +6,7 @@
         <div class="col-sm-1 picture"><%= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %></div>
 
         <div class="col-sm-11">
-          <p class="card-title">When <%= @post.kid.name %> was <%= @post.kids_age %>...</p>
+          <p class="card-title"><%= headline @post %></p>
           <%= highlight_kids_quote @post.body %>
 
           <span> <%= link_to 'Back', :back, class: 'comment text-muted post-show-buttons' %> </span>

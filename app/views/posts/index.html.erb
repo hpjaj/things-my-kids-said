@@ -7,10 +7,11 @@
         <div class="col-sm-1 picture"><%= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %></div>
 
         <div class="col-sm-11">
-          <p class="card-title">When <%= post.kid.name %> was <%= post.kids_age %>...</p>
+          <p class="card-title"><%= headline post %></p>
           <%= highlight_kids_quote post.body %>
 
           <%= link_to "Comment", post, class: 'card-link comment text-muted' %>
+          <span class="pull-xs-right text-muted post-author">captured by <%= post.user.first_name.titleize %></span>
         </div>
       </div>
     </div>
