@@ -1,7 +1,7 @@
 <%= simple_form_for @kid do |f| %>
   <%= f.input :name %>
   <%= f.input :birthdate, as: :date, html5: true %>
-  <%= f.input :gender, collection: [['Male', 'male'], ['Female', 'female']] %>
+  <%= f.input :gender, collection: [['Boy', Kid::BOY], ['Girl', Kid::GIRL]] %>
   <%= f.submit 'Save' %>
 <% end %>
 

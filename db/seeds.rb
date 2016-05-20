@@ -15,21 +15,36 @@ john = User.create(
 
 tommy = Kid.create(
   name: 'Tommy',
-  birthdate: Faker::Date.between(7.years.ago, 18.months.ago),
-  gender: 'boy'
+  birthdate: Faker::Date.between(7.years.ago, 4.years.ago),
+  gender: Kid::BOY
+  )
+
+janie = Kid.create(
+  name: 'Janie',
+  birthdate: Faker::Date.between(7.years.ago, 3.years.ago),
+  gender: Kid::GIRL
   )
 
 tommy.parents << john
+janie.parents << john
 
 30.times do
   Post.create(
     body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
     user_id: john.id,
     kid_id: tommy.id,
-    date_said: Faker::Date.between(6.years.ago, Date.current)
+    date_said: Faker::Date.between(tommy.birthdate + 18.months, Date.current)
   )
 end
 
+30.times do
+  Post.create(
+    body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
+    user_id: john.id,
+    kid_id: janie.id,
+    date_said: Faker::Date.between(janie.birthdate + 18.months, Date.current)
+  )
+end
 
 p "Seed finished"
 p "#{User.count} users"
