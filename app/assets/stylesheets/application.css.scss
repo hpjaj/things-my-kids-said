@@ -24,8 +24,24 @@ html body {
   background: #F4F4F4;
 }
 
-body {
-  padding-top: 100px;
+.whole-site-container {
+  padding-top: 40px;
+}
+
+
+// TOP NAVBAR
+
+.top-navbar {
+  color: #eceeef;
+  background-color: #353535;
+}
+
+.top-navbar-links {
+  color: #747474 !important;
+}
+
+.top-navbar-links:hover {
+  color: white !important;
 }
 
 
@@ -51,5 +67,8 @@ body {
 
 .side-nav-title {
   font-size: 20px;
-  padding: 30px 20px;
+  padding: 40px 20px;
+  background-color: #696F96;
+  border: 1px solid #696F96;
+  color: white;
 }

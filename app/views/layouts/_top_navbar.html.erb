@@ -1,4 +1,4 @@
-<nav class="navbar navbar-full navbar-dark bg-inverse navbar-fixed-top">
+<nav class="navbar navbar-full navbar-dark top-navbar">
   <div class="container">
     <%= link_to 'Things My Kids Said', '#', class: 'navbar-brand' %>
 
@@ -9,10 +9,10 @@
     <div class="collapse navbar-toggleable-xs" id="navbar-ul">
       <ul class="nav navbar-nav pull-sm-right">
         <% if current_user %>
-          <%= content_tag(:li, link_to('+ Create A Quote', new_post_path, class: 'nav-link'), class: 'nav-item') %>
+          <%= content_tag(:li, link_to('+ Create A Quote', new_post_path, class: 'top-navbar-links nav-link'), class: 'nav-item') %>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your Kids</a>
+            <a class="top-navbar-links nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Your Kids</a>
             <div class="dropdown-menu">
               <% if kids = your_kids %>
                 <% kids.each do |kid| %>
@@ -26,11 +26,11 @@
               <% end %>
           </li>
 
-          <li class="nav-item nav-link"><%= current_user.first_name %></li>
-          <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+          <li class="nav-item top-navbar-links nav-link"><%= current_user.first_name %></li>
+          <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'top-navbar-links nav-link' %></li>
         <% else %>
-          <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: 'top-navbar-links nav-link' %></li>
+          <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: 'top-navbar-links nav-link' %></li>
         <% end %>
       </ul>
     </div>
