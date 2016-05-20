@@ -9,14 +9,9 @@
 </head>
 <body>
   <div class="container">
-    <div>
-      <% if current_user %>
-       Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign In", new_user_session_path %> or
-        <%= link_to "Sign Up", new_user_registration_path %>
-      <% end %>
-    </div>
+    <%= render 'layouts/navbar' %>
+
+
 
     <div>
       <% if flash[:notice] %>
@@ -26,11 +21,7 @@
       <% end %>
     </div>
 
-    <div>
-      <%= link_to 'New Quote', new_post_path %>
-      <%= link_to 'New Kid', new_kid_path %>
-      <%= link_to 'Your Kids', kids_path %>
-    </div>
+
 
 <%= yield %>
   </div>
