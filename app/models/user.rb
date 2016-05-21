@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
 
   has_many :friend_and_families, foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :friend_and_families, source: :kid
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
 end
