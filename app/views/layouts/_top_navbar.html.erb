@@ -16,7 +16,7 @@
             <div class="dropdown-menu">
               <% if kids = your_kids %>
                 <% kids.each do |kid| %>
-                  <%= link_to kid.name.titleize, kid_posts_path(kid.id), class: 'dropdown-item' %>
+                  <%= link_to kid.first_name.titleize, kid_posts_path(kid.id), class: 'dropdown-item' %>
                 <% end %>
                 <div class="dropdown-divider"></div>
                   <%= link_to "New Kid", new_kid_path, class: 'dropdown-item' %>

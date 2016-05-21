@@ -8,6 +8,9 @@ class Kid < ActiveRecord::Base
   has_many :friend_and_families, dependent: :destroy
   has_many :followers, through: :friend_and_families, source: :follower
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
   def parents
     users
   end

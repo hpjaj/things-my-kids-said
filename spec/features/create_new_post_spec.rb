@@ -23,7 +23,7 @@ describe 'Creating a new post' do
       before { visit new_post_path }
 
       it "displays the kids name" do
-        expect(page).to have_content "Kid: #{kid.name}"
+        expect(page).to have_content "Kid: #{kid.first_name}"
       end
 
       it "sets the kid as the default for the post" do
@@ -36,17 +36,17 @@ describe 'Creating a new post' do
     end
 
     context "user has more than one kid" do
-      let!(:kid_2) { create :kid, users: [user], name: 'Jackie' }
+      let!(:kid_2) { create :kid, users: [user], first_name: 'Jackie' }
 
       before { visit new_post_path }
 
       it "displays all kids names" do
-        expect(page).to have_content kid.name
-        expect(page).to have_content kid_2.name
+        expect(page).to have_content kid.first_name
+        expect(page).to have_content kid_2.first_name
       end
 
       it "let's you pick one kid" do
-        page.select(kid.name, :from => "post_kid_id")
+        page.select(kid.first_name, :from => "post_kid_id")
         find('#post_kids_age').find(:xpath, 'option[2]').select_option
         fill_in 'Quote', with: 'you go baffroom?'
         click_button 'Save'

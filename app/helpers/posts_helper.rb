@@ -33,7 +33,7 @@ module PostsHelper
   def headline(post)
     age_in_words = Age.new(post.kid.birthdate, post.date_said).calculate
 
-    "Around #{display_date post.date_said}, when #{post.kid.name.titleize} was #{age_in_words}…"
+    "Around #{display_date post.date_said}, when #{post.kid.first_name.titleize} was #{age_in_words}…"
   end
 
   private

@@ -5,7 +5,7 @@
       <h5 class="card-title side-nav-sub-titles">Yours</h5>
       <ul class="side-nav-kids">
         <% kids.each do |kid| %>
-          <%= content_tag(:li, link_to(kid.name.titleize, kid_posts_path(kid.id), class: 'text-muted'), class: 'side-nav-kids' ) %>
+          <%= content_tag(:li, link_to(kid.first_name.titleize, kid_posts_path(kid.id), class: 'text-muted'), class: 'side-nav-kids' ) %>
         <% end %>
       </ul>
     <% end %>
@@ -14,7 +14,7 @@
       <h5 class="card-title side-nav-sub-titles">Friends & Family</h5>
       <ul class="side-nav-kids">
         <% kids.each do |kid| %>
-          <%= content_tag(:li, link_to(kid.name.titleize, kid_posts_path(kid.id), class: 'text-muted'), class: 'side-nav-kids' ) %>
+          <%= content_tag(:li, link_to(kid.first_name.titleize, kid_posts_path(kid.id), class: 'text-muted'), class: 'side-nav-kids' ) %>
         <% end %>
       </ul>
     <% end %>

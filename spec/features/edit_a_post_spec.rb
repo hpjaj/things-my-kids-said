@@ -9,14 +9,14 @@ describe 'Editing a new post' do
     let(:user)   { create :user }
     let(:kid)    { create :kid, users: [user] }
     let(:quote)  { create :post, user: user, kid: kid }
-    let!(:kid_2) { create :kid, users: [user], name: 'Jackie' }
+    let!(:kid_2) { create :kid, users: [user], first_name: 'Jackie' }
 
     before { sign_into_app user }
 
     it "can edit a post" do
       visit edit_post_path(quote)
       fill_in 'Quote', with: 'new and improved'
-      page.select(kid_2.name, :from => "post_kid_id")
+      page.select(kid_2.first_name, :from => "post_kid_id")
       click_button 'Save'
 
       quote.reload

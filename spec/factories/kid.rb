@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :kid do
-    name 'Janie'
+    first_name 'Janie'
+    last_name 'Smith'
     birthdate '2010-04-16'
     gender 'female'
     users { [FactoryGirl.create(:user)] }

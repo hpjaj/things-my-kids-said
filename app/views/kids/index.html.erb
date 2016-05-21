@@ -1,6 +1,6 @@
 <% @kids.each do |kid| %>
   <p>
-    <%= link_to kid.name, kid_posts_path(kid.id) %>,
+    <%= link_to kid.first_name, kid_posts_path(kid.id) %>,
     <%= kid.birthdate %>
     <%= link_to 'Edit', edit_kid_path(kid) %>
   </p>

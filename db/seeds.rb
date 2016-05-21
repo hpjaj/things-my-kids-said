@@ -14,13 +14,15 @@ john = User.create(
   )
 
 tommy = Kid.create(
-  name: 'Tommy',
+  first_name: 'Tommy',
+  last_name: 'Smith',
   birthdate: Faker::Date.between(7.years.ago, 4.years.ago),
   gender: Kid::BOY
   )
 
 janie = Kid.create(
-  name: 'Janie',
+  first_name: 'Janie',
+  last_name: 'Smith',
   birthdate: Faker::Date.between(7.years.ago, 3.years.ago),
   gender: Kid::GIRL
   )
