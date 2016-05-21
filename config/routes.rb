@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  get 'home' => 'welcome#home'
+
   resources :posts, path: 'quotes', except: :index
 
   resources :kids do

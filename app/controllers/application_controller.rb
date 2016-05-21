@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+  def after_sign_in_path_for(resource)
+    home_path
+  end
+
   protected
 
   def configure_permitted_parameters

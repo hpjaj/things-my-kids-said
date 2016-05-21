@@ -1,6 +1,6 @@
 <nav class="navbar navbar-full navbar-light top-navbar">
   <div class="container">
-    <%= link_to 'Things My Kids Said', '#', class: 'navbar-brand' %>
+    <%= link_to 'Things My Kids Said', home_path, class: 'navbar-brand' %>
 
       <button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#navbar-ul">
     &#9776;
@@ -9,6 +9,7 @@
     <div class="collapse navbar-toggleable-xs" id="navbar-ul">
       <ul class="nav navbar-nav pull-sm-right">
         <% if current_user %>
+          <%= content_tag(:li, link_to('Home', home_path, class: 'top-navbar-links nav-link'), class: 'nav-item') %>
           <%= content_tag(:li, link_to('+ Create A Quote', new_post_path, class: 'top-navbar-links nav-link'), class: 'nav-item') %>
 
           <li class="nav-item dropdown">

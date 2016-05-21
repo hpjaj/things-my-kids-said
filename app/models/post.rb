@@ -9,4 +9,13 @@ class Post < ActiveRecord::Base
   validates :kid_id, presence: true
   validates :user_id, presence: true
   validates :date_said, presence: true
+
+  def self.all_associated_kids_posts(user)
+    kid_ids = user.following.pluck(:id) + user.kids.pluck(:id)
+
+    self
+      .where('kid_id in (?)', kid_ids)
+      .order('updated_at DESC')
+      .uniq
+  end
 end
