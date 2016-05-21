@@ -27,9 +27,10 @@
 
 
     <p class="markdown-disclaimer">Wrap your <span class="girl-quote"> <<< kid's quotes >>> </span> with <span class="girl-quote"><<< &nbsp; &nbsp; >>></span></p>
-    <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10 } %>
+    <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10, spellcheck: true } %>
 
-    <%= f.submit 'Save' %>
+    <%= link_to 'Cancel', :back %>
+    <%= f.submit 'Save', class: 'pull-xs-right' %>
   <% end %>
 
 <% else %>
