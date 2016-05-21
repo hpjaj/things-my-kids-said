@@ -32,9 +32,8 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    date  = determine_date_said(params)
 
-    if @post.update(post_params.merge(date_said: date))
+    if @post.update(post_params)
       redirect_to kid_posts_path(params[:post][:kid_id])
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'

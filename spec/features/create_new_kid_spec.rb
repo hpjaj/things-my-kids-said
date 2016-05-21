@@ -10,6 +10,7 @@ describe 'Creating a new kid', js: true do
   before { sign_into_app user }
 
   it "can create a new kid" do
+    click_link 'Your Kids'
     click_link 'New Kid'
     fill_in 'Name', with: 'Jackie'
     page.execute_script("$('#kid_birthdate').val('21/02/2010')")

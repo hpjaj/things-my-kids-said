@@ -84,15 +84,13 @@ RSpec.describe PostsController, type: :controller do
       end
     end
 
-    context "user selects custom_age" do
+    context "user changes date the quote was said" do
       before do
-        post :update, id: quote.id.to_s, post: { kids_age: 'custom_age', body: body, kid_id: kid.id.to_s, years_old: '4', months_old: '11' }
+        post :update, id: quote.id.to_s, post: { date_said: Date.current, body: body, kid_id: kid.id.to_s }
       end
 
       it "updates a post with a custom age" do
-        date_said = Post.first.kid.birthdate + 4.years + 11.months
-
-        expect(Post.first.date_said).to eq date_said
+        expect(Post.first.date_said).to eq Date.current
       end
     end
   end

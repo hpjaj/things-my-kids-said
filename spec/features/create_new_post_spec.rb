@@ -12,7 +12,8 @@ describe 'Creating a new post' do
     before { sign_into_app user }
 
     it "can create a new post" do
-      click_link 'New Quote'
+      click_link '+ Create A Quote'
+      find('#post_kids_age').find(:xpath, 'option[2]').select_option
       fill_in 'Quote', with: 'you go baffroom?'
 
       expect{ click_button 'Save' }.to change{ Post.count }.by(1)
@@ -26,6 +27,7 @@ describe 'Creating a new post' do
       end
 
       it "sets the kid as the default for the post" do
+        find('#post_kids_age').find(:xpath, 'option[2]').select_option
         fill_in 'Quote', with: 'you go baffroom?'
         click_button 'Save'
 
@@ -45,6 +47,7 @@ describe 'Creating a new post' do
 
       it "let's you pick one kid" do
         page.select(kid.name, :from => "post_kid_id")
+        find('#post_kids_age').find(:xpath, 'option[2]').select_option
         fill_in 'Quote', with: 'you go baffroom?'
         click_button 'Save'
 
