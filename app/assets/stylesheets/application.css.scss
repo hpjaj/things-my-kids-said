@@ -33,15 +33,20 @@ html body {
 
 .top-navbar {
   color: #eceeef;
-  background-color: #353535;
+  background-color: white;
+  border-bottom: 1px solid #DADADA;
 }
 
 .top-navbar-links {
-  color: #747474 !important;
+  color: #353535 !important;
 }
 
 .top-navbar-links:hover {
-  color: white !important;
+  color: #FC6574 !important;
+}
+
+.navbar-brand {
+  color: #353535 !important;
 }
 
 
