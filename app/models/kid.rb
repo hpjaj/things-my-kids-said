@@ -14,4 +14,8 @@ class Kid < ActiveRecord::Base
   def parents
     users
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
