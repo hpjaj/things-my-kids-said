@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def your_friends_and_family
-    current_user.following.present? ? current_user.following.order(:last_name) : nil
+    current_user.following.present? ? current_user.following.order(:first_name) : nil
   end
 end
