@@ -1,4 +1,4 @@
-<% if @post.present? %>
+<% if @posts.present? %>
   <%= render 'layouts/timeline', locals: { posts: @posts } %>
 <% else %>
   <%= create_your_first_kid %>
