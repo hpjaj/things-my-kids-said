@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
     if @post.delete
       flash[:notice] = 'Your quote was successfully deleted.'
-      redirect_to root_path
+      redirect_to home_path
     else
       flash[:error] = 'There was a problem deleting your quote. Please try again.'
       render :show
