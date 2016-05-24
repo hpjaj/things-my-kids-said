@@ -57,6 +57,49 @@ html body {
 }
 
 
+// BEGIN temporary mobile navbar hack until Bootstrap 4 beta release
+
+.navbar-brand {
+  float: none;
+}
+
+.navbar-nav .nav-item {
+  float: none;
+}
+
+.navbar-divider,
+.navbar-nav .nav-item+.nav-item,
+.navbar-nav .nav-link + .nav-link {
+  margin-left: 0;
+}
+
+@media (min-width: 34em) {
+  .navbar-brand {
+    float: left;
+  }
+
+  .navbar-nav .nav-item {
+    float: left;
+  }
+
+  .navbar-divider,
+  .navbar-nav .nav-item + .nav-item,
+  .navbar-nav .nav-link + .nav-link {
+    margin-left: 1rem;
+  }
+}
+
+@media (max-width: 34em) {
+  .release-status {
+    float: inherit;
+  }
+}
+
+// END temporary mobile navbar hack until Bootstrap 4 beta release
+
+
+
+
 
 // SIDE NAVBAR
 
