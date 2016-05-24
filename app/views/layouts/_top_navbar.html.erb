@@ -30,12 +30,7 @@
           </li>
 
           <li class="nav-item top-navbar-links nav-link"><%= current_user.first_name %></li>
-          <li class="nav-item">
-            <a class="top-navbar-links nav-link" rel="nofollow" data-method="delete" href="/users/sign_out">Sign out</a>
-          </li>
-
-
-
+          <li class="nav-item"><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'top-navbar-links nav-link' %></li>
         <% else %>
           <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: 'top-navbar-links nav-link' %></li>
           <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: 'top-navbar-links nav-link' %></li>
