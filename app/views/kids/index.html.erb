@@ -1,11 +1,21 @@
-<% @kids.each do |kid| %>
-  <p>
-    <%= link_to kid.first_name, kid_posts_path(kid.id) %>,
-    <%= kid.birthdate %>
-    <%= link_to 'Edit', edit_kid_path(kid) %>
-  </p>
-<% end %>
+<div class="col-md-2">
+  <%= render 'layouts/side_navbar' %>
+</div>
 
-<% if !@kids.present? %>
-  <p><%= link_to "Enter your kid's information", new_kid_path %></p>
-<% end %>
+<div class="col-md-8">
+  <h5 class="page-title">Your Kids</h5>
+  <% @kids.each do |kid| %>
+    <p>
+      <%= kid.full_name.titleize %>,
+      <%= kid.gender %>,
+      <%= kid.birthdate.strftime("%-m/%d/%y") %>,
+      <%= link_to 'Edit', edit_kid_path(kid) %>
+    </p>
+  <% end %>
+
+  <% if !@kids.present? %>
+    <p><%= link_to "Enter your kid's information", new_kid_path %></p>
+  <% end %>
+</div>
+
+<div class="col-md-2"></div>

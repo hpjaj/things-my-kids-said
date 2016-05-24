@@ -2,7 +2,7 @@ class KidsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @kids = current_user.kids
+    @kids = current_user.kids.order(:first_name)
   end
 
   def new
