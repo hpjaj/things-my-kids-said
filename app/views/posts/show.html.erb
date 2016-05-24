@@ -15,7 +15,7 @@
 
           <% if can? :manage, @post %>
             <span> <%= link_to 'Edit', edit_post_path(@post), class: 'comment text-muted post-show-buttons' %> </span>
-            <span id='post-delete-button'> <%= button_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' }, class: 'comment text-muted post-show-buttons btn btn-sm btn-secondary-outline' %> </span>
+            <span class="post-delete-button"> <%= button_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' }, class: 'comment text-muted post-show-buttons btn btn-sm btn-secondary-outline' %> </span>
           <% end %>
 
           <span class="pull-xs-right text-muted post-author">captured by <%= @post.user.first_name.titleize %></span>
