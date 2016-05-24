@@ -6,7 +6,14 @@
   <% @posts.each do |post| %>
     <div class="card card-block">
       <div class='row'>
-        <div class="col-sm-1 picture"><%= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %></div>
+        <div class="col-sm-1 picture">
+          <%= image_tag post.kid.photo.url(:square)  if post.kid.photo.url %>
+
+          <%#= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %>
+
+
+
+          </div>
 
         <div class="col-sm-11">
           <p class="card-title"><%= headline post %></p>
