@@ -1,42 +1,43 @@
-<% kids = users_kids(current_user) %>
-<% if kids.present? %>
+<div class="post-form">
+  <% kids = users_kids(current_user) %>
+  <% if kids.present? %>
 
-  <%= simple_form_for(@post, html: { class: 'form-horizontal' }) do |f| %>
-    <% if kids.size > 1 %>
-      <%= f.input :kid_id, collection: kids, label_method: :first_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
-    <% else %>
-      <p>Kid: <%= kids.first.first_name.titleize %></p>
-      <input name="post[kid_id]" type="hidden" value="<%= kids.first.id %>">
+    <%= simple_form_for(@post, html: { class: 'form-horizontal' }) do |f| %>
+      <% if kids.size > 1 %>
+        <%= f.input :kid_id, collection: kids, label_method: :first_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
+      <% else %>
+        <p>Kid: <%= kids.first.first_name.titleize %></p>
+        <input name="post[kid_id]" type="hidden" value="<%= kids.first.id %>">
+      <% end %>
+
+      <% if new_post %>
+        <div>
+          <label for="post_kids_age">When did they say this?</label>
+          <%= f.input_field :kids_age, label: 'When did they say this?', collection: timing_choices, input_html: { class: 'form-control' } %>
+
+          <span class="custom-age hide-posts-custom-age">
+            <label>How old were they?  Years</label>
+            <%= f.input_field :years_old, label: 'Years', collection: 0..30, selected: 1 %>
+            <label>Months</label>
+            <%= f.input_field :months_old, label: 'Months', collection: 0..11, selected: 0 %>
+          </span>
+        </div>
+      <% else %>
+        <%= f.input :date_said, as: :date, html5: true, required: false %>
+      <% end %>
+
+
+      <p class="markdown-disclaimer">Wrap your <span class="girl-quote"> <<< kid's quotes >>> </span> with <span class="girl-quote"><<< &nbsp; &nbsp; >>></span></p>
+      <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10, spellcheck: true } %>
+
+      <%= link_to 'Cancel', :back %>
+      <%= f.submit 'Save', class: 'pull-xs-right' %>
     <% end %>
 
-    <% if new_post %>
-      <div>
-        <label for="post_kids_age">When did they say this?</label>
-        <%= f.input_field :kids_age, label: 'When did they say this?', collection: timing_choices, input_html: { class: 'form-control' } %>
-
-        <span class="custom-age hide-posts-custom-age">
-          <label>How old were they?  Years</label>
-          <%= f.input_field :years_old, label: 'Years', collection: 0..30, selected: 1 %>
-          <label>Months</label>
-          <%= f.input_field :months_old, label: 'Months', collection: 0..11, selected: 0 %>
-        </span>
-      </div>
-    <% else %>
-      <%= f.input :date_said, as: :date, html5: true, required: false %>
-    <% end %>
-
-
-    <p class="markdown-disclaimer">Wrap your <span class="girl-quote"> <<< kid's quotes >>> </span> with <span class="girl-quote"><<< &nbsp; &nbsp; >>></span></p>
-    <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10, spellcheck: true } %>
-
-    <%= link_to 'Cancel', :back %>
-    <%= f.submit 'Save', class: 'pull-xs-right' %>
+  <% else %>
+    <%= create_your_first_kid %>
   <% end %>
-
-<% else %>
-  <%= create_your_first_kid %>
-<% end %>
-
+</div>
 
 <script>
   var age = $('#post_kids_age');
