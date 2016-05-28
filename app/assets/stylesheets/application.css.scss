@@ -145,6 +145,13 @@ html body {
   color: white;
 }
 
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  .side-nav-kids {
+    padding-bottom: 10px;
+  }
+}
+
 
 
 // HOME PAGE
