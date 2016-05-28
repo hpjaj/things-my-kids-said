@@ -5,17 +5,20 @@
 <div class="col-md-8">
   <% @posts.each do |post| %>
     <div class="card card-block">
-      <!-- <div class='row'> -->
-        <!-- <div class="col-sm-1 picture"><%#= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %></div> -->
+      <div class='row'>
+        <div class="col-sm-1 picture">
+          <%= image_tag post.kid.photo.expiring_url(3600, :thumb) if post.kid.photo? %>
+          <%#= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %>
+        </div>
 
-        <!-- <div class="col-sm-11"> -->
+        <div class="col-sm-11">
           <p class="card-title"><%= headline post %></p>
           <%= highlight_kids_quote post %>
 
-          <%= link_to "Comment", post, class: 'card-link comment text-muted' %>
+          <%= link_to "More", post, class: 'card-link comment text-muted' %>
           <span class="pull-xs-right text-muted post-author">captured by <%= post.user.first_name.titleize %></span>
-        <!-- </div> -->
-      <!-- </div> -->
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

@@ -15,6 +15,7 @@ describe 'Creating a new kid', js: true do
     fill_in 'First name', with: 'Jackie'
     fill_in 'Last name', with: 'Smith'
     page.execute_script("$('#kid_birthdate').val('21/02/2010')")
+    find('#kid_gender').find(:xpath, 'option[2]').select_option
 
     expect{ click_button 'Save' }.to change{ Kid.count }.by(1)
   end

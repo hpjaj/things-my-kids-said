@@ -71,6 +71,11 @@ describe 'Creating a new post' do
 
       it "clicking 'Add your kid's info' link redirects to New Kid page" do
         click_link "Add your kid's info"
+        expect(page).to have_content "New Kid"
+      end
+
+      it "clicking 'New Kid' link redirects to New Kid page" do
+        click_link 'New Kid'
 
         expect(current_path).to eq new_kid_path
       end
