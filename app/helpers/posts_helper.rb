@@ -31,12 +31,22 @@ module PostsHelper
   end
 
   def headline(post)
-    age_in_words = Age.new(post.kid.birthdate, post.date_said).calculate
+    "#{post_date_said(post)}, when #{post_age_said(post)}"
+  end
 
-    "Around #{display_date post.date_said}, when #{post.kid.first_name.titleize} was #{age_in_words}…"
+  def post_age_said(post)
+    "#{post.kid.first_name.titleize} was #{age_in_words(post)}…"
+  end
+
+  def post_date_said(post)
+    "Around #{display_date post.date_said}"
   end
 
   private
+
+  def age_in_words(post)
+    Age.new(post.kid.birthdate, post.date_said).calculate
+  end
 
   def display_date(date)
     if date.year == Date.current.year

@@ -3,12 +3,16 @@
 </div>
 
 <div class="col-md-8">
-    <div class="card card-block">
-      <!-- <div class='row'> -->
-        <!-- <div class="col-sm-1 picture"><%#= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %></div> -->
+    <div class="card ">
+      <div class="card-block">
+        <h4 class="card-title post-show-title">When <%= post_age_said @post %></h4>
+        <h6 class="card-subtitle text-muted"><%= post_date_said @post %></h6>
+      </div>
+        <div class="post-show-picture">
+          <%= image_tag @post.kid.photo.expiring_url(3600, :medium), class: 'card-img-top show-photo' if @post.kid.photo? %>
+        </div>
 
-        <!-- <div class="col-sm-11"> -->
-          <p class="card-title"><%= headline @post %></p>
+        <div class="card-block">
           <%= highlight_kids_quote @post %>
 
           <span> <%= link_to 'Back', :back, class: 'comment text-muted post-show-buttons' %> </span>
@@ -19,8 +23,7 @@
           <% end %>
 
           <span class="pull-xs-right text-muted post-author">captured by <%= @post.user.first_name.titleize %></span>
-        <!-- </div> -->
-      <!-- </div> -->
+        </div>
     </div>
 </div>
 

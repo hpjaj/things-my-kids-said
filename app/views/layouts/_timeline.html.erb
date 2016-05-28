@@ -7,8 +7,7 @@
     <div class="card card-block">
       <div class='row'>
         <div class="col-sm-1 picture">
-          <%= image_tag post.kid.photo.expiring_url(3600, :thumb) if post.kid.photo? %>
-          <%#= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %>
+          <%= image_tag post.kid.photo.expiring_url(3600, :thumb), class: 'timeline-photo' if post.kid.photo? %>
         </div>
 
         <div class="col-sm-11">
