@@ -6,6 +6,7 @@
   <h5 class="page-title">Your Kids</h5>
   <% @kids.each do |kid| %>
     <p>
+      <%= image_tag kid.photo.expiring_url(3600, :thumb), class: 'kids-edit-photo' if kid.photo? %>
       <%= kid.full_name.titleize %>,
       <%= kid.gender %>,
       <%= kid.birthdate.strftime("%-m/%d/%y") %>,
