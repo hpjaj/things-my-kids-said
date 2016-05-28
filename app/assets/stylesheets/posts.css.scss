@@ -25,6 +25,7 @@
 .markdown-disclaimer {
   text-align: right;
   font-size: .8em;
+  padding-top: 10px;
 }
 
 .post-show-buttons {
@@ -53,4 +54,12 @@
 
 .post-form {
   margin-bottom: 40px;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  .markdown-disclaimer {
+    text-align: left;
+    padding-top: 15px;
+  }
 }
