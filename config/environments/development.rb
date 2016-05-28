@@ -49,4 +49,8 @@ Rails.application.configure do
     :url =>':s3_domain_url',
     :path => '/:class/:attachment/:id_partition/:style/:filename',
   }
+
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
 end
