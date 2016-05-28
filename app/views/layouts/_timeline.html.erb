@@ -7,7 +7,7 @@
     <div class="card card-block">
       <div class='row'>
         <div class="col-sm-1 picture">
-          <%= image_tag post.kid.photo.url(:square)  if post.kid.photo.url %>
+          <%= image_tag post.kid.photo.expiring_url(3600, :thumb)  if post.kid.photo.url %>
 
           <%#= image_tag('janie_thumbnail.jpg', width: 50, height: 50) %>
 
