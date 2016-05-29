@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-sm-11">
-          <p class="card-title"><%= headline post %></p>
+          <p class="card-title"><%= link_to(headline(post), post, class: 'text-muted') %></p>
           <%= highlight_kids_quote post %>
 
           <%= link_to "More", post, class: 'card-link comment text-muted' %>
