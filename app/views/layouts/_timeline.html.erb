@@ -1,16 +1,16 @@
-<div class="col-md-2">
+<div class="col-lg-2 col-md-3">
   <%= render 'layouts/side_navbar' %>
 </div>
 
-<div class="col-md-8">
+<div class="col-lg-8 col-md-9">
   <% @posts.each do |post| %>
     <div class="card card-block">
       <div class='row'>
-        <div class="col-sm-1 picture">
+        <div class="col-xl-1 col-xs-12 timeline-picture">
           <%= image_tag post.kid.photo.expiring_url(3600, :thumb), class: 'timeline-photo' if post.kid.photo? %>
         </div>
 
-        <div class="col-sm-11">
+        <div class="col-xl-11 col-xs-12">
           <p class="card-title"><%= link_to(headline(post), post, class: 'text-muted') %></p>
           <%= highlight_kids_quote post %>
 
@@ -22,4 +22,4 @@
   <% end %>
 </div>
 
-<div class="col-md-2"></div>
+<div class="col-lg-2 col-md-1"></div>

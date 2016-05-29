@@ -63,3 +63,12 @@
     padding-top: 15px;
   }
 }
+
+// Large devices (desktops, less than 75em)
+@media (max-width: 74.9em) {
+  .timeline-picture {
+    min-width: 50px;
+    height: auto;
+  }
+}
+
