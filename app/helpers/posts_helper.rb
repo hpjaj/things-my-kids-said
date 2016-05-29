@@ -17,7 +17,8 @@ module PostsHelper
   end
 
   def users_kids(current_user)
-    current_user.kids
+    current_user.kids +
+    Kid.users_friends_and_families_kids_that_they_can_create_posts_for(current_user)
   end
 
   def highlight_kids_quote(post)

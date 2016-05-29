@@ -23,4 +23,13 @@ class Kid < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def self.users_friends_and_families_kids_that_they_can_create_posts_for(user)
+    self
+      .joins(:friend_and_families)
+      .where(friend_and_families: { follower_id: user.id })
+      .where(friend_and_families: { can_create_posts: true })
+      .order(:last_name)
+      .uniq
+  end
 end
