@@ -34,4 +34,34 @@ RSpec.describe Kid, type: :model do
       end
     end
   end
+
+  describe "##users_friends_and_families_kids_that_they_can_create_posts_for" do
+    let(:friends_kid) { create :kid }
+    let(:son)         { create :kid }
+    let(:niece)       { create :kid }
+
+    before do
+      son.parents << user
+      niece.followers << user
+      friends_kid.followers << user
+      son_permission = user.friend_and_families.where(kid_id: niece.id).first
+      son_permission.update!(can_create_posts: true)
+    end
+
+    let(:results) { Kid.users_friends_and_families_kids_that_they_can_create_posts_for(user) }
+
+    it "returns kids that the user was given permission to create post for" do
+      expect(results).to eq [niece]
+    end
+
+    it "does not return the user's own kids" do
+      expect(user.kids).to include(son)
+      expect(results).to_not include(son)
+    end
+
+    it "does not return kids that the user is following, but does not have permission to create posts for" do
+      expect(user.following).to include(niece, friends_kid)
+      expect(results).to_not include(friends_kid)
+    end
+  end
 end
