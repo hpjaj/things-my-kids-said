@@ -1,11 +1,13 @@
-<%= simple_form_for @kid do |f| %>
-  <%= f.input :first_name, required: false %>
-  <%= f.input :last_name, required: false %>
-  <%= f.input :birthdate, as: :date, html5: true %>
-  <%= f.input :gender, collection: [['Boy', Kid::BOY], ['Girl', Kid::GIRL]] %>
-  <%= image_tag @kid.photo.expiring_url(3600, :thumb) if @kid.photo? %>
-  <%= f.input :photo, as: :file, required: false, label: 'Add/Change Photo' %>
-  <%= f.submit 'Save' %>
-<% end %>
-
+<div class="forms">
+  <%= simple_form_for @kid do |f| %>
+    <%= f.input :first_name, required: false %>
+    <%= f.input :last_name, required: false %>
+    <%= f.input :birthdate, as: :date, html5: true %>
+    <%= f.input :gender, collection: [['Boy', Kid::BOY], ['Girl', Kid::GIRL]] %>
+    <%= image_tag @kid.photo.expiring_url(3600, :thumb) if @kid.photo? %>
+    <%= f.input :photo, as: :file, required: false, label: 'Add/Change Photo' %>
+    <br/>
+    <%= f.submit 'Save' %>
+  <% end %>
+</div>
 
