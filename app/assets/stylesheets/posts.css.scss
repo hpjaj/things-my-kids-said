@@ -1,3 +1,40 @@
+.card {
+  position: relative;
+  display: block;
+  margin-bottom: 12px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+
+.card-block {
+  padding: 20px;
+}
+
+.card-title {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.card-text {
+  margin-bottom: 16px;
+}
+
+.card-subtitle {
+  margin-top: -0.375rem;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+
+
+.custom-fields {
+  margin-left: -15px;
+}
+
+
 .hide-posts-custom-age {
   display: none;
 }
@@ -29,12 +66,7 @@
 }
 
 .post-show-buttons {
-  padding-right: 1em;
-}
-
-.post-delete-button {
-  float: left;
-  margin-right: 1em;
+  padding-right: 2.5em;
 }
 
 .timeline-photo {
@@ -54,21 +86,30 @@
 
 .forms {
   margin-bottom: 40px;
+  padding: 0 10px;
 }
 
 /* Extra Small Devices, Phones */
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width : 544px) {
   .markdown-disclaimer {
     text-align: left;
     padding-top: 15px;
   }
+
+  .post-show-buttons {
+    padding-right: 1em;
+  }
 }
 
 // Large devices (desktops, less than 75em)
-@media (max-width: 74.9em) {
+@media (min-width: 1200px) {
   .timeline-picture {
     min-width: 50px;
     height: auto;
+  }
+
+  .timeline-photo {
+    margin-top: 3px;
   }
 }
 

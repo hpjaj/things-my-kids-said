@@ -11,14 +11,14 @@
       <% end %>
 
       <% if new_post %>
-        <div>
+        <div class="custom-fields">
           <label for="post_kids_age">When did they say this?</label>
           <%= f.input_field :kids_age, label: 'When did they say this?', collection: timing_choices, input_html: { class: 'form-control' } %>
 
           <span class="custom-age hide-posts-custom-age">
-            <label>How old were they?  Years</label>
+            <label>How old were they?  Years old</label>
             <%= f.input_field :years_old, label: 'Years', collection: 0..30, selected: 1 %>
-            <label>Months</label>
+            <label>Months old</label>
             <%= f.input_field :months_old, label: 'Months', collection: 0..11, selected: 0 %>
           </span>
         </div>
@@ -27,11 +27,11 @@
       <% end %>
 
 
-      <p class="markdown-disclaimer">Wrap your <span class="girl-quote"> <<< kid's quotes >>> </span> with <span class="girl-quote"><<< &nbsp; &nbsp; >>></span></p>
+      <p class="markdown-disclaimer custom-fields">Wrap your <span class="girl-quote"> <<< kid's quotes >>> </span> with <span class="girl-quote"><<< &nbsp; &nbsp; >>></span></p>
       <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10, spellcheck: true } %>
 
       <%= link_to 'Cancel', :back %>
-      <%= f.submit 'Save', class: 'pull-xs-right' %>
+      <%= f.submit 'Save', class: 'pull-right' %>
     <% end %>
 
   <% else %>

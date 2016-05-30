@@ -6,16 +6,16 @@
   <% @posts.each do |post| %>
     <div class="card card-block">
       <div class='row'>
-        <div class="col-xl-1 col-xs-12 timeline-picture">
+        <div class="col-lg-1 col-xs-12 timeline-picture">
           <%= image_tag post.kid.photo.expiring_url(3600, :thumb), class: 'timeline-photo' if post.kid.photo? %>
         </div>
 
-        <div class="col-xl-11 col-xs-12">
+        <div class="col-lg-11 col-xs-12">
           <p class="card-title"><%= link_to(headline(post), post, class: 'text-muted') %></p>
           <%= highlight_kids_quote post %>
 
-          <%= link_to "More", post, class: 'card-link comment text-muted' %>
-          <span class="pull-xs-right text-muted post-author">captured by <%= post.user.first_name.titleize %></span>
+          <%= link_to "More | Comment", post, class: 'card-link comment text-muted' %>
+          <span class="pull-right text-muted post-author">captured by <%= post.user.first_name.titleize %></span>
         </div>
       </div>
     </div>
