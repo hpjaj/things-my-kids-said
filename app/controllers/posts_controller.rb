@@ -37,7 +37,7 @@ class PostsController < ApplicationController
       redirect_to kid_posts_path(params[:post][:kid_id])
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
-      render :new
+      render :edit
     end
   end
 

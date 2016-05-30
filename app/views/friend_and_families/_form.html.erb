@@ -1,0 +1,14 @@
+<div class="forms">
+  <%= simple_form_for @friend_and_family do |f| %>
+    <%= f.input :kid_id, collection: current_user.kids.order(:first_name), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
+
+    <%= f.input :follower_id, label: 'Friend/Family Member', collection: User.potential_friends_and_family_members_of(current_user), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
+
+    <%= f.input :can_create_posts, label: 'This friend/family member can also create quotes for my kid', required: false, input_html: { class: 'form-control' } %>
+
+    <%= link_to 'Cancel', :back %>
+
+    <%= f.submit 'Save', class: 'pull-xs-right' %>
+  <% end %>
+</div>
+

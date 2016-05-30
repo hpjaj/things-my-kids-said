@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :posts, path: 'quotes', except: :index
 
+  resources :friend_and_families
+
   resources :kids do
     resources :posts, only: :index, path: 'quotes'
   end
