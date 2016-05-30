@@ -34,4 +34,31 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "##potential_friends_and_family_members_of" do
+    let(:son)      { create :kid, :users => [dad] }
+    let(:daughter) { create :kid, :users => [dad] }
+    let(:mom)      { create :user }
+    let!(:friend)  { create :user }
+
+    before do
+      mom.kids << [son, daughter]
+      expect(mom.kids).to include(son, daughter)
+      expect(dad.kids).to include(son, daughter)
+    end
+
+    let(:results) { User.potential_friends_and_family_members_of(dad) }
+
+    it "returns all of the users that are not parents of any of the user's kids" do
+      expect(results).to eq [friend]
+    end
+
+    it "does not return the current user" do
+      expect(results).to_not include(dad)
+    end
+
+    it "does not return either of the parents of the current user's kids" do
+      expect(results).to_not include(mom)
+    end
+  end
 end

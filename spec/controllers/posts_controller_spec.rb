@@ -65,13 +65,13 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe "POST :update" do
+  describe "PATCH :update" do
     let(:quote) { create :post, user: user, kid: kid }
     let(:kid_2) { create :kid, users: [user] }
 
     context "happy path" do
       before do
-        post :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s }
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s }
         quote.reload
       end
 
@@ -86,7 +86,7 @@ RSpec.describe PostsController, type: :controller do
 
     context "user changes date the quote was said" do
       before do
-        post :update, id: quote.id.to_s, post: { date_said: Date.current, body: body, kid_id: kid.id.to_s }
+        patch :update, id: quote.id.to_s, post: { date_said: Date.current, body: body, kid_id: kid.id.to_s }
       end
 
       it "updates a post with a custom age" do
