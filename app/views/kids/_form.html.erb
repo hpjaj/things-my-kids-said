@@ -2,8 +2,8 @@
   <%= simple_form_for @kid do |f| %>
     <%= f.input :first_name, required: false %>
     <%= f.input :last_name, required: false %>
-    <%= f.input :birthdate, as: :date, html5: true %>
-    <%= f.input :gender, collection: [['Boy', Kid::BOY], ['Girl', Kid::GIRL]] %>
+    <%= f.input :birthdate, as: :date, html5: true, required: false %>
+    <%= f.input :gender, collection: [['Boy', Kid::BOY], ['Girl', Kid::GIRL]], required: false %>
     <%= image_tag @kid.photo.expiring_url(3600, :thumb) if @kid.photo? %>
     <%= f.input :photo, as: :file, required: false, label: 'Add/Change Photo' %>
     <br/>
