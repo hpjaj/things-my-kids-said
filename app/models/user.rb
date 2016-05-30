@@ -16,4 +16,18 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
+
+  def self.potential_friends_and_family_members_of(parent)
+    parent_ids = []
+
+    parent.kids.each do |kid|
+      parent_ids << kid.parents.pluck(:id)
+    end
+
+    self.where.not(id: parent_ids.uniq).order(:last_name)
+  end
+
+  def full_name
+    "#{first_name} #{last_name}".titleize
+  end
 end

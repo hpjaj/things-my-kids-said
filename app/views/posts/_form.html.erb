@@ -4,7 +4,7 @@
 
     <%= simple_form_for(@post, html: { class: 'form-horizontal' }) do |f| %>
       <% if kids.size > 1 %>
-        <%= f.input :kid_id, collection: kids, label_method: :first_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
+        <%= f.input :kid_id, collection: kids, label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
       <% else %>
         <p>Kid: <%= kids.first.first_name.titleize %></p>
         <input name="post[kid_id]" type="hidden" value="<%= kids.first.id %>">
