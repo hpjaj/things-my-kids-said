@@ -1,28 +1,29 @@
-<table class="table table-responsive">
-  <thead class="family-table">
-    <tr>
-      <th>Friend/Family Member</th>
-      <th>Kid</th>
-      <th>Can View Quotes</th>
-      <th>Can Create Quotes</th>
-      <th>Edit Permissions</th>
-      <th>Remove All Permissions</th>
-    </tr>
-  </thead>
-  <tbody class="family-table">
-    <% @friends_and_families.each do |fam| %>
+<div class="table-responsive">
+  <table class="table">
+    <thead class="family-table">
       <tr>
-        <td><%= User.find(fam.follower_id).full_name %></td>
-        <td><%= Kid.find(fam.kid_id).first_name %></td>
-        <td>True</td>
-        <td><%= fam.can_create_posts.to_s.titleize %></td>
-        <td><%= link_to 'Edit', edit_friend_and_family_path(fam) %></td>
-        <td><%= button_to 'Remove', friend_and_family_path(fam), method: :delete, data: { confirm: "Delete this friend/family member's permission?" } %></td>
+        <th>Friend/Family Member</th>
+        <th>Kid</th>
+        <th>Can View Quotes</th>
+        <th>Can Create Quotes</th>
+        <th>Edit Permissions</th>
+        <th>Remove All Permissions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    </thead>
+    <tbody class="family-table">
+      <% @friends_and_families.each do |fam| %>
+        <tr>
+          <td><%= User.find(fam.follower_id).full_name %></td>
+          <td><%= Kid.find(fam.kid_id).first_name %></td>
+          <td>True</td>
+          <td><%= fam.can_create_posts.to_s.titleize %></td>
+          <td><%= link_to 'Edit', edit_friend_and_family_path(fam) %></td>
+          <td><%= link_to 'Remove', friend_and_family_path(fam), method: :delete, data: { confirm: "Delete this friend/family member's permission?" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <div class='family-index-button'>
-  <%= link_to "Add New Friend/Family Member", new_friend_and_family_path, class: 'btn btn-sm btn-info-outline' %>
+  <%= link_to "Add New Friend/Family Member", new_friend_and_family_path, class: 'btn btn-sm btn-info' %>
 </div>

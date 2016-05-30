@@ -4,11 +4,11 @@
 
     <%= f.input :follower_id, label: 'Friend/Family Member', collection: User.potential_friends_and_family_members_of(current_user), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
 
-    <%= f.input :can_create_posts, label: 'This friend/family member can also create quotes for my kid', required: false, input_html: { class: 'form-control' } %>
+    <%= f.input :can_create_posts, label: 'This friend/family member can also create quotes for my kid', required: false %>
 
     <%= link_to 'Cancel', :back %>
 
-    <%= f.submit 'Save', class: 'pull-xs-right' %>
+    <%= f.submit 'Save', class: 'pull-right' %>
   <% end %>
 </div>
 
