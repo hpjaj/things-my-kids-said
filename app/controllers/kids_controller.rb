@@ -1,6 +1,8 @@
 class KidsController < ApplicationController
   load_and_authorize_resource
 
+  before_action :authenticate_user!
+
   def index
     @kids = current_user.kids.order(:first_name)
   end

@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
 
+  before_action :authenticate_user!
+
   def index
     kid    = Kid.find(params[:kid_id])
     @posts = kid.posts.order('date_said DESC')
