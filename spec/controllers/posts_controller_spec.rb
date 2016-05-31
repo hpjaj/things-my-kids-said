@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   include Devise::TestHelpers
+  render_views
 
   let(:user) { create :user }
   let!(:kid) { create :kid, users: [user] }
@@ -100,6 +101,24 @@ RSpec.describe PostsController, type: :controller do
 
     it "successfully deletes a Post" do
       expect{ delete :destroy, id: quote.id }.to change{ Post.count }.by(-1)
+    end
+  end
+
+  describe "edge cases" do
+    context "custom_age is selected, and kid_id is left blankl" do
+      let!(:kid_2) { create :kid, users: [user] }
+
+      it "does not create a new Post" do
+        expect{
+          post :create, post: { kids_age: 'custom_age', body: body, kid_id: '', years_old: '4', months_old: '11' }
+        }.to change{ Post.count }.by(0)
+      end
+
+      it "displays error 'Must choose a kid'" do
+        post :create, post: { kids_age: 'custom_age', body: body, kid_id: '', years_old: '4', months_old: '11' }
+
+        expect(response.body).to have_content "can't be blank"
+      end
     end
   end
 end
