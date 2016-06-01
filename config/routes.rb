@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :posts, path: 'quotes', except: :index
 
-  resources :friend_and_families
+  resources :friend_and_families, path: 'friends_and_family'
 
   resources :parents, only: [:index, :new, :create, :destroy]
 
