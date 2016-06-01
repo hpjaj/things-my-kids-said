@@ -1,4 +1,6 @@
 class ParentsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @parent_kid_pairs = []
 
