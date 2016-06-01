@@ -1,5 +1,7 @@
 class FriendAndFamiliesController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @friends_and_families = FriendAndFamily.parents_kids_friends_and_family(current_user)
   end
