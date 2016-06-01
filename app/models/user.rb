@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     self.where.not(id: parent_ids.uniq).order(:last_name)
   end
 
+  def self.potential_parent_with(parent)
+    self.where.not(id: parent.id).order(:last_name)
+  end
+
   def full_name
     "#{first_name} #{last_name}".titleize
   end

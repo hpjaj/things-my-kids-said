@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead class="family-table">
+      <tr>
+        <th>Parent</th>
+        <th>Parent Of</th>
+        <th>Remove Parent Permission</th>
+      </tr>
+    </thead>
+    <tbody class="family-table">
+      <% @parent_kid_pairs.each do |pair| %>
+        <tr>
+          <td><%= pair[0].full_name %></td>
+          <td><%= pair[1].full_name %></td>
+          <td><%= link_to 'Remove', parent_path(pair), method: :delete, data: { confirm: "Delete this parent permission?" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class='family-index-button'>
+  <%= link_to "Add New Parent", new_parent_path, class: 'btn btn-sm btn-info btn-info-outline' %>
+</div>

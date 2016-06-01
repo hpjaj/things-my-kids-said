@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :friend_and_families
 
+  resources :parents, only: [:index, :new, :create, :destroy]
+
   resources :kids do
     resources :posts, only: :index, path: 'quotes'
   end
