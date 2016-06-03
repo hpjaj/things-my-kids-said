@@ -118,3 +118,51 @@
   }
 }
 
+.timeline-header-header {
+  font-size: 20px;
+  padding: 40px 20px;
+  color: white;
+}
+
+.timeline-header-photo {
+  float: left;
+  margin-right: 20px;
+  height: 105px;
+  width: auto;
+  border: 5px solid white;
+  border-radius: 4px;
+}
+
+.girl-timeline-header {
+  border: 1px solid #FC6574;
+  background-color: #FC6574;
+}
+
+.boy-timeline-header {
+  border: 1px solid #4cc1fc;
+  background-color: #4cc1fc;
+}
+
+.timeline-header-block {
+  padding-top: 40px;
+}
+
+.main-timeline-header {
+  border: 1px solid #696F96;
+  background-color: #696F96;
+  margin: 0;
+}
+
+#timeline-header-brand {
+  float: left;
+  padding: 20px 30px;
+  color: #353535;
+  font-size: 32px;
+  background-color: white;
+  font-weight: 300;
+  border-radius: 4px;
+}
+
+.timeline-header-main-block {
+  padding: 20px;
+}

@@ -1,0 +1,7 @@
+<div class="card ">
+  <h3 class="card-header timeline-header-header <%=kid.gender%>-timeline-header">
+    <%= image_tag kid.photo.expiring_url(3600, :medium), class: 'timeline-header-photo' if kid.photo? %>
+    <%= kid.full_name %>
+  </h3>
+  <div class="card-block timeline-header-block"></div>
+</div>

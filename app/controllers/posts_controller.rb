@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    kid    = Kid.find(params[:kid_id])
-    @posts = kid.posts.order('date_said DESC')
+    @kid   = Kid.find(params[:kid_id])
+    @posts = @kid.posts.order('date_said DESC')
   end
 
   def new
