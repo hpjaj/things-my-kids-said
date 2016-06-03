@@ -63,6 +63,7 @@ class PostsController < ApplicationController
 
 
   def determine_date_said(params)
+    # See PR for explanation of this first `if` check: https://github.com/hpjaj/things-my-kids-said/pull/8
     if params[:post][:kid_id].empty?
       nil
     elsif params[:post][:kids_age] == 'custom_age'
