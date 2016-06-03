@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post.date_said = determine_date_said(params)
 
     if @post.save
-      redirect_to kid_posts_path(params[:post][:kid_id])
+      redirect_to home_path
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
       render :new
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     if @post.update(post_params)
-      redirect_to kid_posts_path(params[:post][:kid_id])
+      redirect_to home_path
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
       render :edit
