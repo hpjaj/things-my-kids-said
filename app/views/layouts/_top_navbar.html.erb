@@ -49,9 +49,10 @@
               <ul class="dropdown-menu">
                 <%= content_tag :li, link_to("Add A Member", new_friend_and_family_path), class: "#{css_class_active_for(new_friend_and_family_path)}" %>
                 <%= content_tag :li, link_to("Current Members", friend_and_families_path), class: "#{css_class_active_for(friend_and_families_path)}" %>
-                  <div class="divider"></div>
 
-                  <%= content_tag :li, link_to("Manage Parents", parents_path), class: "#{css_class_active_for(parents_path)}" %>
+                <div class="divider"></div>
+
+                <%= content_tag :li, link_to("Manage Parents", parents_path), class: "#{css_class_active_for(parents_path)}" %>
               </ul>
             </li>
           <% end %>
