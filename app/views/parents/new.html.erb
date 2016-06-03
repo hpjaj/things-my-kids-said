@@ -2,7 +2,7 @@
   <%= simple_form_for :parents, url: parents_path do |f| %>
     <%= f.input :kid_id, collection: current_user.kids.order(:first_name), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
 
-    <%= f.input :parent_id, label: "Kid's Parent", collection: User.potential_parent_with(current_user), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
+    <%= f.input :parent_id, label: "Kid's Parent", collection: User.potential_spouse_of(current_user), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
 
     <%= link_to 'Cancel', :back %>
 
