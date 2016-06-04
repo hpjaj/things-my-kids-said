@@ -17,6 +17,8 @@
 @import "posts";
 @import "kids";
 @import "friend_and_families";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,300italic,400italic,700italic);
 
 // COMMON views
@@ -145,6 +147,40 @@ ul.side-nav-kids {
     padding-bottom: 10px;
   }
 }
+
+.side-nav-panel-heading {
+  background-color: #696F96;
+  color: white;
+}
+
+.side-nav-panel-body {
+  border: 0;
+}
+
+.side-nav-collapse {
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+  .hidden-sm-up {
+    display: none !important;
+  }
+}
+
+.fa-rotate-90 {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.fa-angle-right {
+  padding-left: 4px;
+}
+
+
 
 
 

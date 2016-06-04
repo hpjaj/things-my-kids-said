@@ -1,0 +1,23 @@
+<div class="panel-group" id="accordion">
+  <div class="panel hidden-sm-up side-nav-panel-body">
+    <div class="panel-heading side-nav-panel-heading">
+      <h4 class="panel-title">
+        <a class="accordian-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsible-content">Kids <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      </h4>
+    </div>
+    <div id="collapsible-content" class="panel-collapse collapse side-nav-collapse">
+      <div>
+        <%= render 'layouts/side_nav/your_kids' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('.accordian-toggle').click(function() {
+    $('.fa-angle-right').toggleClass('fa-rotate-90');
+  });
+</script>
+
+
