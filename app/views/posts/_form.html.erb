@@ -33,8 +33,8 @@
       <p class="markdown-disclaimer custom-fields">Put three <span class="girl-quote"><<< &nbsp; >>></span> around <span class="girl-quote"> <<< kid's quotes >>> </span></p>
       <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10, spellcheck: true } %>
 
-      <%= link_to 'Cancel', :back %>
-      <%= f.submit 'Save', class: 'pull-right' %>
+      <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
+      <%= f.submit 'Save', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
     <% end %>
 
   <% else %>

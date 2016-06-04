@@ -7,7 +7,9 @@
     <%= image_tag @kid.photo.expiring_url(3600, :thumb) if @kid.photo? %>
     <%= f.input :photo, as: :file, required: false, label: 'Add/Change Photo' %>
     <br/>
-    <%= f.submit 'Save', class: 'kid-form-save-button' %>
+
+    <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
+    <%= f.submit 'Save', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
   <% end %>
 </div>
 

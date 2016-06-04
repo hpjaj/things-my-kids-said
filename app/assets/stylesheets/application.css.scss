@@ -14,6 +14,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "variables";
 @import "posts";
 @import "devise";
 @import "kids";
@@ -21,6 +22,9 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,300italic,400italic,700italic);
+
+
+
 
 // COMMON views
 
@@ -71,7 +75,7 @@ html body {
 }
 
 .top-navbar-links:hover {
-  color: #FC6574 !important;
+  color: $pink !important;
 }
 
 .navbar-brand {
@@ -134,8 +138,8 @@ ul.side-nav-kids {
 .side-nav-title {
   font-size: 20px;
   padding: 40px 20px;
-  background-color: #696F96;
-  border: 1px solid #696F96;
+  background-color: $purple;
+  border: 1px solid $purple;
   color: white;
 }
 
@@ -150,7 +154,7 @@ ul.side-nav-kids {
 }
 
 .side-nav-panel-heading {
-  background-color: #696F96;
+  background-color: $purple;
   color: white;
 }
 

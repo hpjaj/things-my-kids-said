@@ -6,9 +6,8 @@
 
     <%= f.input :can_create_posts, label: 'This friend/family member can also create quotes for my kid', required: false %>
 
-    <%= link_to 'Cancel', :back %>
-
-    <%= f.submit 'Save', class: 'pull-right' %>
+    <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
+    <%= f.submit 'Save', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
   <% end %>
 </div>
 

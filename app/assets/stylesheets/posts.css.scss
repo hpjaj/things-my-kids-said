@@ -40,11 +40,11 @@
 }
 
 .girl-quote {
-  color: #FC6574;
+  color: $pink;
 }
 
 .boy-quote {
-  color: #4cc1fc;
+  color: $blue;
 }
 
 .card-block {
@@ -135,13 +135,13 @@
 }
 
 .girl-timeline-header {
-  border: 1px solid #FC6574;
-  background-color: #FC6574;
+  border: 1px solid $pink;
+  background-color: $pink;
 }
 
 .boy-timeline-header {
-  border: 1px solid #4cc1fc;
-  background-color: #4cc1fc;
+  border: 1px solid $blue;
+  background-color: $blue;
 }
 
 .timeline-header-block {
@@ -149,8 +149,8 @@
 }
 
 .main-timeline-header {
-  border: 1px solid #696F96;
-  background-color: #696F96;
+  border: 1px solid $purple;
+  background-color: $purple;
   margin: 0;
 }
 
@@ -174,14 +174,27 @@ textarea.text, select.select, input.date, input.string {
 }
 
 .pagination > em {
-  color: #FC6574;
+  color: $pink;
 }
 
 .pagination > a:hover {
-  color: #FC6574;
+  color: $pink;
   text-decoration: none;
 }
 
 .pagination > a {
-  color: #333;
+  color: $black;
+}
+
+.btn-secondary-outline:hover {
+  color: #fff;
+  background-color: $black;
+  border-color: $black;
+}
+
+.btn-secondary-outline {
+  color: $black;
+  background-color: transparent;
+  background-image: none;
+  border-color: $black;
 }
