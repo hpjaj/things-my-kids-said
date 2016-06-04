@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @kid   = Kid.find(params[:kid_id])
-    @posts = @kid.posts.order('date_said DESC')
+    @posts = @kid.posts.order('date_said DESC').paginate(:page => params[:page], :per_page => 30)
   end
 
   def new
