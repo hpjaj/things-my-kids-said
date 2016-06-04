@@ -1,7 +1,16 @@
 <div class="card ">
   <h3 class="card-header timeline-header-header <%=kid.gender%>-timeline-header">
     <%= image_tag kid.photo.expiring_url(3600, :medium), class: 'timeline-header-photo' if kid.photo? %>
-    <%= kid.full_name %>
+    <%= kid.full_name %><br />
+    <span class='post-show-kid-info hidden-sm-down'>
+      <%= content_tag(:span, kids_current_age(kid), class: 'post-show-kid-age') %><br />
+      <%= content_tag(:span, "Born #{kids_birthday(kid)}", class: 'post-show-kid-birthday text-muted') %>
+    </span>
   </h3>
-  <div class="card-block timeline-header-block"></div>
+  <div class="card-block timeline-header-block">
+    <div class="post-show-mobile-kid-info hidden-sm-up">
+      <%= content_tag(:p, kids_current_age(kid), class: 'post-show-kid-age') %>
+      <%= content_tag(:p, "Born #{kids_birthday(kid)}", class: 'post-show-kid-birthday') %>
+    </div>
+  </div>
 </div>

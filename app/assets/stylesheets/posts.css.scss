@@ -214,3 +214,30 @@ textarea.text, select.select, input.date, input.string {
 .girl-link:hover {
   color: $pink;
 }
+
+.post-show-kid-info {
+  float: left;
+  display: block;
+  padding-top: 45px;
+}
+
+.post-show-kid-age, .post-show-kid-birthday {
+  font-size: 12px;
+}
+
+.post-show-kid-age {
+  color: #353535;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: -5px;
+  font-size: 13px;
+}
+
+.post-show-kid-birthday {
+  color: #777;
+  font-weight: 300;
+}
+
+.post-show-mobile-kid-info {
+  padding-left: 5px;
+}

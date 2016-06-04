@@ -17,6 +17,14 @@ class Age
     end
   end
 
+  def calculate_for_profile
+    if birthdate + 2.years > date_said
+      in_months
+    else
+      in_years
+    end
+  end
+
   private
 
   def age_in_days

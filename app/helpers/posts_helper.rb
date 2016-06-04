@@ -49,6 +49,14 @@ module PostsHelper
     "Around #{display_date post.date_said}"
   end
 
+  def kids_current_age(kid)
+    Age.new(kid.birthdate, Date.today).calculate_for_profile
+  end
+
+  def kids_birthday(kid)
+    kid.birthdate.strftime("%b %e, %Y")
+  end
+
   private
 
   def kids_gender(kid)
