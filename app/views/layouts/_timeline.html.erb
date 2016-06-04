@@ -1,4 +1,4 @@
-<div class="col-lg-2 col-sm-3 <%= 'hidden-sm-down' if @kid %> ">
+<div class="col-lg-2 col-sm-3 hidden-sm-down">
   <%= render 'layouts/side_navbar' %>
 </div>
 
@@ -6,7 +6,7 @@
   <% if @kid %>
     <%= render partial: 'posts/timeline_headers/kids', locals: { kid: @kid } %>
   <% else %>
-    <%#= render partial: 'posts/timeline_headers/main' %>
+    <%= render partial: 'posts/timeline_headers/main' %>
   <% end %>
 
   <% @posts.each do |post| %>
