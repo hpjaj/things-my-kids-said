@@ -172,3 +172,16 @@
 textarea.text, select.select, input.date, input.string {
   font-size: 16px;
 }
+
+.pagination > em {
+  color: #FC6574;
+}
+
+.pagination > a:hover {
+  color: #FC6574;
+  text-decoration: none;
+}
+
+.pagination > a {
+  color: #333;
+}
