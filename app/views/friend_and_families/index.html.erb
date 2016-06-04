@@ -15,8 +15,8 @@
         <tr>
           <td><%= User.find(fam.follower_id).full_name %></td>
           <td><%= Kid.find(fam.kid_id).first_name %></td>
-          <td>True</td>
-          <td><%= fam.can_create_posts.to_s.titleize %></td>
+          <td>Yes</td>
+          <td><%= yes_or_no fam.can_create_posts %></td>
           <td><%= link_to 'Edit', edit_friend_and_family_path(fam) %></td>
           <td><%= link_to 'Remove', friend_and_family_path(fam), method: :delete, data: { confirm: "Delete this friend/family member's permission?" } %></td>
         </tr>
