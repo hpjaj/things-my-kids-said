@@ -22,10 +22,9 @@ module PostsHelper
   end
 
   def highlight_kids_quote(post)
-    post.kid.gender == Kid::GIRL ? gender = 'girl' : gender = 'boy'
-
     quote = post.body
-    quote.gsub!(/<{3}/, "<span class='#{gender}-quote'>")
+
+    quote.gsub!(/<{3}/, "<span class='#{kids_gender(post.kid)}-quote'>")
     quote.gsub!(/>{3}/, "</span>")
 
     simple_format(quote, class: "card-text")
@@ -39,11 +38,22 @@ module PostsHelper
     "#{post.kid.first_name.titleize} was #{age_in_words(post)}…"
   end
 
+  def post_show_age_said(post)
+    kid = post.kid
+
+    link_to(post.kid.first_name.titleize, kid_posts_path(kid.id), class: "#{kids_gender(kid)}-link")
+    .concat(" was #{age_in_words(post)}…")
+  end
+
   def post_date_said(post)
     "Around #{display_date post.date_said}"
   end
 
   private
+
+  def kids_gender(kid)
+    kid.gender == Kid::GIRL ? 'girl' : 'boy'
+  end
 
   def age_in_words(post)
     Age.new(post.kid.birthdate, post.date_said).calculate

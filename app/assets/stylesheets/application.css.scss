@@ -247,13 +247,13 @@ ul.side-nav-kids {
 
 .btn-info-outline:hover {
   color: #fff;
-  background-color: #5bc0de;
-  border-color: #5bc0de;
+  background-color: $blue;
+  border-color: $blue;
 }
 
 .btn-info-outline {
-  color: #5bc0de;
+  color: $blue;
   background-color: transparent;
   background-image: none;
-  border-color: #5bc0de;
+  border-color: $blue;
 }

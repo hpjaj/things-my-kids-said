@@ -198,3 +198,19 @@ textarea.text, select.select, input.date, input.string {
   background-image: none;
   border-color: $black;
 }
+
+.boy-link {
+  color: $blue;
+}
+
+.girl-link {
+  color: $pink;
+}
+
+.boy-link:hover {
+  color: $blue;
+}
+
+.girl-link:hover {
+  color: $pink;
+}
