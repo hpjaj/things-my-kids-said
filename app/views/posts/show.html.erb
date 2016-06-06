@@ -3,28 +3,88 @@
 </div>
 
 <div class="col-lg-8 col-sm-9">
-    <div class="card ">
-      <div class="card-block">
-        <h4 class="card-title post-show-title">When <%= post_show_age_said @post %></h4>
-        <h6 class="card-subtitle text-muted"><%= post_date_said @post %></h6>
-      </div>
-        <div class="post-show-picture">
-          <%= image_tag @post.kid.photo.expiring_url(3600, :medium), class: 'card-img-top show-photo' if @post.kid.photo? %>
-        </div>
-
-        <div class="card-block">
-          <%= highlight_kids_quote @post %>
-
-          <span> <%= link_to 'Back', :back, class: 'comment text-muted post-show-buttons' %> </span>
-
-          <% if can? :manage, @post %>
-            <span> <%= link_to 'Edit', edit_post_path(@post), class: 'comment text-muted post-show-buttons' %> </span>
-            <span> <%= link_to('Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' }, class: 'comment text-muted post-show-buttons') %> </span>
-          <% end %>
-
-          <span class="pull-right text-muted post-author">captured by <%= @post.user.first_name.titleize %></span>
-        </div>
+  <div class="card ">
+    <div class="card-block">
+      <h4 class="card-title post-show-title">When <%= post_show_age_said @post %></h4>
+      <h6 class="card-subtitle text-muted"><%= post_date_said @post %></h6>
     </div>
+      <div class="post-show-picture">
+        <%= image_tag @post.kid.photo.expiring_url(3600, :medium), class: 'card-img-top show-photo' if @post.kid.photo? %>
+      </div>
+
+      <div class="card-block">
+        <%= highlight_kids_quote @post %>
+
+        <span> <%= link_to 'Back', :back, class: 'comment text-muted post-show-buttons' %> </span>
+
+        <% if can? :manage, @post %>
+          <span> <%= link_to 'Edit', edit_post_path(@post), class: 'comment text-muted post-show-buttons' %> </span>
+          <span> <%= link_to('Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' }, class: 'comment text-muted post-show-buttons') %> </span>
+        <% end %>
+
+        <span class="pull-right text-muted post-author">captured by <%= @post.user.first_name.titleize %></span>
+      </div>
+  </div>
+
+  <div class="card card-block">
+    <div class="row">
+      <div class="comment-header">
+        <div class="comment-count-container">
+          <p class='comment-count-area'>10 comments</p>
+        </div>
+        <div>
+          <%= render 'comments/form' %>
+        </div>
+      </div>
+    </div>
+
+    <% @comments.each do |comment| %>
+      <div class='row comment-container'>
+        <div class="col-lg-1 col-xs-12 timeline-picture">
+          <%= image_tag @post.kid.photo.expiring_url(3600, :thumb), class: 'timeline-photo' if @post.kid.photo? %>
+        </div>
+
+        <div class="col-lg-11 col-xs-12">
+          <p class="card-title comment-headline">
+            <span class="comment-author"><%= comment.user.full_name %></span>
+            <span class="comment-created-at"><%= time_ago_in_words comment.created_at %> ago</span>
+          </p>
+          <p><%= comment.body %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
 </div>
 
 <div class="col-lg-2 col-sm-1"></div>
+
+
+<script>
+  var form = $('#new_comment');
+  var body = $('#comment_body').val();
+
+  form.submit(function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      method: "POST",
+      url: "/quotes/<%= @post.id %>/comments",
+      data: { post_id: "<%= @post.id %>", user_id: "<%= @post.user_id %>", body: body },
+    })
+      .done(function(e) {
+        console.log(e);
+        console.log('got to the done');
+        // $.ajax({
+        //   method: "GET",
+        //   url: "/quotes/<%#= @post.id %>"
+        // });
+        //
+        // body.val('');
+      })
+      .fail(function(e) {
+        console.log(e);
+      });
+
+  });
+</script>

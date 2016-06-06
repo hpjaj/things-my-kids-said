@@ -17,4 +17,8 @@ Rails.application.routes.draw do
     resources :posts, only: :index, path: 'quotes'
   end
 
+  resources :posts, only: :show, path: 'quotes' do
+    resources :comments, only: [:new, :create, :destroy]
+  end
+
 end

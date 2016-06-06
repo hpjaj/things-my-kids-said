@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :kid
+  has_many :comments, dependent: :destroy
 
   validates :body, presence: true
   validates :kid_id, presence: true
