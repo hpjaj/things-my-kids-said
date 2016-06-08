@@ -1,0 +1,28 @@
+<div class="card card-block">
+  <div class="row">
+    <div class="comment-header">
+      <div class="comment-count-container">
+        <p class='comment-count-area'>10 comments</p>
+      </div>
+      <div>
+        <%= render 'comments/form' %>
+      </div>
+    </div>
+  </div>
+
+  <% @comments.each do |comment| %>
+    <div class='row comment-container'>
+      <div class="col-lg-1 col-xs-12 timeline-picture">
+        <%#= image_tag @post.kid.photo.expiring_url(3600, :thumb), class: 'timeline-photo' if @post.kid.photo? %>
+      </div>
+
+      <div class="col-lg-11 col-xs-12">
+        <p class="card-title comment-headline">
+          <span class="comment-author"><%= comment.user.full_name %></span>
+          <span class="comment-created-at"><%= time_ago_in_words comment.created_at %> ago</span>
+        </p>
+        <p><%= comment.body %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

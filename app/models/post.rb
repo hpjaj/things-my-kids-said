@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :kid
+  has_many :comments, dependent: :destroy
 
   validates :body, presence: true
   validates :kid_id, presence: true
@@ -15,7 +16,7 @@ class Post < ActiveRecord::Base
 
     self
       .where('kid_id in (?)', kid_ids)
-      .order('updated_at DESC')
+      .order('created_at DESC')
       .uniq
   end
 end

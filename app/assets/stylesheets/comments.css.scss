@@ -1,0 +1,35 @@
+.comment-count-area {
+  border-bottom: 2px solid rgba(0, 39, 59, .08);
+  color: #3F4549;
+  font-weight: 700;
+}
+
+.comment-count-container {
+}
+
+.comment-header {
+  padding: 0 15px
+}
+
+#comment_body {
+  border: 2px solid rgba(0, 39, 59, 0.2);
+  padding: 10px;
+  border-radius: 4px;
+  margin: 15px 0;
+  color: rgba(0,39,59,.35);
+  font-weight: 400;
+}
+
+.comment-created-at {
+  padding-left: 15px;
+  color: rgba(0, 39, 59, 0.5);
+}
+
+.comment-headline {
+  font-style: normal;
+  font-weight: 400;
+}
+
+.comment-container {
+  padding: 5px 0;
+}

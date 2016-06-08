@@ -1,0 +1,5 @@
+<%= simple_form_for :comment, url: post_comments_path(@post) do |f| %>
+  <%= f.input :body, label: false, placeholder: 'Comment', required: false, as: :text %>
+  <%= f.submit 'Post', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
+<% end %>
+

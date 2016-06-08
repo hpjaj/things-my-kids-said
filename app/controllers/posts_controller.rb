@@ -26,6 +26,16 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments
+  end
+
+  def display_comments
+    post = Post.find(params[:post_id])
+    @comments = post.comments  # byebug
+    Rails.logger.info "************ blah"
+    # logger.info "************ blah"
+    render nothing: true
+    # render partial: 'display_comments', locals: @comments
   end
 
   def edit
