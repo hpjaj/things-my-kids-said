@@ -11,7 +11,8 @@ class CommentsController < ApplicationController
       flash[:error] = 'There was a problem creating your comment.  Please try again.'
     end
 
-    render nothing: true
+    # render nothing: true
+    redirect_to post_path(post.id)
   end
 
   private

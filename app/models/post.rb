@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
 
     self
       .where('kid_id in (?)', kid_ids)
-      .order('updated_at DESC')
+      .order('created_at DESC')
       .uniq
   end
 end

@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 
   get 'home' => 'welcome#home'
 
-  resources :posts, path: 'quotes', except: :index
+  resources :posts, path: 'quotes', except: :index do
+    member do
+      get 'display_comments'
+    end
+  end
 
   resources :friend_and_families, path: 'friends_and_family'
 
