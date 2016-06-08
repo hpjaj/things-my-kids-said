@@ -2,7 +2,7 @@
   <div class="row">
     <div class="comment-header">
       <div class="comment-count-container">
-        <p class='comment-count-area'>10 comments</p>
+        <p class='comment-count-area'><%= pluralize(@comments.count, 'comment') %></p>
       </div>
       <div>
         <%= render 'comments/form' %>
