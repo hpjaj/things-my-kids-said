@@ -22,6 +22,9 @@
           <span class="comment-created-at"><%= time_ago_in_words comment.created_at %> ago</span>
         </p>
         <p><%= comment.body %></p>
+        <% if (can? :manage, comment) || (can? :destroy, comment) %>
+          <span><%= link_to('Delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete this comment?' }, class: 'comment text-muted post-show-buttons pull-right') %></span>
+        <% end %>
       </div>
     </div>
   <% end %>

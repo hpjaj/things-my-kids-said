@@ -20,6 +20,12 @@ class Ability
       can [:update, :destroy, :read, :index], Kid do |kid|
         kid.parents.pluck(:id).include? user.id
       end
+
+      can :manage, Comment, user_id: user.id
+
+      can :destroy, Comment do |comment|
+        comment.post.kid.parents.pluck(:id).include?(user.id)
+      end
     end
       # end
     #

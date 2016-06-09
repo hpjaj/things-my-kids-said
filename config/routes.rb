@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: :show, path: 'quotes' do
-    resources :comments, only: [:new, :create, :destroy]
+    resources :comments, except: [:index, :show]
   end
 
 end
