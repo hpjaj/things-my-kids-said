@@ -80,8 +80,6 @@ module PostsHelper
 
     if count == 0
       "Comment"
-    elsif count == 1
-      "Comment (#{count})"
     else
       "Comments (#{count})"
     end
