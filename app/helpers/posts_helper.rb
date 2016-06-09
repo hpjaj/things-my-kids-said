@@ -75,4 +75,15 @@ module PostsHelper
     end
   end
 
+  def comment_link_and_count(post)
+    count = post.comments.count
+
+    if count == 0
+      "Comment"
+    elsif count == 1
+      "Comment (#{count})"
+    else
+      "Comments (#{count})"
+    end
+  end
 end
