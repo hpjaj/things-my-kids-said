@@ -35,6 +35,18 @@ class KidsController < ApplicationController
     end
   end
 
+  def destroy
+    @kid = Kid.find(params[:id])
+
+    if @kid.delete
+      flash[:notice] = 'Your kid was successfully deleted.'
+      redirect_to kids_path
+    else
+      flash[:error] = 'There was a problem deleting your kid. Please try again.'
+      render :index
+    end
+  end
+
   private
 
   def kid_params

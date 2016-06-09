@@ -4,19 +4,35 @@
 
 <div class="col-lg-8 col-sm-9">
   <h5 class="page-title">Your Kids</h5>
-  <% @kids.each do |kid| %>
-    <p>
-      <%= image_tag kid.photo.expiring_url(3600, :thumb), class: 'kids-edit-photo' if kid.photo? %>
-      <%= kid.full_name.titleize %>,
-      <%= kid.gender %>,
-      <%= kid.birthdate.strftime("%-m/%d/%y") %>,
-      <%= link_to 'Edit', edit_kid_path(kid) %>
-    </p>
-  <% end %>
 
-  <% if !@kids.present? %>
-    <p><%= link_to "Enter your kid's information", new_kid_path %></p>
-  <% end %>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="family-table">
+        <tr>
+          <th>Photo</th>
+          <th>Kid</th>
+          <th>Gender</th>
+          <th>Birthdate</th>
+          <th>Edit</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody class="family-table kids-table">
+        <% @kids.each do |kid| %>
+          <tr>
+            <td><%= image_tag kid.photo.expiring_url(3600, :thumb), class: 'timeline-photo' if kid.photo? %></td>
+            <td><%= kid.full_name.titleize %></td>
+            <td><%= kid.gender.titleize %></td>
+            <td><%= kid.birthdate.strftime("%-m/%d/%y") %></td>
+            <td><%= link_to 'Edit', edit_kid_path(kid) %></td>
+            <td><%= link_to('Delete', kid_path(kid), method: :delete, data: { confirm: 'Delete this kid?' }) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class='family-index-button'>
+    <%= link_to "Add New Kid", new_kid_path, class: 'btn btn-sm btn-info btn-info-outline devise-buttons' %>
+  </div>
 </div>
-
-<div class="col-lg-2 col-sm-1"></div>
