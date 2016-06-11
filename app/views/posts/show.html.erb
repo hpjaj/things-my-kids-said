@@ -23,6 +23,10 @@
         <% end %>
 
         <span class="pull-right text-muted post-author">captured by <%= @post.user.first_name.titleize %></span>
+
+        <% if @post.parents_eyes_only? %>
+          <p class='parents-eyes'>parents eyes only</p>
+        <% end %>
       </div>
   </div>
 

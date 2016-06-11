@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "#{exception.message}"
-    redirect_to root_url
+    if current_user
+      redirect_to home_url
+    else
+      redirect_to root_url
+    end
   end
 
   def after_sign_in_path_for(resource)

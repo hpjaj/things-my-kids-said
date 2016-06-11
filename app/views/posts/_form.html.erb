@@ -2,7 +2,7 @@
   <% kids = users_kids(current_user) %>
   <% if kids.present? %>
 
-    <%= simple_form_for(@post, html: { class: 'form-horizontal' }) do |f| %>
+    <%= simple_form_for(@post, html: { class: 'form-horizontal post-form' }) do |f| %>
       <% if kids.size > 1 %>
         <%= f.input :kid_id, collection: kids, label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
       <% else %>
@@ -33,8 +33,12 @@
       <p class="markdown-disclaimer custom-fields">Put three <span class="girl-quote"><<< &nbsp; >>></span> around <span class="girl-quote"> <<< kid's quotes >>> </span></p>
       <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10, spellcheck: true } %>
 
+      <div class="form-parents-eyes-only hide-posts-custom-age">
+        <%= f.input :parents_eyes_only, label: 'Parents eyes only', required: false %>
+      </div>
+
       <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
-      <%= f.submit 'Save', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
+      <%= f.submit 'Save', id: 'post-submit-button', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
     <% end %>
 
   <% else %>
@@ -43,12 +47,35 @@
 </div>
 
 <script>
-  var age = $('#post_kids_age');
+  var age             = $('#post_kids_age');
+  var kid             = $('#post_kid_id');
+  var submitButton    = $('#post-submit-button');
+  var parentsEyesOnly = $("#post_parents_eyes_only");
+  var parentsKidsIds  = "<%= current_user.kids.pluck(:id) %>";
 
   age.on( "change", function() {
     if (age.val() === 'custom_age') {
       $('div.custom-age').show();
     } else  {
-      $('div.custom-age').hide(); }
+      $('div.custom-age').hide();
+    }
+  });
+
+  kid.on( "change", function() {
+    if ( parentsKidsIds.includes(kid.val()) ) {
+      $('div.form-parents-eyes-only').show();
+    } else  {
+      $('div.form-parents-eyes-only').hide();
+    }
+  });
+
+  if ( kid.val() !== '' && parentsKidsIds.includes(kid.val()) ) {
+    $('div.form-parents-eyes-only').show();
+  }
+
+  submitButton.on('click', function() {
+    if ( parentsKidsIds.includes(kid.val()) === false) {
+      parentsEyesOnly.attr('checked', false);
+    }
   });
 </script>

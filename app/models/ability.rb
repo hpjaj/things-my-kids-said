@@ -17,8 +17,16 @@ class Ability
 
       can :create, Kid
 
+      can :destroy, Comment do |comment|
+        user.kids.pluck(:id).include?(comment.post.kid_id) || comment.user_id == user.id
+      end
+
       can [:update, :destroy, :read, :index], Kid do |kid|
         kid.parents.pluck(:id).include? user.id
+      end
+
+      can :read, Kid do |kid|
+        user.following.pluck(:id).include?(kid.id)
       end
 
       can :manage, Comment, user_id: user.id

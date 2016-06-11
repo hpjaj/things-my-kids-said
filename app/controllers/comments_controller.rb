@@ -20,6 +20,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
 
+    authorize! :destroy, @comment
+
     unless @comment.delete
       flash[:error] = 'There was a problem deleting your comment. Please try again.'
     end

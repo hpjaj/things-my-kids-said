@@ -4,8 +4,11 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @kid   = Kid.find(params[:kid_id])
-    @posts = @kid.posts.order('date_said DESC').paginate(:page => params[:page], :per_page => 30)
+    @kid = Kid.find(params[:kid_id])
+
+    authorize! :read, @kid
+
+    @posts = Post.user_can_see_for(@kid, current_user).order('date_said DESC').paginate(:page => params[:page], :per_page => 30)
   end
 
   def new
@@ -13,6 +16,8 @@ class PostsController < ApplicationController
   end
 
   def create
+    authorize! :create, Post
+
     @post           = current_user.posts.build(post_params)
     @post.date_said = determine_date_said(params)
 
@@ -26,6 +31,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+
+    authorize! :read, @post
+
     @comments = @post.comments.order('created_at DESC')
   end
 
@@ -40,10 +48,14 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+
+    authorize! :update, @post
   end
 
   def update
     @post = Post.find(params[:id])
+
+    authorize! :update, @post
 
     if @post.update(post_params)
       redirect_to home_path
@@ -55,6 +67,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+
+    authorize! :destroy, @post
 
     if @post.delete
       flash[:notice] = 'Your quote was successfully deleted.'
@@ -68,7 +82,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said)
+    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only)
   end
 
 

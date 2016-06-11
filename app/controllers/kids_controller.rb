@@ -8,6 +8,8 @@ class KidsController < ApplicationController
   end
 
   def new
+    authorize! :create, Kid
+
     @kid = Kid.new
   end
 
@@ -22,10 +24,14 @@ class KidsController < ApplicationController
 
   def edit
     @kid = Kid.find(params[:id])
+
+    authorize! :update, @kid
   end
 
   def update
     @kid = Kid.find(params[:id])
+
+    authorize! :update, @kid
 
     if @kid.update(kid_params)
       redirect_to kids_path
@@ -37,6 +43,8 @@ class KidsController < ApplicationController
 
   def destroy
     @kid = Kid.find(params[:id])
+
+    authorize! :destroy, @kid
 
     if @kid.delete
       flash[:notice] = 'Your kid was successfully deleted.'

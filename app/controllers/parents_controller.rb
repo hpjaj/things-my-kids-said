@@ -20,6 +20,8 @@ class ParentsController < ApplicationController
     kid    = Kid.find_by(id: params[:parents][:kid_id])
     parent = User.find_by(id: params[:parents][:parent_id])
 
+    authorize! :create, kid
+
     if kid && parent && !kid.parents.include?(parent)
       kid.parents << parent
       redirect_to parents_path
@@ -33,6 +35,8 @@ class ParentsController < ApplicationController
     parent_kid_ids = params[:id].split('/')
     parent         = User.find_by(id: parent_kid_ids.first.to_i)
     kid            = Kid.find_by(id: parent_kid_ids.last.to_i)
+
+    authorize! :destroy, kid
 
     if kid.parents.delete(parent)
       flash[:notice] = 'The parent permission was successfully deleted.'
