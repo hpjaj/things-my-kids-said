@@ -1,7 +1,7 @@
 .comment-count-area {
-  border-bottom: 2px solid rgba(0, 39, 59, .08);
+  border-bottom: 1px solid rgba(0, 39, 59, .08);
   color: #3F4549;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .comment-count-container {
@@ -12,12 +12,11 @@
 }
 
 #comment_body {
-  border: 2px solid rgba(0, 39, 59, 0.2);
+  border: 1px solid rgba(0, 39, 59, 0.2);
   padding: 10px;
   border-radius: 4px;
   margin: 15px 0;
   color: rgba(0,39,59,.35);
-  font-weight: 400;
 }
 
 .comment-created-at {
@@ -32,4 +31,9 @@
 
 .comment-container {
   padding: 5px 0;
+}
+
+.comment-delete-button {
+  font-weight: 300;
+  color: rgba(0, 39, 59, 0.5);
 }
