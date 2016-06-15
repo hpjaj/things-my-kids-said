@@ -19,6 +19,7 @@
 @import "comments";
 @import "devise";
 @import "kids";
+@import "help";
 @import "friend_and_families";
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -32,7 +33,7 @@
 html body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  background: #F4F4F4;
+  background: $body-gray;
 
   font-size: 16px;
   line-height: 150%;
@@ -195,8 +196,14 @@ ul.side-nav-kids {
 
 // HOME PAGE
 
-.home-create-kid {
+.help-get-started {
   text-align: center;
+  font-size: 34px;
+  font-weight: 300;
+}
+
+.help-get-started a {
+  color: $pink;
 }
 
 

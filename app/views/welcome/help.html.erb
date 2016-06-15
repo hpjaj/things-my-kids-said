@@ -1,0 +1,36 @@
+<div class="hidden-sm-down col-lg-2 col-sm-3">
+  <%= render 'layouts/side_nav/navbar' %>
+</div>
+
+<div class="col-lg-8 col-sm-9">
+  <ul class="nav nav-tabs"  role="tablist">
+    <li role="presentation" class="active">
+      <a href="#parents" aria-controls="parents" role="tab" data-toggle="tab">Parents</a>
+    </li>
+    <li role="presentation">
+      <a href="#friends-and-family" aria-controls="friends-and-family" role="tab" data-toggle="tab">Friends & Family</a>
+    </li>
+    <li role="presentation">
+      <a href="#faq" aria-controls="faq" role="tab" data-toggle="tab">FAQ</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="parents">
+      <%= render 'welcome/help/parents_getting_started' %>
+      <%= render 'welcome/help/creating_a_quote' %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="friends-and-family">
+      <%= render 'welcome/help/friends_family_getting_started' %>
+      <%= render 'welcome/help/creating_a_quote' %>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="faq">
+      <%= render 'welcome/help/faq' %>
+    </div>
+  </div>
+
+</div>
+
+<div class="col-lg-2 col-sm-1"></div>

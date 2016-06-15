@@ -65,13 +65,14 @@ describe 'Creating a new post' do
         visit new_post_path
       end
 
-      it "prompts you to create a kid when creating a Post" do
-        expect(page).to have_content "Add your kid's info"
+      it "prompts you to go to the help page to get started" do
+        expect(page).to have_content "Let's get started!"
       end
 
-      it "clicking 'Add your kid's info' link redirects to New Kid page" do
-        click_link "Add your kid's info"
-        expect(page).to have_content "New Kid"
+      it "clicking the 'Let's get started!' link redirects to the help page" do
+        click_link "Let's get started!"
+
+        expect(current_path).to eq(help_path)
       end
 
       it "clicking 'New Kid' link redirects to New Kid page" do

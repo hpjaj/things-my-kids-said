@@ -1,0 +1,38 @@
+.nav-tabs > li > a {
+  margin-right: 0;
+}
+
+.tab-content .active {
+  background-color: $body-gray !important;
+}
+
+.nav-tabs li a {
+  color: $black;
+}
+
+.nav-tabs li a:hover {
+  color: $pink;
+}
+
+.question, .help-body {
+  margin-bottom: 15px;
+  padding: 0 20px;
+}
+
+.help-bold {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.help-steps {
+  padding-left: 20px;
+  list-style-type: circle;
+}
+
+.help-contact-us a {
+  color: $pink;
+}
+
+.help-contact-us a:hover {
+  color: $pink;
+}
