@@ -10,7 +10,9 @@ describe 'Creating a new kid', js: true do
   before { sign_into_app user }
 
   it "can create a new kid" do
-    page.find(:xpath, "//a[@href='/kids/new']").click
+    click_link 'Your Kids'
+    click_link 'New Kid'
+    visit new_kid_path
     fill_in 'First name', with: 'Jackie'
     fill_in 'Last name', with: 'Smith'
     page.execute_script("$('#kid_birthdate').val('21/02/2010')")

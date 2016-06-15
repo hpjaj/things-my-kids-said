@@ -1,5 +1,5 @@
 <% if @posts.present? %>
   <%= render 'layouts/timeline', locals: { posts: @posts } %>
 <% else %>
-  <%= create_your_first_kid %>
+  <%= help_getting_started %>
 <% end %>
