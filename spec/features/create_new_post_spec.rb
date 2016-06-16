@@ -66,11 +66,11 @@ describe 'Creating a new post' do
       end
 
       it "prompts you to go to the help page to get started" do
-        expect(page).to have_content "Let's get started!"
+        expect(page).to have_content "Click here to get started!"
       end
 
-      it "clicking the 'Let's get started!' link redirects to the help page" do
-        click_link "Let's get started!"
+      it "clicking the 'Click here to get started!' link redirects to the help page" do
+        click_link "Click here to get started!"
 
         expect(current_path).to eq(help_path)
       end
