@@ -15,6 +15,7 @@ class Kid < ActiveRecord::Base
   validates :last_name, presence: true
   validates :birthdate, presence: true
   validates :gender, presence: true
+  validate :cannot_create_duplicate, on: :create
 
   def parents
     users
@@ -31,5 +32,17 @@ class Kid < ActiveRecord::Base
       .where(friend_and_families: { can_create_posts: true })
       .order(:last_name)
       .uniq
+  end
+
+  private
+
+  def cannot_create_duplicate
+
+  end
+
+  def self.kid_exists?
+    blah = self.where(
+      birthdate:
+      )
   end
 end
