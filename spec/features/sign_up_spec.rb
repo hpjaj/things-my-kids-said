@@ -18,6 +18,6 @@ describe 'Signing up for an account' do
   end
 
   it "logs in a new user" do
-    expect(current_path).to eq home_path
+    expect(current_path).to eq help_path
   end
 end

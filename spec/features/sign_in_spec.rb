@@ -17,6 +17,6 @@ describe 'Signing in as an existing user' do
   end
 
   it "logs in an existing user" do
-    expect(current_path).to eq home_path
+    expect(current_path).to eq help_path
   end
 end

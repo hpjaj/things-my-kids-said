@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def help_getting_started
-    content_tag(:h4, link_to("Click here to get started!", help_path), class: 'help-get-started' )
+    controller.redirect_to help_path
   end
 
   def current_path

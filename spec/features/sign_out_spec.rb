@@ -10,7 +10,7 @@ describe 'Signing out of the app' do
   before do
     sign_into_app user
     visit home_path
-    expect(current_path).to eq home_path
+    expect(current_path).to eq help_path
     page.find(:xpath, "//a[@href='/users/sign_out']").click
   end
 
