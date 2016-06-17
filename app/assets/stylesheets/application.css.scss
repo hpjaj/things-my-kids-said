@@ -103,6 +103,28 @@ html body {
   color: #333333;
 }
 
+.logo {
+  max-height: 40px;
+  width: auto;
+}
+
+.logo-link {
+  padding: 5px;
+  padding-left: 15px;
+}
+
+@media only screen and (max-width: 991px) {
+  .logo {
+    max-height: 30px;
+    width: auto;
+  }
+
+  .logo-link {
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 5px;
+  }
+}
 
 
 
