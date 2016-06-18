@@ -91,3 +91,51 @@
 #video-pic:hover {
   cursor: pointer;
 }
+
+.landing_page_container, .blah {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.blah {
+  height: 100vh;
+  text-transform: uppercase;
+}
+
+#topper {
+  background-color: white;
+}
+
+#feature-1 {
+  background-color: $purple;
+}
+
+#feature-2 {
+  background-color: #F4F4F4;
+}
+
+#feature-3 {
+  background-color: $blue;
+}
+
+#feature-4 {
+  background-color: $text-muted-gray;
+}
+
+#landing-more {
+  background-color: $pink;
+}
+
+#landing-footer {
+  background-color: white;
+}
+
+
+// #topper, #feature-1, #feature-2, #feature-3, #feature-4 {
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+// }
