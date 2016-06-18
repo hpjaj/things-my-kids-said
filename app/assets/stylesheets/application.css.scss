@@ -17,6 +17,7 @@
 @import "variables";
 @import "posts";
 @import "comments";
+@import "landing_page";
 @import "devise";
 @import "kids";
 @import "help";
@@ -54,13 +55,6 @@ html body {
   padding-bottom: 2rem;
 }
 
-.jumbotron {
-  background-color: white;
-}
-
-#sign-in-button {
-  margin-right: 10px;
-}
 
 
 
@@ -211,68 +205,4 @@ ul.side-nav-kids {
 
 .collapse.in {
   padding-bottom: 15px;
-}
-
-
-
-
-
-// FOOTER
-
-.footer {
-  font-size: .8em;
-  padding: 30px 0 20px;
-}
-
-.footer-text {
-  padding-left: 15px;
-}
-
-.footer-contact-us a {
-  color: $black;
-}
-
-.footer-contact-us a:hover {
-  color: $pink;
-  text-decoration: none;
-}
-
-
-
-
-// LANDING PAGE
-
-#display-3 {
-  font-size: 7.4rem;
-  font-weight: 300;
-  margin: 0 0 8px;
-}
-
-#lead {
-  font-size: 21px;
-  font-weight: 300;
-  line-height: 30px;
-}
-
-.jumbotron {
-  padding: 64px 32px !important;
-}
-
-@media (max-width: 544px) {
-  .jumbotron {
-    padding: 32px 16px !important;
-  }
-}
-
-.btn-info-outline:hover {
-  color: #fff;
-  background-color: $blue;
-  border-color: $blue;
-}
-
-.btn-info-outline {
-  color: $blue;
-  background-color: transparent;
-  background-image: none;
-  border-color: $blue;
 }
