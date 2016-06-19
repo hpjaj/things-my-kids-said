@@ -14,7 +14,7 @@ class KidsController < ApplicationController
   end
 
   def create
-    if current_user.kids.create(kid_params)
+    if kid_creation_transaction
       redirect_to kids_path
     else
       flash[:error] = "There was a problem creating your kid's profile.  Please try again."
@@ -60,6 +60,17 @@ class KidsController < ApplicationController
   def kid_params
     params.require(:kid).permit(:first_name, :last_name, :birthdate, :gender, :photo, :created_by)
   end
+
+  def kid_creation_transaction
+    ActiveRecord::Base.transaction do
+      begin
+        @kid = Kid.create(kid_params)
+        current_user.kids << @kid
+      rescue Exception => e
+        logger.error "User #{current_user.id} experienced #{e.message} when trying to create a new kid"
+        false
+      end
+    end
   end
 
 end

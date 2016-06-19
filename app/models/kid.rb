@@ -15,8 +15,8 @@ class Kid < ActiveRecord::Base
   validates :last_name, presence: true
   validates :birthdate, presence: true
   validates :gender, presence: true
-  validate :cannot_create_duplicate, on: :create
   validates :created_by, presence: true
+  validate :cannot_create_duplicate, on: :create, if: :created_by_valid_user?
 
   def parents
     users
@@ -35,15 +35,31 @@ class Kid < ActiveRecord::Base
       .uniq
   end
 
+  def self.matching_kids(kid, parent_ids)
+    self
+      .joins(:users)
+      .where(users: { id: parent_ids })
+      .where(gender: kid.gender)
+      .where(birthdate: kid.birthdate)
+      .where(first_name: kid.first_name)
+      .where(last_name: kid.last_name)
+  end
+
   private
 
+  ## TODO - remove this method from here and the validation check once the spec/factories/kid.rb :created_by issue is resolved
+  def created_by_valid_user?
+    User.find_by(id: self.created_by)
+  end
+
   def cannot_create_duplicate
+    user           = User.find_by(id: self.created_by)
+    parent_ids     = user.fellow_parent_s
+    duplicate_kid  = Kid.matching_kids(self, parent_ids)
 
+    if duplicate_kid.present?
+      errors.add(:first_name, 'A kid with the same first name, last name, birthdate and gender has already been created by your spouse/partner.')
+    end
   end
 
-  def self.kid_exists?
-    blah = self.where(
-      birthdate:
-      )
-  end
 end
