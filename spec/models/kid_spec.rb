@@ -5,6 +5,49 @@ RSpec.describe Kid, type: :model do
   let(:kid)   { create :kid }
   let(:janie) { create :kid }
 
+  describe "validations" do
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:birthdate) }
+    it { should validate_presence_of(:gender) }
+    it { should validate_presence_of(:created_by) }
+
+    describe "#cannot_create_duplicate" do
+      let(:date)   { Date.new(2012, 1, 15) }
+      let(:dad)    { create :user, first_name: 'Tom' }
+      let(:mom)    { create :user, first_name: 'Susan' }
+      let(:friend) { create :user, first_name: 'Brian' }
+      let!(:son)   { create :kid, users: [dad, mom], gender: Kid::BOY, birthdate: date, first_name: 'Jack', last_name: 'Johnson', created_by: dad.id }
+
+      before do
+        expect(Kid.count).to eq 1
+        expect(son.parents).to include(mom, dad)
+      end
+
+      context "fellow parent creating duplicate of their own kid" do
+        it "will raise an error when a parent tries to create a kid that already exists underneath the set of parents" do
+          expect{
+            create :kid, users: [dad, mom], gender: Kid::BOY, birthdate: date, first_name: 'Jack', last_name: 'Johnson', created_by: mom.id
+            }.to raise_error(ActiveRecord::RecordInvalid)
+        end
+      end
+
+      context "another user creating a kid with identical information to a kid in the database that is not theirs" do
+        it "will create a new kid" do
+          expect{
+            create :kid, users: [friend], gender: Kid::BOY, birthdate: date, first_name: 'Jack', last_name: 'Johnson', created_by: friend.id
+            }.to change{ Kid.count }.by(1)
+        end
+
+        it "will not raise an error" do
+          expect{
+            create :kid, users: [friend], gender: Kid::BOY, birthdate: date, first_name: 'Jack', last_name: 'Johnson', created_by: friend.id
+            }.to_not raise_error(ActiveRecord::RecordInvalid)
+        end
+      end
+    end
+  end
+
   describe "associations" do
     context "friend_and_families" do
       before { kid.followers << user }

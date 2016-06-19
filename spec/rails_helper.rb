@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'shoulda/matchers'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'database_cleaner'
@@ -40,6 +41,17 @@ RSpec.configure do |config|
 
   # Make Factory Girl's methods available
   config.include FactoryGirl::Syntax::Methods
+
+
+  Shoulda::Matchers.configure do |c|
+    c.integrate do |with|
+      # Choose a test framework:
+      with.test_framework :rspec
+
+      # Or, choose the following (which implies all of the above):
+      with.library :rails
+    end
+  end
 
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

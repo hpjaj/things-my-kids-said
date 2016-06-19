@@ -35,4 +35,20 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}".titleize
   end
+
+  def fellow_parent_s
+    kids    = self.kids
+    spouses = []
+
+    kids.each do |kid|
+      kid.parents.each do |parent|
+        next if parent == self
+
+        spouses << parent
+      end
+    end
+
+    spouses.uniq
+  end
+
 end
