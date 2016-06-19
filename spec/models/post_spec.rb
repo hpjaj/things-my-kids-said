@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
+  describe "validations" do
+    it { should validate_presence_of(:body) }
+    it { should validate_presence_of(:kid_id) }
+    it { should validate_presence_of(:user_id) }
+    it { should validate_presence_of(:date_said) }
+  end
+
   describe "##all_associated_kids_posts" do
     let(:parent_1) { create :user }
     let(:kid_1)    { create :kid, users: [parent_1] }

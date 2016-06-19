@@ -5,6 +5,13 @@ RSpec.describe Kid, type: :model do
   let(:kid)   { create :kid }
   let(:janie) { create :kid }
 
+  describe "validations" do
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:birthdate) }
+    it { should validate_presence_of(:gender) }
+    it { should validate_presence_of(:created_by) }
+
   describe "associations" do
     context "friend_and_families" do
       before { kid.followers << user }
