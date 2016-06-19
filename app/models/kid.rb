@@ -16,6 +16,7 @@ class Kid < ActiveRecord::Base
   validates :birthdate, presence: true
   validates :gender, presence: true
   validate :cannot_create_duplicate, on: :create
+  validates :created_by, presence: true
 
   def parents
     users

@@ -25,14 +25,16 @@ jackie = Kid.create(
   first_name: 'Jackie',
   last_name: 'Levine',
   birthdate: Date.new(2012, 10, 24),
-  gender: Kid::GIRL
+  gender: Kid::GIRL,
+  created_by: harry.id
   )
 
 janie = Kid.create(
   first_name: 'Janie',
   last_name: 'Levine',
   birthdate: Date.new(2010, 7, 15),
-  gender: Kid::GIRL
+  gender: Kid::GIRL,
+  created_by: harry.id
   )
 
 jackie.parents << paula
@@ -86,21 +88,24 @@ tyler = Kid.create(
   first_name: 'Tyler',
   last_name: 'Smith',
   birthdate: Date.new(2013, 4, 8),
-  gender: Kid::BOY
+  gender: Kid::BOY,
+  created_by: susan.id
   )
 
 rebecca = Kid.create(
   first_name: 'Rebecca',
   last_name: 'Smith',
   birthdate: Date.new(2013, 2, 25),
-  gender: Kid::GIRL
+  gender: Kid::GIRL,
+  created_by: susan.id
   )
 
 brian = Kid.create(
   first_name: 'Brian',
   last_name: 'Johnson',
   birthdate: Date.new(2014, 1, 9),
-  gender: Kid::BOY
+  gender: Kid::BOY,
+  created_by: kevin.id
   )
 
 harry.following << tyler

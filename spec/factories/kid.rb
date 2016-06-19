@@ -5,6 +5,7 @@ FactoryGirl.define do
     birthdate '2010-04-16'
     gender 'female'
     users { [FactoryGirl.create(:user)] }
+    created_by 999999999   ##TODO - figure out how to change this to the user's id from the above line
   end
 end
 
