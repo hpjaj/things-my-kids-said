@@ -25,7 +25,8 @@ describe 'Editing a kid does not change their original :created_by' do
       click_button 'Save'
       son.reload
 
-      expect(son.first_name).to eq 'Drew'
+      expect(son.first_name).to eq 'drew'
+      expect(son.last_name).to eq 'johnson'
       expect(son.created_by).to eq dad.id
     end
   end
