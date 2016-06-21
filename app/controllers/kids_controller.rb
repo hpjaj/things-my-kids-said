@@ -33,7 +33,11 @@ class KidsController < ApplicationController
 
     authorize! :update, @kid
 
-    if @kid.update(kid_params)
+    downcased_params = kid_params
+    downcased_params['first_name'] = kid_params['first_name'].downcase
+    downcased_params['last_name']  = kid_params['last_name'].downcase
+
+    if @kid.update(downcased_params)
       redirect_to kids_path
     else
       flash[:error] = "There was a problem updating your kid.  Please try again."
@@ -64,7 +68,12 @@ class KidsController < ApplicationController
   def kid_creation_transaction
     ActiveRecord::Base.transaction do
       begin
-        @kid = Kid.create(kid_params)
+        authorize! :create, Kid
+
+        @kid = Kid.new(kid_params)
+        @kid.first_name = @kid.first_name.downcase
+        @kid.last_name  = @kid.last_name.downcase
+        @kid.save
         current_user.kids << @kid
       rescue Exception => e
         logger.error "User #{current_user.id} experienced #{e.message} when trying to create a new kid"

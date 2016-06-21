@@ -41,8 +41,8 @@ class Kid < ActiveRecord::Base
       .where(users: { id: parent_ids })
       .where(gender: kid.gender)
       .where(birthdate: kid.birthdate)
-      .where(first_name: kid.first_name)
-      .where(last_name: kid.last_name)
+      .where(first_name: kid.first_name.downcase)
+      .where(last_name: kid.last_name.downcase)
   end
 
   private

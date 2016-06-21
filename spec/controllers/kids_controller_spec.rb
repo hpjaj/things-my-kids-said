@@ -22,9 +22,13 @@ RSpec.describe KidsController, type: :controller do
     end
 
     it "creates a kid with the correct attributes" do
-      expect(Kid.first.first_name).to eq attrs[:first_name]
       expect(Kid.first.birthdate).to eq attrs[:birthdate].to_date
       expect(Kid.first.gender).to eq attrs[:gender]
+    end
+
+    it "downcases the kid's first and last name for Kid#cannot_create_duplicate validation" do
+      expect(Kid.first.first_name).to eq attrs[:first_name].downcase
+      expect(Kid.first.last_name).to eq attrs[:last_name].downcase
     end
 
     it "sets the Kid's #created_by to the user's id" do
@@ -38,6 +42,12 @@ RSpec.describe KidsController, type: :controller do
 
       it "will raise an error when a parent tries to create a kid that already exists underneath the set of parents" do
         post :create, kid: attrs
+
+        expect(response.body).to have_content('A kid with the same first name, last name, birthdate and gender has already been created by your spouse/partner.')
+      end
+
+      it "will raise an error when a parent tries to create a kid that already exists, with the names in a different case, underneath the set of parents" do
+        post :create, kid: { gender: 'female', birthdate: '2010-04-16', first_name: 'jackie', last_name: 'smith', created_by: mom.id.to_s }
 
         expect(response.body).to have_content('A kid with the same first name, last name, birthdate and gender has already been created by your spouse/partner.')
       end
@@ -59,6 +69,11 @@ RSpec.describe KidsController, type: :controller do
 
     it "updates the kid record accordingly" do
       expect(son.birthdate).to eq(date + 1.month)
+    end
+
+    it "downcases the kid's first and last name" do
+      expect(son.first_name).to eq 'jack'
+      expect(son.last_name).to eq 'johnson'
     end
   end
 end
