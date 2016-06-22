@@ -15,12 +15,12 @@
     <tbody class="family-table">
       <% @friends_and_families.each do |fam| %>
         <tr>
-          <td><%= User.find(fam.follower_id).full_name %></td>
-          <td><%= Kid.find(fam.kid_id).first_name.titleize %></td>
+          <td><%= friends_name(fam) %></td>
+          <td><%= kids_name(fam) %></td>
           <td>Yes</td>
           <td><%= yes_or_no fam.can_create_posts %></td>
           <td><%= link_to 'Edit', edit_friend_and_family_path(fam) %></td>
-          <td><%= link_to 'Remove', friend_and_family_path(fam), method: :delete, data: { confirm: "Delete this friend/family member's permission?" } %></td>
+          <td><%= link_to 'Remove', friend_and_family_path(fam), method: :delete, data: { confirm: "Remove #{friends_name(fam)}'s friend/family member permissions for #{kids_name(fam)}?" } %></td>
         </tr>
       <% end %>
     </tbody>
