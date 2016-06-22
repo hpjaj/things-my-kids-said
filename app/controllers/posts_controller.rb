@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
     authorize! :read, @kid
 
-    @posts = Post.user_can_see_for(@kid, current_user).order('date_said DESC').paginate(:page => params[:page], :per_page => 30)
+    @posts = Post.user_can_see_for(@kid, current_user).order('date_said DESC').paginate(:page => params[:page], :per_page => 20)
   end
 
   def new

@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
 
   def home
     if current_user
-      @posts = Post.all_associated_kids_posts(current_user).paginate(:page => params[:page], :per_page => 30)
+      @posts = Post.all_associated_kids_posts(current_user).paginate(:page => params[:page], :per_page => 20)
     else
       flash[:notice] = 'Please sign in to access this page'
       redirect_to root_path
