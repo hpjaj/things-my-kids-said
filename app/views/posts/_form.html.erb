@@ -52,6 +52,8 @@
   var submitButton    = $('#post-submit-button');
   var parentsEyesOnly = $("#post_parents_eyes_only");
   var parentsKidsIds  = "<%= current_user.kids.pluck(:id) %>";
+  var kidCount        = "<%= current_user.kids.count %>";
+  var hiddenKidVal    = $("input[name='post[kid_id]']").val();
 
   age.on( "change", function() {
     if (age.val() === 'custom_age') {
@@ -73,8 +75,18 @@
     $('div.form-parents-eyes-only').show();
   }
 
+  if ( kidCount === '1' ) {
+    $('div.form-parents-eyes-only').show();
+  }
+
   submitButton.on('click', function() {
-    if ( parentsKidsIds.includes(kid.val()) === false) {
+    if ( (parentsKidsIds.includes(kid.val()) === false) && (parentsKidsIds.split(',').length > 1) ) {
+      parentsEyesOnly.attr('checked', false);
+    }
+  });
+
+  submitButton.on('click', function() {
+    if ( (parentsKidsIds.includes(hiddenKidVal) === false ) && (parentsKidsIds.split(',').length === 1) ) {
       parentsEyesOnly.attr('checked', false);
     }
   });
