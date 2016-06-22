@@ -40,4 +40,8 @@ class Post < ActiveRecord::Base
       kid.posts.where(parents_eyes_only: false)
     end
   end
+
+  def to_param
+    "#{id}-#{Kid.find(kid_id).first_name.downcase}"
+  end
 end
