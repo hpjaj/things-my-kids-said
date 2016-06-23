@@ -5,6 +5,8 @@ class KidsController < ApplicationController
 
   def index
     @kids = current_user.kids.order(:first_name)
+
+    authorize! :create, @kids.first
   end
 
   def new
