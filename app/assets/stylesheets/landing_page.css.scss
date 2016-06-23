@@ -42,13 +42,13 @@
   margin-right: 10px;
 }
 
-#sign-up-button:hover {
+.solid-button:hover {
   color: $blue;
   background-color: white;
   border-color: $blue;
 }
 
-#sign-up-button {
+.solid-button {
   color: white;
   background-color: $blue;
   background-image: none;
