@@ -14,8 +14,12 @@
   vertical-align: middle !important;
 }
 
-@media only screen and (max-width: 1025px) {
-  .hidden-lg-down {
-    display: none !important;
+#new-kid-button {
+  margin-right: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+  #export-posts-button {
+    float: none !important;
   }
 }

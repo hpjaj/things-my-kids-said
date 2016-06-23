@@ -35,7 +35,7 @@
   </div>
 
   <div class='family-index-button'>
-    <%= link_to "Add New Kid", new_kid_path, class: 'btn btn-sm btn-info btn-info-outline devise-buttons' %>
-    <%= link_to "Download My Kids Quotes", my_kids_quotes_path, class: 'btn btn-sm btn-info btn-info-outline devise-buttons pull-right hidden-lg-down' %>
+    <%= link_to "Add New Kid", new_kid_path, id: 'new-kid-button', class: 'btn btn-sm btn-info btn-info-outline devise-buttons' %>
+    <%= link_to "Export My Kid's Quotes", my_kids_quotes_path, id: 'export-posts-button', class: 'btn btn-sm btn-info btn-info-outline devise-buttons pull-right', data: { confirm: 'Quotes can be exported to a computer. On a mobile device, they are only viewable.' } %>
   </div>
 </div>
