@@ -1,0 +1,8 @@
+<div>
+  <h3 class="">Person not in the list?</h3>
+  <%= mail_to nil, "Invite new member!",
+    class: 'btn btn-sm btn-info solid-button devise-buttons',
+    subject: 'Things My Kids Said!',
+    body: "Hi!  #{all_kids_have_said(current_user)} the funniest things lately, and I've been able to capture all of them for you to read and enjoy!  If you'd like to see them, just click here to join: https://things-my-kids-said.herokuapp.com/   Once you've signed up, **please let me know**, so I can grant your Friends & Family permissions!  Thanks 😊 -#{current_user.first_name.titleize}"
+  %>
+</div>
