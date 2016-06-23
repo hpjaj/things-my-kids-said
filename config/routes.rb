@@ -26,4 +26,6 @@ Rails.application.routes.draw do
     resources :comments, except: [:index, :show]
   end
 
+  get 'my_kids_quotes' => 'quote_exports#my_kids'
+
 end

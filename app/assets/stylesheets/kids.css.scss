@@ -13,3 +13,9 @@
 .kids-table td {
   vertical-align: middle !important;
 }
+
+@media only screen and (max-width: 1025px) {
+  .hidden-lg-down {
+    display: none !important;
+  }
+}
