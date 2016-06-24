@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     @post.date_said = determine_date_said(params)
 
     if @post.save
-      redirect_to home_path
+      redirect_to post_path(@post)
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
       render :new
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
     authorize! :update, @post
 
     if @post.update(post_params)
-      redirect_to home_path
+      redirect_to post_path(@post)
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
       render :edit
