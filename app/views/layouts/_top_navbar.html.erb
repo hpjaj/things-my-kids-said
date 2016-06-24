@@ -10,6 +10,7 @@
       </button>
       <% if current_user %>
         <%= link_to((image_tag 'Logo7.svg', class: 'logo'), home_path, class: "navbar-brand logo-link") %>
+        <%#= link_to 'Things My Kids Said', home_path, class: "navbar-brand top-navbar-links" %>
 
         <%= content_tag(:span, 'Alpha', class: 'release-status') %>
       <% else %>
