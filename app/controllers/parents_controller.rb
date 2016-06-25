@@ -39,10 +39,10 @@ class ParentsController < ApplicationController
     authorize! :destroy, kid
 
     if kid.parents.delete(parent)
-      flash[:notice] = 'The parent permission was successfully deleted.'
+      flash[:notice] = "This person's parent access was successfully deleted."
       redirect_to parents_path
     else
-      flash[:error] = 'There was a problem deleting the parent permission. Please try again.'
+      flash[:error] = "There was a problem deleting this person's parent access. Please try again."
       redirect_to parents_path
     end
   end
@@ -53,7 +53,7 @@ class ParentsController < ApplicationController
     if !kid.present? || !parent.present?
       flash[:error] = 'Kid and parent are required. Please try again.'
     else
-      flash[:error] = 'This parent already has permissions for this kid. Please try again.'
+      flash[:error] = 'This parent already has access for this kid. Please try again.'
     end
   end
 end

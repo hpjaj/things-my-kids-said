@@ -6,7 +6,7 @@
       <tr>
         <th>Parent</th>
         <th>Parent Of</th>
-        <th>Remove Parent Permission</th>
+        <th>Remove Access</th>
       </tr>
     </thead>
     <tbody class="family-table">
@@ -14,7 +14,7 @@
         <tr>
           <td><%= pair[0].full_name %></td>
           <td><%= pair[1].full_name %></td>
-          <td><%= link_to 'Remove', parent_path(pair), method: :delete, data: { confirm: "Delete this parent permission?" } %></td>
+          <td><%= link_to 'Remove', parent_path(pair), method: :delete, data: { confirm: "Delete this person's parent access?" } %></td>
         </tr>
       <% end %>
     </tbody>

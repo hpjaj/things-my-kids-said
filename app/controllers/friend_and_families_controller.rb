@@ -16,7 +16,7 @@ class FriendAndFamiliesController < ApplicationController
     if @friend_and_family.save
       redirect_to friend_and_families_path
     else
-      flash[:error] = 'There was a problem saving your new permission.  Please try again.'
+      flash[:error] = 'There was a problem saving the new access.  Please try again.'
       render :new
     end
   end
@@ -31,7 +31,7 @@ class FriendAndFamiliesController < ApplicationController
     if @friend_and_family.update(friend_and_family_params)
       redirect_to friend_and_families_path
     else
-      flash[:error] = 'There was a problem saving your permission.  Please try again.'
+      flash[:error] = 'There was a problem saving this access.  Please try again.'
       render :edit
     end
   end
@@ -40,10 +40,10 @@ class FriendAndFamiliesController < ApplicationController
     @friend_and_family = FriendAndFamily.find(params[:id])
 
     if @friend_and_family.delete
-      flash[:notice] = 'Your friend/family member permission has been successfully deleted.'
+      flash[:notice] = "This friend/family member's access has been successfully deleted."
       redirect_to friend_and_families_path
     else
-      flash[:error] = "There was a problem deleting your friend/family member's permission. Please try again."
+      flash[:error] = "There was a problem deleting this friend/family member's access. Please try again."
       redirect_to friend_and_families_path
     end
   end

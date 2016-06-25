@@ -8,8 +8,8 @@
         <th>Kid</th>
         <th>Can View Quotes</th>
         <th>Can Create Quotes</th>
-        <th>Edit Permissions</th>
-        <th>Remove All Permissions</th>
+        <th>Edit Access</th>
+        <th>Remove Access</th>
       </tr>
     </thead>
     <tbody class="family-table">
@@ -20,7 +20,7 @@
           <td>Yes</td>
           <td><%= yes_or_no fam.can_create_posts %></td>
           <td><%= link_to 'Edit', edit_friend_and_family_path(fam) %></td>
-          <td><%= link_to 'Remove', friend_and_family_path(fam), method: :delete, data: { confirm: "Remove #{friends_name(fam)}'s friend/family member permissions for #{kids_name(fam)}?" } %></td>
+          <td><%= link_to 'Remove', friend_and_family_path(fam), method: :delete, data: { confirm: "Remove #{friends_name(fam)}'s friend/family member access to #{kids_name(fam)}?" } %></td>
         </tr>
       <% end %>
     </tbody>

@@ -4,7 +4,7 @@ class FriendAndFamily < ActiveRecord::Base
 
   validates :kid_id, presence: true
   validates :follower_id, presence: true
-  validates :follower_id, uniqueness: { scope: [:kid_id, :follower_id], message: 'This friend/family member already has a permission for this kid' }
+  validates :follower_id, uniqueness: { scope: [:kid_id, :follower_id], message: 'This friend/family member already has access to this kid' }
 
   def self.parents_kids_friends_and_family(parent)
     kids_ids = parent.kids.pluck(:id)
