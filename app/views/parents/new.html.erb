@@ -2,7 +2,7 @@
   <%= simple_form_for :parents, url: parents_path do |f| %>
     <%= f.input :kid_id, collection: current_user.kids.order(:first_name), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
 
-    <%= f.input :parent_id, label: "Kid's Parent", collection: User.potential_spouse_of(current_user), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
+    <%= f.input :parent_id, label: "Kid's Parent", collection: User.potential_spouse_of(current_user), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control parent_select' } %>
 
     <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
     <%= f.submit 'Save', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
@@ -10,3 +10,8 @@
     <%= render 'friend_and_families/invite_new_member' %>
   <% end %>
 </div>
+
+
+<script>
+  $('.parent_select').select2();
+</script>
