@@ -10,6 +10,10 @@
         <input name="post[kid_id]" type="hidden" value="<%= kids.first.id %>">
       <% end %>
 
+      <div id="photo-goes-here"></div>
+
+      <%= f.input :photo, as: :file, required: false, label: 'Add/Change Photo' %>
+
       <% if new_post %>
         <div>
           <div>
@@ -69,6 +73,23 @@
     } else  {
       $('div.form-parents-eyes-only').hide();
     }
+
+    if ( "<%= @post.photo? %>" === true ) {
+      $('#photo-goes-here').append( "<%= image_tag @post.photo.expiring_url(3600, :thumb) %>" );
+    } else {
+
+    }
+
+      <% if @post.photo? %>
+
+      <% else %>
+        <%= kid.posts.order('date_said DESC').first.photo.expiring_url(3600, :thumb) %>
+      <% end %>
+
+
+
+
+
   });
 
   if ( kid.val() !== '' && parentsKidsIds.includes(kid.val()) ) {
