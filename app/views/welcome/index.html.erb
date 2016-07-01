@@ -8,10 +8,31 @@
   </p>
 </div>
 
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe width="1280" height="720" class="embed-responsive-item" src="https://www.youtube.com/embed/ED_6cZoMoD0?rel=0&amp;showinfo=0&VQ=HD720" frameborder="0" allowfullscreen></iframe>
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button> -->
+
+<div id="video-pic-container">
+  <%= image_tag("mobile-landing-v1.png", id: 'video-pic')  %>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe width="1280" height="720" class="embed-responsive-item" src="https://www.youtube.com/embed/ED_6cZoMoD0?rel=0&amp;showinfo=0&VQ=HD720" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
   <%= render 'layouts/footer' %>
 </div>
+
+
+<script>
+  var blah = $('#video-pic');
+
+  blah.on('click', function(event) {
+    $('.bs-example-modal-lg').modal('show');
+  });
+</script>
