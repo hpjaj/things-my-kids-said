@@ -20,6 +20,11 @@ class PostsController < ApplicationController
 
     @post           = current_user.posts.build(post_params)
     @post.date_said = determine_date_said(params)
+    quotes_photo    = determine_quotes_picture(params[:post][:kid_id])
+
+    if !params[:post][:photo].present?
+      @post.photo = quotes_photo
+    end
 
     if @post.save
       redirect_to post_path(@post)
@@ -57,6 +62,12 @@ class PostsController < ApplicationController
 
     authorize! :update, @post
 
+    quotes_photo = determine_quotes_picture(params[:post][:kid_id])
+
+    if !params[:post][:photo].present?
+      @post.photo = quotes_photo
+    end
+
     if @post.update(post_params)
       redirect_to post_path(@post)
     else
@@ -79,12 +90,19 @@ class PostsController < ApplicationController
     end
   end
 
+  def select_picture
+    @photo = determine_quotes_picture(params[:kid_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def post_params
     params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, :photo)
   end
-
 
   def determine_date_said(params)
     # See PR for explanation of this first `if` check: https://github.com/hpjaj/things-my-kids-said/pull/8
@@ -98,6 +116,16 @@ class PostsController < ApplicationController
     else
       params[:post][:kids_age].to_date
     end
+  end
+
+  def determine_quotes_picture(kid_id)
+    kid = Kid.find_by(id: kid_id)
+
+    return unless kid
+
+    last_post_with_photo = kid.posts.most_recent_with_photo
+
+    return last_post_with_photo.try(:photo) || kid.photo || nil
   end
 
 end

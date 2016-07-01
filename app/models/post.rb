@@ -44,6 +44,14 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def self.most_recent_with_photo
+    self
+      .where.not(photo_file_name: nil)
+      .order(date_said: :desc)
+      .order(created_at: :desc)
+    .first
+  end
+
   def to_param
     "#{id}-#{Kid.find(kid_id).first_name.downcase}"
   end
