@@ -6,6 +6,9 @@ class Post < ActiveRecord::Base
   belongs_to :kid
   has_many :comments, dependent: :destroy
 
+  has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
+
   validates :body, presence: true
   validates :kid_id, presence: true
   validates :user_id, presence: true
@@ -39,6 +42,14 @@ class Post < ActiveRecord::Base
     else
       kid.posts.where(parents_eyes_only: false)
     end
+  end
+
+  def self.most_recent_with_photo
+    self
+      .where.not(photo_file_name: nil)
+      .order(date_said: :desc)
+      .order(created_at: :desc)
+    .first
   end
 
   def to_param

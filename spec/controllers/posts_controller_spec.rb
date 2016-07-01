@@ -105,7 +105,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "edge cases" do
-    context "custom_age is selected, and kid_id is left blankl" do
+    context "custom_age is selected, and kid_id is left blank" do
       let!(:kid_2) { create :kid, users: [user] }
 
       it "does not create a new Post" do

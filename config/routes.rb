@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'select_picture' => 'posts#select_picture'
+
   resources :friend_and_families, path: 'friends_and_family'
 
   resources :parents, only: [:index, :new, :create, :destroy]
