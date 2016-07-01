@@ -94,6 +94,12 @@
 
   if ( kidCount === '1' ) {
     $('div.form-parents-eyes-only').show();
+
+    $.ajax({
+      method: "POST",
+      url: "/select_picture",
+      data: { kid_id: hiddenKidVal }
+    });
   }
 
   submitButton.on('click', function() {
