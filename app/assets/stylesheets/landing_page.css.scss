@@ -69,7 +69,7 @@
 }
 
 @media (max-width: 990px) {
-  .section-flex-container div:first-child {
+  .section-flex-container div.col-md-6:first-child {
     margin-top: 30px;
   }
 }
@@ -95,6 +95,12 @@
 .feature-title, .feature-description {
   color: white;
   text-align: left;
+}
+
+.feature-description {
+  font-size: 18px;
+  // font-weight: 300;
+  line-height: 28px;
 }
 
 #video-pic, .feature-image {
