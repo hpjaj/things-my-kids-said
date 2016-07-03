@@ -1,24 +1,126 @@
-#display-3 {
-  font-size: 5.7rem;
-  font-weight: 300;
-  margin: 0 0 8px;
+// FLEXBOX
+
+.landing_page_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
-#lead {
-  font-size: 21px;
-  font-weight: 300;
-  line-height: 30px;
+.section-flex-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.jumbotron {
-  padding: 64px 32px !important;
+.section-flex-container div:first-child {
+  align-self: center;
+}
+
+.feature-image-container {
+  align-self: flex-end;
+  margin-top: 50px;
+}
+
+.landing-page-section {
+  min-height: 100vh;
+}
+
+.centered-imaged-container {
+  align-self: center;
+  margin-top: 50px;
 }
 
 @media (max-width: 544px) {
-  .jumbotron {
-    padding: 32px 16px !important;
+  .centered-imaged-container {
+    align-self: flex-start;
+  }
+
+  div.white-background {
+    margin-top: 0 !important;
   }
 }
+
+
+
+
+
+//  TITLES & DESCRIPTIONS
+
+#landing-title {
+  font-size: 5rem;
+  font-weight: 500;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+
+#lead {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 28px;
+}
+
+@media (max-width: 544px) {
+  #landing-title span {
+    font-size: 6.5rem;
+  }
+}
+
+@media (max-width: 990px) {
+  .section-flex-container div:first-child {
+    margin-top: 30px;
+  }
+}
+
+.landing-buttons-container {
+  margin-top: 30px;
+}
+
+#call-to-action div {
+  text-align: center;
+  color: white;
+}
+
+#call-to-action h2 {
+  margin-top: 40px;
+}
+
+
+
+
+// IMAGES
+
+.feature-title, .feature-description {
+  color: white;
+  text-align: left;
+}
+
+#video-pic, .feature-image {
+  max-width: 360px;
+  width: 80%;
+  height: auto;
+}
+
+#video-pic-container, .feature-image-container, .centered-imaged-container {
+  text-align: center;
+}
+
+#video-pic:hover {
+  cursor: pointer;
+}
+
+.small-image {
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+// BUTTONS
 
 .btn-info-outline:hover {
   color: #fff;
@@ -33,13 +135,54 @@
   border-color: $blue;
 }
 
+.pink-button-outline {
+  color: $pink;
+  background-color: transparent;
+  background-image: none;
+  border-color: $pink;
+}
 
-.jumbotron {
+.pink-button-outline:hover {
+  color: #fff;
+  background-color: $pink;
+  border-color: $pink;
+}
+
+.pink-button-solid {
+  color: white;
+  background-color: $pink;
+  background-image: none;
+  border-color: $pink;
+}
+
+.pink-button-solid:hover {
+  color: $pink;
   background-color: white;
+  border-color: $pink;
 }
 
 #sign-in-button {
   margin-right: 10px;
+
+}
+
+// #sign-in-button:hover {
+//   color: #fff;
+//   background-color: $pink;
+//   border-color: $pink;
+// }
+
+#sign-up-button:hover {
+  // color: $pink;
+  // background-color: white;
+  // border-color: $pink;
+}
+
+#sign-up-button {
+  // color: white;
+  // background-color: $pink;
+  // background-image: none;
+  // border-color: $pink;
 }
 
 .solid-button:hover {
@@ -54,6 +197,79 @@
   background-image: none;
   border-color: $blue;
 }
+
+#sign-in-button, #sign-up-button {
+  width: 85px;
+}
+
+#call-to-action-button {
+  margin-top: 15px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+
+
+
+
+// BACKGROUNDS
+
+.body-landing-page {
+  background-color: white;
+}
+
+#topper {
+  background-color: white;
+}
+
+#feature-1 {
+  background-color: $purple;
+}
+
+#feature-2 {
+  background-color: $blue;
+}
+
+#feature-3 {
+  background-color: $text-muted-gray;
+}
+
+#feature-4 {
+  background-color: $pink;
+}
+
+#feature-5 {
+  background-color: white;
+}
+
+#landing-more {
+  background-color: #F4F4F4;
+}
+
+#landing-footer {
+  background-color: white;
+}
+
+.white-background {
+  color: $black;
+}
+
+.footer {
+  background-color: #F4F4F4;
+}
+
+#call-to-action {
+  background-color: $black;
+}
+
+// #topper, #feature-1, #feature-2, #feature-3, #feature-4 {
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+// }
+
+
 
 
 
@@ -78,64 +294,20 @@
   text-decoration: none;
 }
 
-#video-pic {
-  max-width: 367px;
-  width: 80%;
-  height: auto;
-}
-
-#video-pic-container {
-  text-align: center;
-}
-
-#video-pic:hover {
-  cursor: pointer;
-}
-
-.landing_page_container, .blah {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.blah {
-  height: 100vh;
-  text-transform: uppercase;
-}
-
-#topper {
-  background-color: white;
-}
-
-#feature-1 {
-  background-color: $purple;
-}
-
-#feature-2 {
-  background-color: #F4F4F4;
-}
-
-#feature-3 {
-  background-color: $blue;
-}
-
-#feature-4 {
-  background-color: $text-muted-gray;
-}
-
-#landing-more {
-  background-color: $pink;
-}
-
-#landing-footer {
-  background-color: white;
-}
 
 
-// #topper, #feature-1, #feature-2, #feature-3, #feature-4 {
-//   -webkit-background-size: cover;
-//   -moz-background-size: cover;
-//   -o-background-size: cover;
-//   background-size: cover;
+// JUMBOTRON
+
+// .jumbotron {
+//   padding: 64px 32px !important;
+// }
+
+// @media (max-width: 544px) {
+//   .jumbotron {
+//     padding: 32px 16px !important;
+//   }
+// }
+
+// .jumbotron {
+//   background-color: white;
 // }

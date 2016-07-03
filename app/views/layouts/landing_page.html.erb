@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+  <title>Things My Kids Said</title>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <%= favicon_link_tag 'favicon.ico' %>
+</head>
+<body class='body-landing-page'>
 
-    <title>ThingsMyKidsSaid</title>
-    <link rel="stylesheet" media="all" href="/assets/application-082eb20b1b03b9a7cf20a805958e28a23a795a00cfd3ba47b7e84696da48a4a3.css" data-turbolinks-track="true" />
-    <script src="/assets/application-3c5298627b0e1102e160cc917d5166b6ef10a4daf6863e9baccfbc5fbe0459b6.js" data-turbolinks-track="true"></script>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <meta name="csrf-param" content="authenticity_token" />
-  <meta name="csrf-token" content="GOhGDBZudag5SeILBkdA55tlfg7GajUW01Zks+4e0ueXzBq3O/VhUByErpjvuEljhm8ZEmZNDdLZi+ydHXT0XA==" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-dc78cb3cf45beefe56dfc6f4561e4fb9d4ebdc6e2c3188251a84dace891d57f0.ico" />
-  </head>
-  <body>
+  <%= render 'layouts/top_navbar' %>
 
-    <%= render 'layouts/top_navbar' %>
-
-    <div class="landing_page_container">
-      <section class="blah" id='topper'>
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oB2uVm3rHkE?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </section>
-      <section class="blah" id='feature-1'>
-
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est.</p>
-
-      feature 1</section>
-      <section class="blah" id='feature-2'>feature 2</section>
-      <section class="blah" id='feature-3'>feature 3</section>
-      <section class="blah" id='feature-4'>feature 4</section>
-      <section class="blah" id='landing-more'>more</section>
-      <section class="blah" id='landing-footer'>footer</section>
-    </div>
+  <div class="landing_page_container">
+    <%= render 'layouts/landing_pages/first_section' %>
+    <%= render 'layouts/landing_pages/feature_1' %>
+    <%= render 'layouts/landing_pages/feature_2' %>
+    <%= render 'layouts/landing_pages/feature_3' %>
+    <%= render 'layouts/landing_pages/feature_4' %>
+    <%= render 'layouts/landing_pages/feature_5' %>
+    <%= render 'layouts/landing_pages/call_to_action' %>
+    <%= render 'layouts/footer' %>
+  </div>
 
   <%= javascript_include_tag 'application' %>
-  </body>
+
+  <script>
+    $('#video-pic').on('click', function() {
+      $('.bs-example-modal-lg').modal('show');
+    });
+  </script>
+
+</body>
 </html>

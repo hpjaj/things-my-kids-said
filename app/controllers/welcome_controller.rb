@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
 
   def index
-    @blah = true
     render :layout => 'landing_page'
   end
 
