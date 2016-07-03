@@ -1,0 +1,34 @@
+<section class="landing-page-section" id='topper'>
+
+  <div class="container">
+    <div class="section-flex-container">
+      <div class='col-md-6'>
+        <h1 id="landing-title">Capture it <span>forever</span></h1>
+        <p id="lead">A home for parents, friends & family to remember and share all of the funny, cute, honest, precocious things that our kids say!</p>
+        <p class='landing-buttons-container'>
+          <%= link_to "Log In", new_user_session_path, class: 'btn btn-info pink-button-outline', id: 'sign-in-button'  %>
+          <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-info pink-button-solid', id: 'sign-up-button' %>
+        </p>
+      </div>
+
+      <div class='col-md-6 feature-image-container'>
+
+        <div id="video-pic-container">
+          <%= image_tag("mobile-landing-v1.png", id: 'video-pic')  %>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="1280" height="720" class="embed-responsive-item" src="https://www.youtube.com/embed/ED_6cZoMoD0?rel=0&amp;showinfo=0&VQ=HD720" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>

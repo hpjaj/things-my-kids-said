@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Things My Kids Said</title>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <%= favicon_link_tag 'favicon.ico' %>
+</head>
+<body class='body-landing-page'>
+
+  <%= render 'layouts/top_navbar' %>
+
+  <div class="landing_page_container">
+    <%= render 'layouts/landing_pages/first_section' %>
+    <%= render 'layouts/landing_pages/feature_1' %>
+    <%= render 'layouts/landing_pages/feature_2' %>
+    <%= render 'layouts/landing_pages/feature_3' %>
+    <%= render 'layouts/landing_pages/feature_4' %>
+    <%= render 'layouts/landing_pages/feature_5' %>
+    <%= render 'layouts/landing_pages/call_to_action' %>
+    <%= render 'layouts/footer' %>
+  </div>
+
+  <%= javascript_include_tag 'application' %>
+
+  <script>
+    $('#video-pic').on('click', function() {
+      $('.bs-example-modal-lg').modal('show');
+    });
+  </script>
+
+</body>
+</html>
