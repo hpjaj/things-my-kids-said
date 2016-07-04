@@ -34,5 +34,7 @@ module ThingsMyKidsSaid
     config.active_record.raise_in_transactional_callbacks = true
 
     config.serve_static_files = true
+
+    config.force_ssl = true
   end
 end
