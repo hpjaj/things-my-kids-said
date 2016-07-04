@@ -65,12 +65,14 @@
             <ul class="dropdown-menu">
               <%= content_tag :li, link_to("Edit", edit_user_registration_path), class: "#{css_class_active_for(edit_user_registration_path)}" %>
               <%= content_tag :li, link_to("Help", help_path), class: "#{css_class_active_for(edit_user_registration_path)}" %>
+              <%= content_tag :li, link_to("About", about_path), class: "#{css_class_active_for(edit_user_registration_path)}" %>
               <%= content_tag :li, link_to("Sign out", destroy_user_session_path), method: :delete, class: "#{css_class_active_for(destroy_user_session_path)}" %>
             </ul>
           </li>
 
         <% else %>
-          <%= content_tag :li, link_to('Log In', new_user_session_path), class: "#{css_class_active_for(new_user_session_path)}" %>
+          <%= content_tag :li, link_to('Log In', new_user_session_path, class: 'top-navbar-links'), class: "#{css_class_active_for(new_user_session_path)}" %>
+          <%= content_tag :li, link_to('About', about_path, class: 'top-navbar-links'), class: "#{css_class_active_for(new_user_session_path)}" %>
         <% end %>
       </ul>
     </div>
