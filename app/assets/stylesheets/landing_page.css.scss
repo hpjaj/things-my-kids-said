@@ -291,15 +291,22 @@
   padding-left: 15px;
 }
 
-.footer-contact-us a {
+.footer-links a {
   color: $black;
 }
 
-.footer-contact-us a:hover {
+.footer-links a:hover {
   color: $pink;
   text-decoration: none;
 }
 
+.pink-link {
+  color: $pink;
+}
+
+.pink-link:hover {
+  color: $pink;
+}
 
 
 // JUMBOTRON
