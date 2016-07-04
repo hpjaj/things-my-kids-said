@@ -169,26 +169,6 @@
 
 #sign-in-button {
   margin-right: 10px;
-
-}
-
-// #sign-in-button:hover {
-//   color: #fff;
-//   background-color: $pink;
-//   border-color: $pink;
-// }
-
-#sign-up-button:hover {
-  // color: $pink;
-  // background-color: white;
-  // border-color: $pink;
-}
-
-#sign-up-button {
-  // color: white;
-  // background-color: $pink;
-  // background-image: none;
-  // border-color: $pink;
 }
 
 .solid-button:hover {
@@ -285,6 +265,7 @@
 .footer {
   font-size: .8em;
   padding: 30px 0 20px;
+  text-align: center;
 }
 
 .footer-text {
@@ -309,7 +290,7 @@
 }
 
 .script {
-  text-indent: 15px;
+  margin-left: 15px;
 }
 
 
