@@ -81,7 +81,7 @@ class PostsController < ApplicationController
 
     authorize! :destroy, @post
 
-    if @post.delete
+    if @post.destroy
       flash[:notice] = 'Your quote was successfully deleted.'
       redirect_to home_path
     else

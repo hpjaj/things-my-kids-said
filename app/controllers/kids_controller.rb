@@ -52,7 +52,7 @@ class KidsController < ApplicationController
 
     authorize! :destroy, @kid
 
-    if @kid.delete
+    if @kid.destroy
       flash[:notice] = 'Your kid was successfully deleted.'
       redirect_to kids_path
     else

@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
     authorize! :destroy, @comment
 
-    unless @comment.delete
+    unless @comment.destroy
       flash[:error] = 'There was a problem deleting your comment. Please try again.'
     end
 

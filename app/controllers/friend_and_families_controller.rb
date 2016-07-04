@@ -39,7 +39,7 @@ class FriendAndFamiliesController < ApplicationController
   def destroy
     @friend_and_family = FriendAndFamily.find(params[:id])
 
-    if @friend_and_family.delete
+    if @friend_and_family.destroy
       flash[:notice] = "This friend/family member's access has been successfully deleted."
       redirect_to friend_and_families_path
     else
