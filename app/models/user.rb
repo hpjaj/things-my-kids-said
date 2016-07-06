@@ -51,4 +51,8 @@ class User < ActiveRecord::Base
     spouses.uniq
   end
 
+  def admin?
+    role == 'admin'
+  end
+
 end

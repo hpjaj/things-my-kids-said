@@ -31,4 +31,6 @@ Rails.application.routes.draw do
 
   get 'my_kids_quotes' => 'quote_exports#my_kids'
 
+  get 'dashboard' => 'admin#dashboard'
+
 end

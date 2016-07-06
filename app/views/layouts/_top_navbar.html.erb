@@ -60,6 +60,10 @@
             </li>
           <% end %>
 
+          <% if current_user.admin? %>
+            <%= content_tag(:li, link_to('Admin', dashboard_path, class: 'top-navbar-links'), class: "#{css_class_active_for(home_path)}") %>
+          <% end %>
+
           <li class='dropdown'>
             <a href="#" class="dropdown-toggle top-navbar-links" data-toggle="dropdown"><%= current_user.first_name.titleize %><b class="caret"></b></a>
             <ul class="dropdown-menu">

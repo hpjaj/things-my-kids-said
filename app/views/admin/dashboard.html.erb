@@ -1,0 +1,72 @@
+<h5 class="page-title">Admin Dashboard</h5>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="family-table">
+      <tr>
+        <th>User</th>
+        <th>Joined</th>
+        <th>Posts</th>
+        <th>Kids</th>
+        <th>Comments</th>
+        <th>Fellow parents</th>
+      </tr>
+    </thead>
+    <tbody class="family-table">
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.full_name %></td>
+          <td><%= time_ago_in_words user.created_at %> ago </td>
+          <td><%= user.posts.try(:count) %></td>
+          <td><%= user.kids.try(:count) %></td>
+          <td><%= user.comments.try(:count) %></td>
+          <td><%= user.fellow_parent_s.try(:count) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="family-table">
+      <tr>
+        <th>Total Users</th>
+        <th>Total Quotes</th>
+        <th>Total Kids</th>
+        <th>Total Comments</th>
+      </tr>
+    </thead>
+    <tbody class="family-table">
+      <tr>
+        <td><%= User.count %></td>
+        <td><%= Post.count %></td>
+        <td><%= Kid.count %></td>
+        <td><%= Comment.count %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="family-table">
+      <tr>
+        <th>Kid name</th>
+        <th>Added</th>
+        <th>Friends & Family</th>
+      </tr>
+    </thead>
+    <tbody class="family-table">
+      <% @kids.each do |kid| %>
+        <tr>
+          <td><%= kid.full_name %></td>
+          <td><%= time_ago_in_words kid.created_at %> ago </td>
+          <td><%= kid.followers.try(:count) %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= will_paginate @users %>
