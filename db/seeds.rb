@@ -232,4 +232,4 @@ p "Seed finished"
 p "#{User.count} users"
 p "#{Kid.count} kids"
 p "#{Post.count} posts"
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
