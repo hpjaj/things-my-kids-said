@@ -20,7 +20,7 @@ class ParentsController < ApplicationController
     kid    = Kid.find_by(id: params[:parents][:kid_id])
     parent = User.find_by(id: params[:parents][:parent_id])
 
-    authorize! :create, kid
+    authorize! :create, kid if kid
 
     if kid && parent && !kid.parents.include?(parent)
       kid.parents << parent
