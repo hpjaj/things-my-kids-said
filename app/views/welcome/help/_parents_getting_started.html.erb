@@ -5,11 +5,11 @@
   </div>
   <div class="help-body">
     <ul class='help-steps'>
-      <li>Enter in your kid's information</li>
-      <li>Link your spouse/partner to your kids</li>
+      <li>Enter in your kid's information by <%= link_to 'adding a new kid', new_kid_path, class: 'pink-link' %></li>
+      <li>Link your spouse/partner to your kids by <%= link_to 'adding a new parent', new_parent_path, class: 'pink-link' %></li>
       <li>Capture your kid's quotes</li>
-      <li>Invite friends & family to see your kid's quotes</li>
-      <li>Grant friends & family access to see your kid's quotes, and capture quotes of their own!</li>
+      <li><%= link_to 'Invite friends & family', new_friend_and_family_path, class: 'pink-link' %> to see your kid's quotes</li>
+      <li><%= link_to 'Grant friends & family access', friend_and_families_path, class: 'pink-link' %> to see your kid's quotes, and capture quotes of their own!</li>
     </ul>
 
     <p>Access to all of this is through the <span class='help-bold'>menu</span> above!</p>
