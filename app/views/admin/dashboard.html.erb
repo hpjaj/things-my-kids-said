@@ -59,6 +59,7 @@
         <th>Kid Name</th>
         <th>Posts</th>
         <th>Added</th>
+        <th>Parents</th>
         <th>Friends & Family</th>
       </tr>
     </thead>
@@ -68,6 +69,7 @@
           <td><%= kid.full_name %></td>
           <td><%= kid.posts.try(:count) %></td>
           <td><%= time_ago_in_words kid.created_at %> ago </td>
+          <td><%= kid.parents.count %> </td>
           <td><%= kid.followers.try(:count) %> </td>
         </tr>
       <% end %>
