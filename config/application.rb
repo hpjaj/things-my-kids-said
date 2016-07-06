@@ -35,6 +35,6 @@ module ThingsMyKidsSaid
 
     config.serve_static_files = true
 
-    config.force_ssl = true
+    config.force_ssl = false
   end
 end
