@@ -5,17 +5,17 @@ Kid.destroy_all
 User.destroy_all
 
 
-paula = User.create(
-  email: 'paula@example.com',
-  first_name: 'Paula',
+harry = User.create(
+  email: 'harry@example.com',
+  first_name: 'Harry',
   last_name: 'Levine',
   password: 'password',
   password_confirmation: 'password'
   )
 
-harry = User.create(
-  email: 'harry@example.com',
-  first_name: 'Harry',
+paula = User.create(
+  email: 'paula@example.com',
+  first_name: 'Paula',
   last_name: 'Levine',
   password: 'password',
   password_confirmation: 'password'
@@ -150,14 +150,14 @@ FriendAndFamily.all.each { |friend| friend.update(can_create_posts: true) }
 #   )
 # end
 
-30.times do
-  Post.create(
-    body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
-    user_id: paula.id,
-    kid_id: janie.id,
-    date_said: Faker::Date.between(janie.birthdate + 18.months, Date.current)
-  )
-end
+# 30.times do
+#   Post.create(
+#     body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
+#     user_id: paula.id,
+#     kid_id: janie.id,
+#     date_said: Faker::Date.between(janie.birthdate + 18.months, Date.current)
+#   )
+# end
 
 
 Post.create(
