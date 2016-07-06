@@ -145,19 +145,19 @@ FriendAndFamily.all.each { |friend| friend.update(can_create_posts: true) }
 #   Post.create(
 #     body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
 #     user_id: paula.id,
-#     kid_id: tommy.id,
-#     date_said: Faker::Date.between(tommy.birthdate + 18.months, Date.current)
+#     kid_id: jackie.id,
+#     date_said: Faker::Date.between(jackie.birthdate + 18.months, Date.current)
 #   )
 # end
 
-# 30.times do
-#   Post.create(
-#     body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
-#     user_id: paula.id,
-#     kid_id: janie.id,
-#     date_said: Faker::Date.between(janie.birthdate + 18.months, Date.current)
-#   )
-# end
+30.times do
+  Post.create(
+    body: Faker::Hipster.paragraphs(2, true).join("\n\n"),
+    user_id: paula.id,
+    kid_id: janie.id,
+    date_said: Faker::Date.between(janie.birthdate + 18.months, Date.current)
+  )
+end
 
 
 Post.create(
@@ -232,3 +232,4 @@ p "Seed finished"
 p "#{User.count} users"
 p "#{Kid.count} kids"
 p "#{Post.count} posts"
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

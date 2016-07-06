@@ -75,5 +75,6 @@ gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
 gem 'newrelic_rpm'
 gem 'font-awesome-sass'
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.1'
 gem "select2-rails"
+gem 'activeadmin', github: 'activeadmin'
