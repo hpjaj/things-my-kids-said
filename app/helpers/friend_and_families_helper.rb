@@ -16,7 +16,7 @@ module FriendAndFamiliesHelper
     all_kids = current_user.kids
 
     if all_kids.count == 1
-      all_kids.first.first_name.titleize + "has said"
+      all_kids.first.first_name.titleize + " has said"
     elsif all_kids.count == 2
       "#{all_kids.first.first_name.titleize} and #{all_kids.last.first_name.titleize} have said"
     elsif all_kids.count > 2
