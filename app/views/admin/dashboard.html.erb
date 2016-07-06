@@ -9,7 +9,9 @@
         <th>Posts</th>
         <th>Kids</th>
         <th>Comments</th>
-        <th>Fellow parents</th>
+        <th>Fellow Parents</th>
+        <th>Last Signed In</th>
+        <th>Sign In Count</th>
       </tr>
     </thead>
     <tbody class="family-table">
@@ -21,6 +23,8 @@
           <td><%= user.kids.try(:count) %></td>
           <td><%= user.comments.try(:count) %></td>
           <td><%= user.fellow_parent_s.try(:count) %></td>
+          <td><%= "#{time_ago_in_words user.last_sign_in_at} ago" if user.last_sign_in_at %></td>
+          <td><%= user.sign_in_count %></td>
         </tr>
       <% end %>
     </tbody>
@@ -52,7 +56,8 @@
   <table class="table table-striped">
     <thead class="family-table">
       <tr>
-        <th>Kid name</th>
+        <th>Kid Name</th>
+        <th>Posts</th>
         <th>Added</th>
         <th>Friends & Family</th>
       </tr>
@@ -61,6 +66,7 @@
       <% @kids.each do |kid| %>
         <tr>
           <td><%= kid.full_name %></td>
+          <td><%= kid.posts.try(:count) %></td>
           <td><%= time_ago_in_words kid.created_at %> ago </td>
           <td><%= kid.followers.try(:count) %> </td>
         </tr>
