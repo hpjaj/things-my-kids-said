@@ -102,7 +102,7 @@ html body {
 }
 
 .logo {
-  max-height: 40px;
+  height: 40px;
   width: auto;
 }
 
@@ -113,7 +113,7 @@ html body {
 
 @media only screen and (max-width: 991px) {
   .logo {
-    max-height: 30px;
+    height: 30px;
     width: auto;
   }
 
