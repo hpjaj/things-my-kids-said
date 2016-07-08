@@ -77,4 +77,3 @@ gem 'newrelic_rpm'
 gem 'font-awesome-sass'
 gem 'will_paginate'
 gem "select2-rails"
-gem 'jquery-ui-rails'
