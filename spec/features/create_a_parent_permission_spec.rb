@@ -11,11 +11,9 @@ describe 'Create a parent permission' do
 
   before do
     sign_into_app parent
-    click_link 'Manage Parents'
+    click_link 'Add / Manage Parents'
     expect(current_path).to eq parents_path
-    within('nav') do
-      click_link 'Add Parent'
-    end
+    click_link 'Add Parent'
     find('#parents_kid_id').find(:xpath, 'option[2]').select_option
     find('#parents_parent_id').find(:xpath, 'option[2]').select_option
     click_button 'Save'
