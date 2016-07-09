@@ -1,8 +1,12 @@
 .page-title {
   padding-bottom: 20px;
   font-weight: 400;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 20px;
+}
+
+.form-title {
+  text-align: center;
 }
 
 .kids-edit-photo {
