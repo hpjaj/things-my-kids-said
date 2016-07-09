@@ -15,9 +15,9 @@
   <div class="container whole-site-container">
 
     <div class="flash-messages">
-      <% if flash[:notice] %>
+      <% if flash[:notice].present? %>
         <%= flash[:notice] %>
-      <% elsif flash[:error] %>
+      <% elsif flash[:error].present? %>
         <%= flash[:error] %>
       <% end %>
     </div>
