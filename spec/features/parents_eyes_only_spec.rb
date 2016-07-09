@@ -14,13 +14,13 @@ describe 'Making a quote parents eyes only' do
       before { sign_into_app parent }
 
       it "with one kid, a parent should see the 'parents eyes only' checkbox" do
-        click_link '+ Create A Quote'
+        click_link '+ Add Quote'
 
         expect(page).to have_content 'Parents eyes only'
       end
 
       it "parent can set 'parents eyes only'" do
-        click_link '+ Create A Quote'
+        click_link '+ Add Quote'
         find('#post_kids_age').find(:xpath, 'option[2]').select_option
         fill_in 'Quote', with: 'you go baffroom?'
         page.check('post_parents_eyes_only')

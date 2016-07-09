@@ -26,7 +26,7 @@
 
           <%= content_tag(:li, link_to('Home', home_path, class: 'top-navbar-links'), class: "#{css_class_active_for(home_path)}") %>
 
-          <%= content_tag(:li, link_to('+ Create A Quote', new_post_path, class: 'top-navbar-links'), class: "#{css_class_active_for(new_post_path)}") %>
+          <%= content_tag(:li, link_to('+ Add Quote', new_post_path, class: 'top-navbar-links'), class: "#{css_class_active_for(new_post_path)}") %>
 
           <li class='dropdown'>
             <a href="#" class="dropdown-toggle top-navbar-links" data-toggle="dropdown">Your Kids<b class="caret"></b></a>
@@ -39,9 +39,9 @@
                 <div class="divider"></div>
 
                 <%= content_tag :li, link_to("Edit Kids", kids_path), class: "#{css_class_active_for(kids_path)}" %>
-                <%= content_tag :li, link_to("New Kid", new_kid_path), class: "#{css_class_active_for(new_kid_path)}" %>
+                <%= content_tag :li, link_to("Add Kid", new_kid_path), class: "#{css_class_active_for(new_kid_path)}" %>
               <% else %>
-                <%= content_tag :li, link_to("New Kid", new_kid_path), class: "#{css_class_active_for(new_kid_path)}" %>
+                <%= content_tag :li, link_to("Add Kid", new_kid_path), class: "#{css_class_active_for(new_kid_path)}" %>
               <% end %>
             </ul>
           </li>
@@ -52,9 +52,13 @@
               <ul class="dropdown-menu">
                 <%= content_tag :li, link_to("Add / Invite Member", new_friend_and_family_path), class: "#{css_class_active_for(new_friend_and_family_path)}" %>
                 <%= content_tag :li, link_to("Current Members", friend_and_families_path), class: "#{css_class_active_for(friend_and_families_path)}" %>
+              </ul>
+            </li>
 
-                <div class="divider"></div>
-
+            <li class='dropdown'>
+              <a href="#" class="dropdown-toggle top-navbar-links" data-toggle="dropdown">Parents<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <%= content_tag :li, link_to("Add Parent", new_parent_path), class: "#{css_class_active_for(new_friend_and_family_path)}" %>
                 <%= content_tag :li, link_to("Manage Parents", parents_path), class: "#{css_class_active_for(parents_path)}" %>
               </ul>
             </li>

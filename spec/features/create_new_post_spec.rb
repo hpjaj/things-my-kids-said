@@ -12,7 +12,7 @@ describe 'Creating a new post' do
     before { sign_into_app user }
 
     it "can create a new post" do
-      click_link '+ Create A Quote'
+      click_link '+ Add Quote'
       find('#post_kids_age').find(:xpath, 'option[2]').select_option
       fill_in 'Quote', with: 'you go baffroom?'
 
@@ -75,14 +75,14 @@ describe 'Creating a new post' do
         expect(current_path).to eq(help_path)
       end
 
-      it "clicking the 'Create a quote' link redirects to the help page" do
-        click_link "+ Create A Quote"
+      it "clicking the 'Add quote' link redirects to the help page" do
+        click_link "+ Add Quote"
 
         expect(current_path).to eq(help_path)
       end
 
-      it "clicking 'New Kid' link redirects to New Kid page" do
-        click_link 'New Kid'
+      it "clicking 'Add Kid' link redirects to New Kid page" do
+        click_link 'Add Kid'
 
         expect(current_path).to eq new_kid_path
       end

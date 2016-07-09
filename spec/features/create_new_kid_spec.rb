@@ -11,7 +11,7 @@ describe 'Creating a new kid', js: true do
 
   it "can create a new kid" do
     click_link 'Your Kids'
-    click_link 'New Kid'
+    click_link 'Add Kid'
     visit new_kid_path
     fill_in 'First name', with: 'Jackie'
     fill_in 'Last name', with: 'Smith'

@@ -14,7 +14,7 @@
   vertical-align: middle !important;
 }
 
-#new-kid-button {
+.kid-buttons {
   margin-right: 15px;
 }
 
@@ -25,5 +25,9 @@
 
   #kid_birthdate_1i, #kid_birthdate_2i {
     margin-bottom: 10px;
+  }
+
+  .kid-buttons {
+    margin-right: 70px;
   }
 }
