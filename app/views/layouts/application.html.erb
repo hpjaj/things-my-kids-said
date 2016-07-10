@@ -11,14 +11,13 @@
 <body>
 
   <%= render 'layouts/top_navbar' %>
-  <%#= render '' %>
   <div class="container whole-site-container">
 
-    <div class="flash-messages">
+    <div>
       <% if flash[:notice].present? %>
-        <%= flash[:notice] %>
+        <%= content_tag(:div, flash[:notice], class: "flash-messages") %>
       <% elsif flash[:error].present? %>
-        <%= flash[:error] %>
+        <%= content_tag(:div, flash[:error], class: "flash-messages") %>
       <% end %>
     </div>
 
