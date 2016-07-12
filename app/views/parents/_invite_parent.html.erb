@@ -3,6 +3,6 @@
   <%= mail_to nil, "Invite new member!",
     class: 'btn btn-info solid-button devise-buttons',
     subject: 'Things My Kids Said!',
-    body: "Hi!  #{all_kids_have_said(current_user)} the funniest things lately, and I've been able to capture all of them for us to read, enjoy, and have forever!  I would like to get you signed up so you can see & capture them, too.  First click here to join: https://things-my-kids-said.herokuapp.com/   Once you've signed up, *please let me know* so I can grant you parental access!  Thanks 😊 -#{current_user.first_name.titleize}"
+    body: "Hi!  #{all_kids_have_said(current_user)} the funniest things lately, and I've been able to capture all of them for us to read, enjoy, and have forever!  I would like to get you signed up so you can see & capture them, too.  First click here to join: http://www.things-my-kids-said.com/   Once you've signed up, *please let me know* so I can grant you parental access!  Thanks 😊 -#{current_user.first_name.titleize}"
   %>
 </div>
