@@ -116,6 +116,10 @@
   .hidden-sm-down {
     display: none !important;
   }
+
+  .timeline-container {
+    padding: 0;
+  }
 }
 
 .timeline-header-header {
@@ -259,4 +263,28 @@ a.post-body {
 
 .form-parents-eyes-only {
   margin-top: 40px;
+}
+
+.girl-background {
+  background-color: $pink;
+}
+
+.boy-background {
+  background-color: $blue;
+}
+
+.boy-background, .girl-background {
+  color: white;
+}
+
+#search-input {
+  border: 0;
+  border-bottom: 1px solid $text-muted-gray;
+  outline: 0;
+  width: 100%;
+  background-color: $body-gray;
+}
+
+#search-input:focus {
+  background-color: white;
 }

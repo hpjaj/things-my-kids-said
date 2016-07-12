@@ -33,4 +33,6 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'admin#dashboard'
 
+  get 'search' => 'search#main'
+
 end

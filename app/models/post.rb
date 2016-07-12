@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
 
+  include PgSearch
+
   attr_accessor :years_old, :months_old, :kids_age
 
   belongs_to :user
@@ -14,12 +16,27 @@ class Post < ActiveRecord::Base
   validates :user_id, presence: true
   validates :date_said, presence: true
 
+  pg_search_scope :search_by_body,
+                  against: :body,
+                  using: {
+                    tsearch: {
+                      dictionary: "english",
+                      prefix: true
+                    }
+                  }
+
   def self.all_associated_kids_posts(user)
     parents = self.parents_can_see(user)
     family  = self.friends_family_can_see(user)
     all     = (parents + family).uniq
 
     all.sort_by { |quote| quote.created_at }.reverse!
+  end
+
+  def self.all_for_user_for_search(user)
+    parents = self.parents_can_see(user)
+    family  = self.friends_family_can_see(user)
+    all     = (parents + family).uniq
   end
 
   def self.parents_can_see(user)

@@ -3,44 +3,20 @@
 </div>
 
 <% unless @kid %>
-  <div class="col-lg-2 col-sm-3 hidden-sm-up">
+  <div class="col-lg-2 col-sm-3 hidden-sm-up timeline-container">
     <%= render 'layouts/side_nav/collapsible_navbar' %>
   </div>
 <% end %>
 
-<div class="col-lg-8 col-sm-9">
+<div class="col-lg-8 col-sm-9 timeline-container">
   <% if @kid %>
+    <%= render 'layouts/search/collapsible_search' %>
     <%= render partial: 'posts/timeline_headers/kids', locals: { kid: @kid } %>
   <% else %>
     <%= render partial: 'posts/timeline_headers/main' %>
   <% end %>
 
-  <% @posts.each do |post| %>
-    <% if can? :read, post %>
-      <div class="card card-block">
-        <div class='row'>
-          <div class="col-lg-1 col-xs-12 timeline-picture">
-            <% if post.photo? %>
-              <%= link_to((image_tag post.photo.expiring_url(3600, :thumb), class: 'timeline-photo'), post) %>
-            <% end %>
-          </div>
-          <div class="col-lg-11 col-xs-12">
-            <p class="card-title"><%= link_to(headline(post), post, class: 'text-muted') %></p>
-            <%= link_to(post, class: 'post-body') do %>
-              <%= highlight_kids_quote post %>
-            <% end %>
-
-            <%= link_to comment_link_and_count(post), post, class: 'card-link comment text-muted' %>
-            <span class="pull-right text-muted post-author">captured by <%= post.user.first_name.titleize %></span>
-
-            <% if post.parents_eyes_only? %>
-              <p class='parents-eyes'>parents eyes only</p>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
+  <%= render 'layouts/quotes' %>
 
   <%= will_paginate @posts %>
 </div>
