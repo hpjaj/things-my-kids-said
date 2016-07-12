@@ -63,7 +63,7 @@
   var kid             = $('#post_kid_id');
   var submitButton    = $('#post-submit-button');
   var parentsEyesOnly = $("#post_parents_eyes_only");
-  var parentsKidsIds  = "<%= current_user.kids.pluck(:id) %>";
+  var parentsKidsIds  = "<%= current_user.kids.pluck(:id).join(' ') %>".split(' ');
   var kidCount        = "<%= current_user.kids.count %>";
   var hiddenKidVal    = $("input[name='post[kid_id]']").val();
 
@@ -76,7 +76,7 @@
   });
 
   kid.on( "change", function() {
-    if ( parentsKidsIds.includes(kid.val()) ) {
+    if ( _.contains(parentsKidsIds, kid.val()) ) {
       $('div.form-parents-eyes-only').show();
     } else  {
       $('div.form-parents-eyes-only').hide();
@@ -90,7 +90,7 @@
 
   });
 
-  if ( kid.val() !== '' && parentsKidsIds.includes(kid.val()) ) {
+  if ( kid.val() !== '' && _.contains(parentsKidsIds, kid.val()) ) {
     $('div.form-parents-eyes-only').show();
   }
 
@@ -105,13 +105,13 @@
   }
 
   submitButton.on('click', function() {
-    if ( (parentsKidsIds.includes(kid.val()) === false) && (parentsKidsIds.split(',').length > 1) ) {
+    if ( (_.contains(parentsKidsIds, kid.val()) === false) && (parentsKidsIds.length > 1) ) {
       parentsEyesOnly.attr('checked', false);
     }
   });
 
   submitButton.on('click', function() {
-    if ( (parentsKidsIds.includes(hiddenKidVal) === false ) && (parentsKidsIds.split(',').length === 1) ) {
+    if ( (_.contains(parentsKidsIds, hiddenKidVal) === false ) && (parentsKidsIds.length === 1) ) {
       parentsEyesOnly.attr('checked', false);
     }
   });
