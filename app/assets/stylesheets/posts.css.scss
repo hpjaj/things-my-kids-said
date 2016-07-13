@@ -265,26 +265,13 @@ a.post-body {
   margin-top: 40px;
 }
 
-.girl-background {
-  background-color: $pink;
-}
-
-.boy-background {
-  background-color: $blue;
-}
-
-.boy-background, .girl-background {
+#search-submit-button {
+  background-color: $purple;
   color: white;
+  margin-bottom: 12px;
 }
 
-#search-input {
-  border: 0;
-  border-bottom: 1px solid $text-muted-gray;
-  outline: 0;
-  width: 100%;
-  background-color: $body-gray;
-}
-
-#search-input:focus {
-  background-color: white;
+#search-submit-button:hover {
+  background-color: lighten($purple, 10%);
+  color: white;
 }

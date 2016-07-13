@@ -7,7 +7,7 @@ class SearchController < ApplicationController
     if search_terms
       @posts = Post.search_by_body(search_terms).all_for_user_for_search(current_user).paginate(:page => params[:page], :per_page => 20)
     else
-      @posts = []
+      @posts = [].paginate(:page => params[:page], :per_page => 20)
     end
   end
 end

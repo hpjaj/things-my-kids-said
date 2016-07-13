@@ -8,6 +8,8 @@
   <%= render 'search/form', locals: { path: @path } %>
 
   <%= render 'layouts/quotes' %>
+
+  <%= will_paginate @posts %>
 </div>
 
 <div class="col-lg-2 col-sm-1"></div>

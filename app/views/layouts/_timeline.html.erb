@@ -10,7 +10,6 @@
 
 <div class="col-lg-8 col-sm-9 timeline-container">
   <% if @kid %>
-    <%= render 'layouts/search/collapsible_search' %>
     <%= render partial: 'posts/timeline_headers/kids', locals: { kid: @kid } %>
   <% else %>
     <%= render partial: 'posts/timeline_headers/main' %>
