@@ -116,6 +116,10 @@
   .hidden-sm-down {
     display: none !important;
   }
+
+  .timeline-container {
+    padding: 0;
+  }
 }
 
 .timeline-header-header {
@@ -259,4 +263,15 @@ a.post-body {
 
 .form-parents-eyes-only {
   margin-top: 40px;
+}
+
+#search-submit-button {
+  background-color: $purple;
+  color: white;
+  margin-bottom: 12px;
+}
+
+#search-submit-button:hover {
+  background-color: lighten($purple, 10%);
+  color: white;
 }

@@ -1,0 +1,15 @@
+<div class="col-lg-2 col-sm-3 hidden-sm-down">
+  <%= render 'layouts/side_nav/navbar' %>
+</div>
+
+<div class="col-lg-8 col-sm-9 timeline-container">
+  <%= render 'search/search_title' %>
+  <% path = search_path %>
+  <%= render 'search/form', locals: { path: @path } %>
+
+  <%= render 'layouts/quotes' %>
+
+  <%= will_paginate @posts %>
+</div>
+
+<div class="col-lg-2 col-sm-1"></div>

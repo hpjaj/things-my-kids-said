@@ -78,3 +78,4 @@ gem 'font-awesome-sass'
 gem 'will_paginate'
 gem "select2-rails"
 gem 'underscore-rails'
+gem 'pg_search'
