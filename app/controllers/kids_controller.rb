@@ -53,10 +53,10 @@ class KidsController < ApplicationController
     authorize! :destroy, @kid
 
     if @kid.destroy
-      flash[:notice] = 'Your kid was successfully deleted.'
+      flash[:notice] = 'Your kid was successfully removed.'
       redirect_to kids_path
     else
-      flash[:error] = 'There was a problem deleting your kid. Please try again.'
+      flash[:error] = 'There was a problem removing your kid. Please try again.'
       render :index
     end
   end

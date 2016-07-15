@@ -14,3 +14,18 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content kids-timeline-modal">
+      <%= image_tag kid.photo.expiring_url(3600, :medium), class: '' if kid.photo? %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('.timeline-header-photo').on('click', function() {
+    $('.bs-example-modal-sm').modal('show');
+  });
+</script>

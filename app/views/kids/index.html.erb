@@ -27,7 +27,7 @@
             <td><%= kid.birthdate.strftime("%-m/%d/%y") %></td>
             <td><%= User.find_by(id: kid.created_by).full_name %></td>
             <td><%= link_to 'Edit', edit_kid_path(kid) %></td>
-            <td><%= link_to('Delete', kid_path(kid), method: :delete, data: { confirm: 'Delete this kid?' }) %></td>
+            <td><%= link_to('Remove', kid_path(kid), method: :delete, data: { confirm: "Remove #{kid.full_name}?" }) %></td>
           </tr>
         <% end %>
       </tbody>
