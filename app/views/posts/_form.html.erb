@@ -28,7 +28,7 @@
           </div>
         </div>
       <% else %>
-        <%= f.input :date_said, as: :date, html5: true, required: false %>
+        <%= f.input :date_said, as: :date, start_year: Date.today.year - 110, end_year: Date.today.year, required: false, input_html: { class: 'form-control' } %>
       <% end %>
 
 
