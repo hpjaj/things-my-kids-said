@@ -194,6 +194,15 @@
   text-transform: uppercase;
 }
 
+.pink-button-solid, .solid-button, .pink-button-outline, .btn-info-outline, .btn-secondary-outline {
+  -webkit-transition: color .2s ease-out;
+  -moz-transition: color .2s ease-out;
+  -o-transition: color .2s ease-out;
+  transition: color .2s ease-out;
+}
+
+
+
 
 
 
