@@ -45,7 +45,6 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy', '~> 2.4'
   gem 'factory_girl_rails'
-  gem 'selenium-webdriver'
 end
 
 group :development do
