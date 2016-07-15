@@ -7,9 +7,19 @@
   <% path = search_path %>
   <%= render 'search/form', locals: { path: @path } %>
 
-  <%= render 'layouts/quotes' %>
-
-  <%= will_paginate @posts %>
+  <% if params[:query].present? %>
+    <% if @posts.empty?  %>
+      <div class='search-results'>
+        <p>0 results</p>
+      </div>
+    <% else %>
+      <div class='search-results'>
+        <p><%= pluralize(@posts.count, 'result') %></p>
+      </div>
+      <%= render 'layouts/quotes' %>
+      <%= will_paginate @posts %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="col-lg-2 col-sm-1"></div>
