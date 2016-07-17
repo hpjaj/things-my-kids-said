@@ -77,6 +77,26 @@
   </table>
 </div>
 
+<!-- Activity Feed -->
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="family-table">
+      <tr>
+        <th>Type</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+    <tbody class="family-table">
+      <% @feed.each do |item| %>
+        <tr>
+          <td><%= item.class.name.titleize %></td>
+          <td><%= time_ago_in_words item.created_at %> ago</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <%= render 'email_all_users' %>
 
 <%= will_paginate @users %>
