@@ -1,9 +1,8 @@
 <% if kids = your_kids %>
   <h5 class="card-title side-nav-sub-titles"><%= link_to 'Yours', kids_path, class: 'text-muted' %></h5>
+
   <ul class="side-nav-kids">
-    <% kids.each do |kid| %>
-      <%= content_tag(:li, link_to(kid.first_name.titleize, kid_posts_path(kid.id), class: 'text-muted'), class: 'side-nav-kids' ) %>
-    <% end %>
+    <%= render partial: 'layouts/side_nav/kid_link', locals: { kids: kids, my_kids: true } %>
   </ul>
 <% end %>
 
@@ -15,8 +14,13 @@
   <% end %>
 
   <ul class="side-nav-kids">
-    <% kids.each do |kid| %>
-      <%= content_tag(:li, link_to(kid.full_name, kid_posts_path(kid.id), class: 'text-muted'), class: 'side-nav-kids' ) %>
-    <% end %>
+    <%= render partial: 'layouts/side_nav/kid_link', locals: { kids: kids, my_kids: false } %>
   </ul>
 <% end %>
+
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

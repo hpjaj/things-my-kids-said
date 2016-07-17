@@ -33,6 +33,8 @@ class Ability
       can :destroy, Comment do |comment|
         comment.post.kid.parents.pluck(:id).include?(user.id)
       end
+
+      can :manage, FilteredKid, user_id: user.id
     end
       # end
     #

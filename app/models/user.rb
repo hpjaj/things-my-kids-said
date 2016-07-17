@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts
+  has_many :filtered_kids, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :kids
 

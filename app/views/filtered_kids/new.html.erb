@@ -1,0 +1,11 @@
+<h5 class="page-title form-title">Hide Kid In Main Timeline</h5>
+
+<div class="forms">
+  <%= simple_form_for @filtered_kid do |f| %>
+    <%= f.input :kid_id, label: 'Kid To Hide From Timeline', collection: all_related_kids_for(current_user), label_method: :full_name, value_method: :id, required: false, input_html: { class: 'form-control' } %>
+
+    <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
+    <%= f.submit 'Save', class: 'pull-right btn btn-info btn-info-outline devise-buttons' %>
+
+  <% end %>
+</div>

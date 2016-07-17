@@ -1,0 +1,20 @@
+<div class="card card-block">
+  <h4 class="settings-titles">Hidden From Timeline</h4>
+
+  <p class='card-text'>You can hide kids' quotes from your homepage timeline feed.  You will still see these kids' quotes in their individual timelines.</p>
+
+  <p>
+    Currently hidden:
+
+    <% if @filtered_kids.present? %>
+      <% @filtered_kids.each do |filtered_kid| %>
+        <% kid = filtered_kid.kid %>
+        <span class='filtered-kids-container'><%= link_to(kid.full_name, filtered_kid_path(filtered_kid), method: :delete, data: { confirm: "Begin showing #{kid.full_name}'s quotes in your timeline?" }, class: 'filtered-kids-links') %></span>
+      <% end %>
+    <% else %>
+      <span class='filtered-kids-none'>none</span>
+    <% end %>
+  </p>
+
+  <%= link_to "Hide Kid", new_filtered_kid_path, class: 'btn btn-info btn-info-outline devise-buttons kid-buttons solid-button' %>
+</div>
