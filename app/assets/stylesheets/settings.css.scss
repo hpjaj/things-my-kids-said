@@ -1,0 +1,30 @@
+.settings-titles {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0 0 12px 0;
+}
+
+.filtered-kids-links {
+  color: $pink;
+}
+
+.filtered-kids-links:hover {
+  color: $pink;
+  text-transform: underline;
+}
+
+.filtered-kids-container::after {
+  content: ', ';
+}
+
+.filtered-kids-container:last-child::after {
+  content: '';
+}
+
+.filtered-kids-none, .filtered-kids-container:first-child {
+  padding-left: 5px;
+}
+
+.filtered-kids-none {
+  font-weight: bold;
+}

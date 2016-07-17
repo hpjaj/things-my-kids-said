@@ -4,6 +4,7 @@ class Kid < ActiveRecord::Base
 
   has_and_belongs_to_many :users
   has_many :posts
+  has_many :filtered_kids, dependent: :destroy
 
   has_many :friend_and_families, dependent: :destroy
   has_many :followers, through: :friend_and_families, source: :follower
@@ -43,6 +44,10 @@ class Kid < ActiveRecord::Base
       .where(birthdate: kid.birthdate)
       .where(first_name: kid.first_name.downcase)
       .where(last_name: kid.last_name.downcase)
+  end
+
+  def self.with_ids(ids)
+    self.where(id: ids)
   end
 
   private

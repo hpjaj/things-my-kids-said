@@ -1,0 +1,15 @@
+<% kids.each do |kid| %>
+  <li class='side-nav-kids'>
+    <% if my_kids %>
+      <%= link_to(kid.first_name.titleize, kid_posts_path(kid.id), class: 'text-muted')%>
+    <% else %>
+      <%= link_to(kid.full_name, kid_posts_path(kid.id), class: 'text-muted') %>
+    <% end %>
+
+    <% if FilteredKid.where(user: current_user, kid: kid).present? %>
+      <%= link_to settings_path, class: 'tooltips text-muted', data: { toggle: 'tooltip', placement: 'top', original_title: 'Hidden' } do %>
+        <i class="fa fa-eye-slash side-nav-kids" aria-hidden="true"></i>
+      <% end %>
+    <% end %>
+  </li>
+<% end %>

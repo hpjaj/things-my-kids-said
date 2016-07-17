@@ -26,8 +26,8 @@ class Post < ActiveRecord::Base
                   }
 
   def self.all_associated_kids_posts(user)
-    parents = self.parents_can_see(user)
-    family  = self.friends_family_can_see(user)
+    parents = self.parents_can_see(user).filter_kids_settings(user)
+    family  = self.friends_family_can_see(user).filter_kids_settings(user)
     all     = (parents + family).uniq
 
     all.sort_by { |quote| quote.created_at }.reverse!
@@ -51,6 +51,12 @@ class Post < ActiveRecord::Base
     self
       .where('kid_id in (?)', kid_ids)
       .where(parents_eyes_only: false)
+  end
+
+  def self.filter_kids_settings(user)
+    kid_ids = user.filtered_kids.pluck(:kid_id)
+
+    self.where.not(kid_id: kid_ids)
   end
 
   def self.user_can_see_for(kid, user)

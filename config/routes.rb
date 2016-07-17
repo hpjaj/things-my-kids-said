@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :parents, only: [:index, :new, :create, :destroy]
 
+  resources :filtered_kids, only: [:new, :create, :destroy]
+
   resources :kids do
     resources :posts, only: :index, path: 'quotes'
   end
@@ -34,5 +36,7 @@ Rails.application.routes.draw do
   get 'dashboard' => 'admin#dashboard'
 
   get 'search' => 'search#main'
+
+  get 'settings' => 'settings#index'
 
 end
