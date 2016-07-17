@@ -19,6 +19,8 @@ class Kid < ActiveRecord::Base
   validates :created_by, presence: true
   validate :cannot_create_duplicate, on: :create, if: :created_by_valid_user?
 
+  scope :sort_by_last_name, -> { order(last_name: :asc) }
+
   def parents
     users
   end
@@ -48,6 +50,12 @@ class Kid < ActiveRecord::Base
 
   def self.with_ids(ids)
     self.where(id: ids)
+  end
+
+  def self.filtered_out_by(user)
+    self
+      .joins(:filtered_kids)
+      .where(filtered_kids: { user_id: user.id })
   end
 
   private

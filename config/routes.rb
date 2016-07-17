@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :parents, only: [:index, :new, :create, :destroy]
 
-  resources :filtered_kids, only: [:new, :create, :destroy]
+  resources :filtered_kids, only: [:index, :new, :create, :destroy]
 
   resources :kids do
     resources :posts, only: :index, path: 'quotes'

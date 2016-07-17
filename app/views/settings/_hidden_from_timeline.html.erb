@@ -7,14 +7,17 @@
     Currently hidden:
 
     <% if @filtered_kids.present? %>
-      <% @filtered_kids.each do |filtered_kid| %>
-        <% kid = filtered_kid.kid %>
-        <span class='filtered-kids-container'><%= link_to(kid.full_name, filtered_kid_path(filtered_kid), method: :delete, data: { confirm: "Begin showing #{kid.full_name}'s quotes in your timeline?" }, class: 'filtered-kids-links') %></span>
+      <% @filtered_kids.each do |kid| %>
+        <span class='filtered-kids-container'><%= kid.full_name %></span>
       <% end %>
     <% else %>
       <span class='filtered-kids-none'>none</span>
     <% end %>
   </p>
 
-  <%= link_to "Hide Kid", new_filtered_kid_path, class: 'btn btn-info btn-info-outline devise-buttons kid-buttons solid-button' %>
+  <%= link_to "Hide Kid", new_filtered_kid_path, class: 'btn btn-info devise-buttons solid-button normal-button-margin' %>
+
+  <% if @filtered_kids.present? %>
+    <%= link_to "Show Kid", filtered_kids_path, class: 'btn btn-info btn-info-outline devise-buttons normal-button-margin' %>
+  <% end %>
 </div>
