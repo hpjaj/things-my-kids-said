@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     self.where.not(id: parent.id).order(:last_name)
   end
 
+  def self.all_emails
+    pluck(:email)
+  end
+
   def full_name
     "#{first_name} #{last_name}".titleize
   end
