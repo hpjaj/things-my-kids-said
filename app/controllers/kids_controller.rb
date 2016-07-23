@@ -4,7 +4,11 @@ class KidsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @kids = current_user.kids.order(:first_name)
+    if current_user.admin?
+      @kids = Kid.all
+    else
+      @kids = current_user.kids.order(:first_name)
+    end
 
     authorize! :create, @kids.first
   end

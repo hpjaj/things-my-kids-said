@@ -12,6 +12,9 @@
 
   <%= render 'layouts/top_navbar' %>
   <div class="container whole-site-container">
+    <% if current_user %>
+      <% flash[:notice] = 'Fixing picture issues. Will be completed ASAP!  Apologies for any inconvenience.' %>
+    <% end %>
 
     <div>
       <% if flash[:notice].present? %>
