@@ -21,7 +21,7 @@
       <tbody class="family-table kids-table">
         <% @kids.each do |kid| %>
           <tr>
-            <td><%= image_tag kid.photo.expiring_url(3600, :thumb), class: 'timeline-photo' if kid.photo? %></td>
+            <td><%= image_tag kid.photo.url(:thumb, false), class: 'timeline-photo' if kid.photo? %></td>
             <td><%= kid.full_name.titleize %></td>
             <td><%= kid.gender.titleize %></td>
             <td><%= kid.birthdate.strftime("%-m/%d/%y") %></td>
