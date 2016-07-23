@@ -75,6 +75,9 @@ class Post < ActiveRecord::Base
   def self.most_recent_with_photo
     self
       .where.not(photo_file_name: nil)
+      .where.not(photo_content_type: nil)
+      .where.not(photo_file_size: nil)
+      .where.not(photo_updated_at: nil)
       .order(date_said: :desc)
       .order(created_at: :desc)
     .first
