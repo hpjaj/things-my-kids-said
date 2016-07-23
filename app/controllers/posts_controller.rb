@@ -22,8 +22,8 @@ class PostsController < ApplicationController
     @post.date_said = determine_date_said(params)
     quotes_photo    = determine_quotes_picture(params[:post][:kid_id])
 
-    if !params[:post][:photo].present?
-      @post.photo = quotes_photo
+    if !params[:post][:photo].present? && quotes_photo
+      set_photo_params(quotes_photo, @post)
     end
 
     if @post.save
@@ -64,8 +64,8 @@ class PostsController < ApplicationController
 
     quotes_photo = determine_quotes_picture(params[:post][:kid_id])
 
-    if !params[:post][:photo].present?
-      @post.photo = quotes_photo
+    if !params[:post][:photo].present? && quotes_photo
+      set_photo_params(quotes_photo, @post)
     end
 
     if @post.update(post_params)
@@ -116,6 +116,13 @@ class PostsController < ApplicationController
     else
       params[:post][:kids_age].to_date
     end
+  end
+
+  def set_photo_params(photo_ojbect, post)
+    post.photo_file_name    = photo_ojbect.instance.photo_file_name
+    post.photo_content_type = photo_ojbect.instance.photo_content_type
+    post.photo_file_size    = photo_ojbect.instance.photo_file_size
+    post.photo_updated_at   = photo_ojbect.instance.photo_updated_at
   end
 
   def determine_quotes_picture(kid_id)
