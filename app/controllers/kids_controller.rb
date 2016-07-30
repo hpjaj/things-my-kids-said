@@ -13,9 +13,12 @@ class KidsController < ApplicationController
     authorize! :create, Kid
 
     @kid = Kid.new
+    @picture = Picture.new
   end
 
   def create
+    @picture = Picture.new
+
     if kid_creation_transaction
       redirect_to kids_path
     else
@@ -26,20 +29,18 @@ class KidsController < ApplicationController
 
   def edit
     @kid = Kid.find(params[:id])
+    @picture = @kid.pictures.last || Picture.new
 
     authorize! :update, @kid
   end
 
   def update
     @kid = Kid.find(params[:id])
+    @picture = @kid.pictures.last || Picture.new
 
     authorize! :update, @kid
 
-    downcased_params = kid_params
-    downcased_params['first_name'] = kid_params['first_name'].downcase
-    downcased_params['last_name']  = kid_params['last_name'].downcase
-
-    if @kid.update(downcased_params)
+    if kid_updating_transaction
       redirect_to kids_path
     else
       flash[:error] = "There was a problem updating your kid.  Please try again."
@@ -64,7 +65,23 @@ class KidsController < ApplicationController
   private
 
   def kid_params
-    params.require(:kid).permit(:first_name, :last_name, :birthdate, :gender, :photo, :created_by)
+    params.require(:kid).permit(:first_name, :last_name, :birthdate, :gender, :photo, :created_by, pictures_attributes: [:picture])
+  end
+
+  def downcase_params
+    downcased_params = kid_params
+    downcased_params['first_name'] = kid_params['first_name'].downcase
+    downcased_params['last_name']  = kid_params['last_name'].downcase
+
+    downcased_params
+  end
+
+  def create_kid_picture
+    if params[:kid][:picture]
+      Picture.add_picture(current_user, params[:kid], @kid.id)
+    else
+      true
+    end
   end
 
   def kid_creation_transaction
@@ -72,11 +89,11 @@ class KidsController < ApplicationController
       begin
         authorize! :create, Kid
 
-        @kid = Kid.new(kid_params)
-        @kid.first_name = @kid.first_name.downcase
-        @kid.last_name  = @kid.last_name.downcase
-        @kid.save
+        @kid = Kid.new(downcase_params)
+        @kid.save!
         current_user.kids << @kid
+
+        create_kid_picture
       rescue Exception => e
         logger.error "User #{current_user.id} experienced #{e.message} when trying to create a new kid"
         false
@@ -84,4 +101,14 @@ class KidsController < ApplicationController
     end
   end
 
+  def kid_updating_transaction
+    ActiveRecord::Base.transaction do
+      begin
+        @kid.update!(downcase_params) && create_kid_picture
+      rescue Exception => e
+        logger.error "User #{current_user.id} experienced #{e.message} when trying to update kid #{@kid}"
+        false
+      end
+    end
+  end
 end

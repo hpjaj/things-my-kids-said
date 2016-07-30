@@ -7,6 +7,8 @@ class Kid < ActiveRecord::Base
   has_many :filtered_kids, dependent: :destroy
   has_many :pictures
 
+  accepts_nested_attributes_for :pictures
+
   has_many :friend_and_families, dependent: :destroy
   has_many :followers, through: :friend_and_families, source: :follower
 
