@@ -1,6 +1,6 @@
 <div class="card ">
   <h3 class="card-header timeline-header-header <%=kid.gender%>-timeline-header">
-    <%= image_tag kid.photo.expiring_url(3600, :medium), class: 'timeline-header-photo' if kid.photo? %>
+    <%= image_tag kid.pictures.profile_pictures.last.photo.url(:medium, false), class: 'timeline-header-photo' if kid.pictures.profile_pictures.last %>
     <%= kid.full_name %><br />
     <span class='post-show-kid-info hidden-sm-down'>
       <%= content_tag(:span, kids_current_age(kid), class: 'post-show-kid-age') %><br />
@@ -18,7 +18,7 @@
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-sm">
     <div class="modal-content kids-timeline-modal">
-      <%= image_tag kid.photo.expiring_url(3600, :medium), class: '' if kid.photo? %>
+      <%= image_tag kid.pictures.profile_pictures.last.photo.url(:medium, false), class: '' if kid.pictures.profile_pictures.last %>
     </div>
   </div>
 </div>

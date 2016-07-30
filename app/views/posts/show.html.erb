@@ -9,7 +9,7 @@
       <h6 class="card-subtitle text-muted"><%= post_date_said @post %></h6>
     </div>
       <div class="post-show-picture">
-        <%= image_tag @post.photo.expiring_url(3600, :medium), class: 'card-img-top show-photo' if @post.photo? %>
+        <%= image_tag @post.picture.photo.url(:medium, false), class: 'card-img-top show-photo' if @post.picture %>
       </div>
 
       <div class="card-block">
