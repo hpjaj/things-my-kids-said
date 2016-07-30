@@ -24,3 +24,7 @@ def params_from_kid_controller(user, dispatch_upload)
     'created_by' => user.id
   }
 end
+
+def create_profile_picture_for(kid, user)
+  Picture.add_picture(user, params_from_kid_controller(user, dispatch_upload), kid.id)
+end
