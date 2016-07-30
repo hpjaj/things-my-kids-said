@@ -1,4 +1,6 @@
 class Kid < ActiveRecord::Base
+  acts_as_paranoid
+
   BOY  = 'boy'
   GIRL = 'girl'
 

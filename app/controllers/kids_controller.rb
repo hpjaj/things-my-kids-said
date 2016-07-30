@@ -53,7 +53,7 @@ class KidsController < ApplicationController
 
     authorize! :destroy, @kid
 
-    if @kid.destroy
+    if kid_destroying_transaction
       flash[:notice] = 'Your kid was successfully removed.'
       redirect_to kids_path
     else
@@ -111,4 +111,18 @@ class KidsController < ApplicationController
       end
     end
   end
+
+  def kid_destroying_transaction
+    ActiveRecord::Base.transaction do
+      begin
+        @kid.posts.destroy_all
+        @kid.pictures.destroy_all
+        @kid.destroy
+      rescue Exception => e
+        logger.error "User #{current_user.id} experienced #{e.message} when trying to destroy kid #{@kid}"
+        false
+      end
+    end
+  end
+
 end
