@@ -1,10 +1,15 @@
 class Kid < ActiveRecord::Base
+  acts_as_paranoid
+
   BOY  = 'boy'
   GIRL = 'girl'
 
   has_and_belongs_to_many :users
   has_many :posts
   has_many :filtered_kids, dependent: :destroy
+  has_many :pictures
+
+  accepts_nested_attributes_for :pictures
 
   has_many :friend_and_families, dependent: :destroy
   has_many :followers, through: :friend_and_families, source: :follower

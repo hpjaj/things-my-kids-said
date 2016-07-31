@@ -3,8 +3,8 @@
     <div class="card card-block">
       <div class='row'>
         <div class="col-lg-1 col-xs-12 timeline-picture">
-          <% if post.photo? %>
-            <%= link_to((image_tag post.photo.expiring_url(3600, :thumb), class: 'timeline-photo'), post) %>
+          <% if post.picture %>
+            <%= link_to((image_tag post.picture.photo.url(:thumb, false), class: 'timeline-photo'), post) %>
           <% end %>
         </div>
         <div class="col-lg-11 col-xs-12">

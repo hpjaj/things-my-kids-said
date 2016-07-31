@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  acts_as_paranoid
 
   include PgSearch
 
@@ -7,6 +8,9 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :kid
   has_many :comments, dependent: :destroy
+  belongs_to :picture
+
+  accepts_nested_attributes_for :picture
 
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
@@ -70,6 +74,14 @@ class Post < ActiveRecord::Base
   def self.most_recent_with_photo
     self
       .where.not(photo_file_name: nil)
+      .order(date_said: :desc)
+      .order(created_at: :desc)
+    .first
+  end
+
+  def self.most_recent_with_picture
+    self
+      .where.not(picture_id: nil)
       .order(date_said: :desc)
       .order(created_at: :desc)
     .first

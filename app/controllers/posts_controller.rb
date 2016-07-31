@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.build
+    @picture = Picture.new
   end
 
   def create
@@ -20,11 +21,9 @@ class PostsController < ApplicationController
 
     @post           = current_user.posts.build(post_params)
     @post.date_said = determine_date_said(params)
-    quotes_photo    = determine_quotes_picture(params[:post][:kid_id])
+    @picture        = Picture.new
 
-    if !params[:post][:photo].present?
-      @post.photo = quotes_photo
-    end
+    set_picture_id
 
     if @post.save
       redirect_to post_path(@post)
@@ -44,29 +43,24 @@ class PostsController < ApplicationController
 
   def display_comments
     post = Post.find(params[:post_id])
-    @comments = post.comments  # byebug
-    Rails.logger.info "************ blah"
-    # logger.info "************ blah"
+    @comments = post.comments
     render nothing: true
-    # render partial: 'display_comments', locals: @comments
   end
 
   def edit
     @post = Post.find(params[:id])
+    @picture = @post.picture || Picture.new
 
     authorize! :update, @post
   end
 
   def update
     @post = Post.find(params[:id])
+    @picture = @post.picture || Picture.new
 
     authorize! :update, @post
 
-    quotes_photo = determine_quotes_picture(params[:post][:kid_id])
-
-    if !params[:post][:photo].present?
-      @post.photo = quotes_photo
-    end
+    set_picture_id
 
     if @post.update(post_params)
       redirect_to post_path(@post)
@@ -91,7 +85,8 @@ class PostsController < ApplicationController
   end
 
   def select_picture
-    @photo = determine_quotes_picture(params[:kid_id])
+    picture_id = determine_quotes_picture(params[:kid_id])
+    @photo     = picture_id ? Picture.find(picture_id).photo : nil
 
     respond_to do |format|
       format.js
@@ -101,7 +96,22 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, :photo)
+    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, :photo, pictures_attributes: [:picture])
+  end
+
+  def create_post_picture
+    new_picture = Picture.add_picture(current_user, params[:post], params[:post][:kid_id])
+
+    new_picture.try(:id)
+  end
+
+  def set_picture_id
+    if params[:post][:picture].present? && (id = create_post_picture)
+      @post.picture_id = id
+    else
+      quotes_photo     = determine_quotes_picture(params[:post][:kid_id])
+      @post.picture_id = quotes_photo
+    end
   end
 
   def determine_date_said(params)
@@ -123,9 +133,15 @@ class PostsController < ApplicationController
 
     return unless kid
 
-    last_post_with_photo = kid.posts.most_recent_with_photo
+    last_post_with_photo = kid.posts.most_recent_with_picture
 
-    return last_post_with_photo.try(:photo) || kid.photo || nil
+    if last_post_with_photo
+      last_post_with_photo.picture_id
+    elsif picture = kid.pictures.profile_pictures.last
+      picture.id
+    else
+      nil
+    end
   end
 
 end

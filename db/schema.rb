@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160716154538) do
+ActiveRecord::Schema.define(version: 20160730152420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,10 @@ ActiveRecord::Schema.define(version: 20160716154538) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.integer  "created_by"
+    t.datetime "deleted_at"
   end
+
+  add_index "kids", ["deleted_at"], name: "index_kids_on_deleted_at", using: :btree
 
   create_table "kids_users", id: false, force: :cascade do |t|
     t.integer "kid_id"
@@ -70,6 +73,21 @@ ActiveRecord::Schema.define(version: 20160716154538) do
 
   add_index "kids_users", ["kid_id"], name: "index_kids_users_on_kid_id", using: :btree
   add_index "kids_users", ["user_id"], name: "index_kids_users_on_user_id", using: :btree
+
+  create_table "pictures", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "kid_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.boolean  "profile_picture",    default: false
+  end
+
+  add_index "pictures", ["kid_id"], name: "index_pictures_on_kid_id", using: :btree
+  add_index "pictures", ["user_id"], name: "index_pictures_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.text     "body"
@@ -83,9 +101,13 @@ ActiveRecord::Schema.define(version: 20160716154538) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "picture_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
   add_index "posts", ["kid_id"], name: "index_posts_on_kid_id", using: :btree
+  add_index "posts", ["picture_id"], name: "index_posts_on_picture_id", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -108,8 +130,10 @@ ActiveRecord::Schema.define(version: 20160716154538) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.string   "role",                   limit: 50
+    t.datetime "deleted_at"
   end
 
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
@@ -117,4 +141,6 @@ ActiveRecord::Schema.define(version: 20160716154538) do
   add_foreign_key "comments", "users"
   add_foreign_key "filtered_kids", "kids"
   add_foreign_key "filtered_kids", "users"
+  add_foreign_key "pictures", "kids"
+  add_foreign_key "pictures", "users"
 end

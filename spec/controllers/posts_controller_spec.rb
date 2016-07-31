@@ -64,6 +64,77 @@ RSpec.describe PostsController, type: :controller do
         expect(Post.first.date_said).to eq date_said
       end
     end
+
+    context "with an uploaded picture" do
+      before do
+        post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, picture: { photo: dispatch_upload } }
+      end
+
+      it "creates a post" do
+        expect(Post.count).to eq 1
+      end
+
+      it "creates a new Picture for the post" do
+        expect(Picture.count).to eq 1
+        expect(Post.first.picture).to eq Picture.first
+      end
+
+      it "does not create a new profile picture" do
+        expect(Picture.first.profile_picture).to be false
+      end
+
+      it "creates a picture for the post's kid" do
+        expect(kid.pictures.last).to eq Picture.first
+      end
+    end
+
+    context "kid has a profile picture" do
+      before do
+        create_profile_picture_for(kid, user)
+        expect(kid.pictures.profile_pictures.count).to eq 1
+      end
+
+      context "no new picture is uploaded" do
+        before do
+          post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s }
+        end
+
+        it "creates a post" do
+          expect(Post.count).to eq 1
+        end
+
+        it "links the kid's profile picture to the new post" do
+          kid_picture_id = kid.pictures.profile_pictures.last.id
+
+          expect(Post.first.picture_id).to eq kid_picture_id
+        end
+      end
+
+      context "uploads a new picture" do
+        before do
+          post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, picture: { photo: dispatch_upload } }
+        end
+
+        it "creates a post" do
+          expect(Post.count).to eq 1
+        end
+
+        it "creates a new picture for the post and kid" do
+          expect(Picture.count).to eq 2
+          expect(Kid.first.pictures.count).to eq 2
+        end
+
+        it "links the kid's new picture to the new post" do
+          kid_picture_id = kid.pictures.last.id
+
+          expect(Post.first.picture_id).to eq kid_picture_id
+        end
+
+        it "creates a picture with profile_picture == false" do
+          expect(Post.first.picture.profile_picture).to be false
+        end
+      end
+    end
   end
 
   describe "PATCH :update" do
@@ -92,6 +163,58 @@ RSpec.describe PostsController, type: :controller do
 
       it "updates a post with a custom age" do
         expect(Post.first.date_said).to eq Date.current
+      end
+    end
+
+    context "adds a picture to a picture-less post" do
+      before do
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+      end
+
+      it "updates the current post" do
+        expect(Post.count).to eq 1
+        expect(Post.first.valid?).to be true
+      end
+
+      it "creates a new Picture for the post" do
+        expect(Picture.count).to eq 1
+        expect(Post.first.picture).to eq Picture.first
+      end
+
+      it "does not create a new profile picture" do
+        expect(Picture.first.profile_picture).to be false
+      end
+
+      it "creates a picture for the post's kid" do
+        expect(kid_2.pictures.last).to eq Picture.first
+      end
+    end
+
+    context "replaces picture on post with a new picture" do
+      before do
+        create_profile_picture_for(kid_2, user)
+        expect(kid_2.pictures.profile_pictures.count).to eq 1
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+      end
+
+      it "updates the current post" do
+        expect(Post.count).to eq 1
+        expect(Post.first.valid?).to be true
+      end
+
+      it "creates a new picture for the post and kid" do
+        expect(Picture.count).to eq 2
+        expect(kid_2.pictures.count).to eq 2
+      end
+
+      it "links the kid's new picture to the new post" do
+        kid_picture_id = kid_2.pictures.last.id
+
+        expect(Post.first.picture_id).to eq kid_picture_id
+      end
+
+      it "creates a picture with profile_picture == false" do
+        expect(Post.first.picture.profile_picture).to be false
       end
     end
   end

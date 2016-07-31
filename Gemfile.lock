@@ -145,7 +145,7 @@ GEM
     mime-types-data (3.2016.0221)
     mimemagic (0.3.0)
     mini_portile2 (2.0.0)
-    minitest (5.8.4)
+    minitest (5.9.0)
     multi_json (1.11.2)
     nenv (0.3.0)
     newrelic_rpm (3.15.2.317)
@@ -161,6 +161,8 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    paranoia (2.1.5)
+      activerecord (~> 4.0)
     pg (0.18.4)
     pg_search (1.0.6)
       activerecord (>= 3.1)
@@ -304,6 +306,7 @@ DEPENDENCIES
   launchy (~> 2.4)
   newrelic_rpm
   paperclip
+  paranoia (~> 2.0)
   pg (~> 0.15)
   pg_search
   rails (= 4.2.6)

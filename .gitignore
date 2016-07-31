@@ -17,3 +17,6 @@
 # Ignore application configuration
 /config/application.yml
 .byebug_history
+
+# Ignore all test pictures
+/public/system/pictures/*

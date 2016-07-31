@@ -78,3 +78,4 @@ gem 'will_paginate'
 gem "select2-rails"
 gem 'underscore-rails'
 gem 'pg_search'
+gem "paranoia", "~> 2.0"

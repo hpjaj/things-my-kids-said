@@ -36,14 +36,16 @@
       <%= f.input :body, placeholder: 'Quote', label: false, required: false, input_html: { class: 'form-control', rows: 10, spellcheck: true } %>
 
       <div id="photo-goes-here">
-        <% if @post.photo? %>
-          <%= image_tag @post.photo.expiring_url(3600, :thumb) %>
+        <% if @post.picture %>
+          <%= image_tag @post.picture.photo.url(:thumb, false) %>
         <% else %>
           <%= image_tag("person-placeholder.jpg", height: '100', width: '100')  %>
         <% end %>
       </div>
 
-      <%= f.input :photo, as: :file, required: false, label: 'Picture for this quote' %>
+      <%= f.fields_for @picture do |pic| %>
+        <%= pic.input :photo, as: :file, required: false, label: 'Picture for this quote' %>
+      <% end %>
 
       <div class="form-parents-eyes-only hide-posts-custom-age">
         <%= f.input :parents_eyes_only, label: 'Parents eyes only', required: false %>
