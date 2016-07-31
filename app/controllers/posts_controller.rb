@@ -96,7 +96,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, :photo, pictures_attributes: [:picture])
+    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, pictures_attributes: [:picture])
   end
 
   def create_post_picture
