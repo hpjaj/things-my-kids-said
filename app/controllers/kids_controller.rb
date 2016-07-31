@@ -65,7 +65,7 @@ class KidsController < ApplicationController
   private
 
   def kid_params
-    params.require(:kid).permit(:first_name, :last_name, :birthdate, :gender, :photo, :created_by, pictures_attributes: [:picture])
+    params.require(:kid).permit(:first_name, :last_name, :birthdate, :gender, :created_by, pictures_attributes: [:picture])
   end
 
   def downcase_params
