@@ -5,9 +5,7 @@ class WelcomeController < ApplicationController
   end
 
   def home
-    if current_user.admin?
-      @posts = Post.all.paginate(:page => params[:page], :per_page => 60)
-    elsif current_user
+    if current_user
       @posts = Post.all_associated_kids_posts(current_user).paginate(:page => params[:page], :per_page => 20)
     else
       flash[:notice] = 'Please sign in to access this page'
