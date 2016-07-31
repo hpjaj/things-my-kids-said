@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730152420) do
+ActiveRecord::Schema.define(version: 20160731025633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,14 +52,10 @@ ActiveRecord::Schema.define(version: 20160730152420) do
   create_table "kids", force: :cascade do |t|
     t.date     "birthdate"
     t.string   "gender"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
     t.integer  "created_by"
     t.datetime "deleted_at"
   end
@@ -91,16 +87,12 @@ ActiveRecord::Schema.define(version: 20160730152420) do
 
   create_table "posts", force: :cascade do |t|
     t.text     "body"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "user_id"
     t.integer  "kid_id"
     t.date     "date_said"
-    t.boolean  "parents_eyes_only",  default: false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
+    t.boolean  "parents_eyes_only", default: false
     t.integer  "picture_id"
     t.datetime "deleted_at"
   end
@@ -125,10 +117,6 @@ ActiveRecord::Schema.define(version: 20160730152420) do
     t.string   "last_name"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
     t.string   "role",                   limit: 50
     t.datetime "deleted_at"
   end
