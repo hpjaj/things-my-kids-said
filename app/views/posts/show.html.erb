@@ -22,7 +22,7 @@
           <span> <%= link_to('Delete', post_path(@post), method: :delete, data: { confirm: 'Delete this quote?' }, class: 'comment text-muted post-show-buttons') %> </span>
         <% end %>
 
-        <span class="pull-right text-muted post-author">captured by <%= friendly_name @post %></span>
+        <span class="pull-right text-muted post-author">captured by <%= friendly_name @post.user, @post.kid %></span>
 
         <% if @post.parents_eyes_only? %>
           <p class='parents-eyes'>parents eyes only</p>

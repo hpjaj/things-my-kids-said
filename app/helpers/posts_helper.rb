@@ -57,10 +57,7 @@ module PostsHelper
     kid.birthdate.strftime("%b %e, %Y")
   end
 
-  def friendly_name(post)
-    author = post.user
-    kid    = post.kid
-
+  def friendly_name(author, kid)
     if family_name = FriendAndFamily.relationship_name_for(author, kid)
       family_name.titleize
     elsif author.parent_of?(kid) && author.parent_name.present?
