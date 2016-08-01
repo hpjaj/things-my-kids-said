@@ -51,7 +51,7 @@ class FriendAndFamiliesController < ApplicationController
   private
 
   def friend_and_family_params
-    params.require(:friend_and_family).permit(:kid_id, :follower_id, :can_create_posts)
+    params.require(:friend_and_family).permit(:kid_id, :follower_id, :can_create_posts, :relationship_name)
   end
 
 end

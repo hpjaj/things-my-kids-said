@@ -6,9 +6,10 @@
       <tr>
         <th>Friend/Family Member</th>
         <th>Kid</th>
+        <th>Relationship Name</th>
         <th>Can View Quotes</th>
         <th>Can Create Quotes</th>
-        <th>Edit Access</th>
+        <th>Edit</th>
         <th>Remove Access</th>
       </tr>
     </thead>
@@ -17,6 +18,7 @@
         <tr>
           <td><%= friends_name(fam) %></td>
           <td><%= kids_name(fam) %></td>
+          <td><%= fam.relationship_name.try(:titleize) %></td>
           <td>Yes</td>
           <td><%= yes_or_no fam.can_create_posts %></td>
           <td><%= link_to 'Edit', edit_friend_and_family_path(fam) %></td>

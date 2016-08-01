@@ -20,6 +20,40 @@
     </tbody>
   </table>
 </div>
+
 <div class='family-index-button'>
   <%= link_to "Add Parent", new_parent_path, class: 'btn btn-info solid-button devise-buttons' %>
 </div>
+
+<h5 class="page-title sub-page-titles">
+  What Your Kids Call You
+  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="<%= parent_name_explanation %>"></i>
+</h5>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="family-table">
+      <tr>
+        <th>Parent</th>
+        <th>What They Call You</th>
+        <th>Edit Name</th>
+      </tr>
+    </thead>
+    <tbody class="family-table">
+      <% @parents.each do |parent| %>
+        <tr>
+          <td><%= parent.full_name %></td>
+          <td><%= parents_name(parent, current_user) %></td>
+          <td><%= edit_parents_name(parent, current_user) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

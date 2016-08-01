@@ -6,7 +6,7 @@
       <%= link_to(kid.full_name, kid_posts_path(kid.id), class: 'text-muted') %>
     <% end %>
 
-    <% if FilteredKid.where(user: current_user, kid: kid).present? %>
+    <% if FilteredKid.exists?(kid, current_user) %>
       <%= link_to settings_path, class: 'tooltips text-muted', data: { toggle: 'tooltip', placement: 'top', original_title: 'Hidden' } do %>
         <i class="fa fa-eye-slash side-nav-kids" aria-hidden="true"></i>
       <% end %>

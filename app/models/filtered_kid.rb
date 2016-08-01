@@ -10,4 +10,8 @@ class FilteredKid < ActiveRecord::Base
       .where(user_id: user.id)
       .order('kids.last_name ASC')
   end
+
+  def self.exists?(kid, user)
+    self.where(user: user, kid: kid).present?
+  end
 end

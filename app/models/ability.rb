@@ -8,6 +8,8 @@ class Ability
     if user.try(:admin?)
       can :manage, :all
     elsif user
+      can :manage, User, id: user.id
+
       can :manage, Post, user_id: user.id
 
       can [:index, :read], Post do |post|

@@ -1,0 +1,26 @@
+<% if current_user.kids.present? %>
+  <h5 class="page-title form-title">
+    What Do Your Kids Call You
+    <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="<%= parent_name_explanation %>"></i>
+  </h5>
+
+  <div class="forms">
+    <%= simple_form_for @parent, url: update_parent_name_path do |f| %>
+
+      <%= f.input :parent_name, label: false, required: false, input_html: { class: 'form-control' }, placeholder: "e.g. mom, dad, mommy, etc.", hint: 'Note: If blank, we will use your first name' %>
+
+      <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
+      <%= f.submit 'Save', class: 'pull-right btn btn-info solid-button devise-buttons' %>
+    <% end %>
+  </div>
+
+
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
+<% else %>
+  <h5 class="page-title form-title">You must have a kid before setting your parent name</h5>
+  <%= link_to 'Back', :back, class: 'btn btn-secondary solid-button devise-buttons' %>
+<% end %>
