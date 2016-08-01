@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :friend_and_families, path: 'friends_and_family'
 
   resources :parents, only: [:index, :new, :create, :destroy]
+  get 'parent_name' => "parents#edit_parent_name"
+  patch 'update_parent_name' => "parents#update_parent_name"
 
   resources :filtered_kids, only: [:index, :new, :create, :destroy]
 

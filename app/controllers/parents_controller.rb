@@ -11,6 +11,8 @@ class ParentsController < ApplicationController
     end
 
     @parent_kid_pairs.sort_by! { |pair| pair[0].first_name }
+
+    @parents = current_user.fellow_parent_s << current_user
   end
 
   def new
@@ -45,6 +47,26 @@ class ParentsController < ApplicationController
       flash[:error] = "There was a problem deleting this person's parent access. Please try again."
       redirect_to parents_path
     end
+  end
+
+  def edit_parent_name
+    @parent = current_user
+
+    authorize! :update, @parent
+  end
+
+  def update_parent_name
+    @parent = current_user
+
+    authorize! :update, @parent
+
+    @parent.parent_name = params[:user][:parent_name]
+
+    unless @parent.save
+      flash[:error] = "There was a problem saving your parent name. Please try again."
+    end
+
+    redirect_to parents_path
   end
 
   private
