@@ -40,9 +40,10 @@ ActiveRecord::Schema.define(version: 20160731025633) do
   create_table "friend_and_families", force: :cascade do |t|
     t.integer  "kid_id"
     t.integer  "follower_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "can_create_posts", default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "can_create_posts",  default: false
+    t.string   "relationship_name"
   end
 
   add_index "friend_and_families", ["follower_id", "kid_id"], name: "index_friend_and_families_on_follower_id_and_kid_id", unique: true, using: :btree
