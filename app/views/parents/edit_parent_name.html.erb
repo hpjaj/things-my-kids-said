@@ -21,6 +21,6 @@
     })
   </script>
 <% else %>
-  <h5 class="page-title form-title">You must have a kid before setting your parent name</h5>
+  <% flash[:notice] = 'You must have a kid before setting your parent name' %>
   <%= link_to 'Back', :back, class: 'btn btn-secondary solid-button devise-buttons' %>
 <% end %>
