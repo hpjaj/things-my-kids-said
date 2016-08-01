@@ -16,4 +16,12 @@ class FriendAndFamily < ActiveRecord::Base
       .order('users.first_name')
   end
 
+  def self.relationship_name_for(follower, kid)
+    self
+      .where(kid_id: kid.id, follower_id: follower.id)
+      .where.not(relationship_name: nil)
+      .first
+      .try(:relationship_name)
+  end
+
 end

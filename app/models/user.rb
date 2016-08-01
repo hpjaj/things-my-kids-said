@@ -60,4 +60,8 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
 
+  def parent_of?(kid)
+    kids.include?(kid)
+  end
+
 end
