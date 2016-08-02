@@ -1,0 +1,9 @@
+<div class="card card-block">
+  <h4 class="settings-titles">Export Quotes</h4>
+
+  <p class='card-text'>If you have kids, you can export a copy of your kid's quotes onto your computer, as often as you'd like!</p>
+
+  <% if current_user.kids.present? %>
+    <%= link_to "Export Quotes", my_kids_quotes_path, id: 'export-posts-button', class: 'btn btn-info solid-button devise-buttons normal-button-margin', data: { confirm: 'Quotes can be exported to a computer. On a mobile device, they are only viewable.' } %>
+  <% end %>
+</div>

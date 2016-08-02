@@ -26,7 +26,11 @@ h5 .fa-question-circle {
   vertical-align: middle !important;
 }
 
-.kid-buttons, .normal-button-margin {
+#new-kid-button {
+  margin-left: 15px;
+}
+
+.normal-button-margin {
   margin-right: 15px;
 }
 
@@ -37,9 +41,5 @@ h5 .fa-question-circle {
 
   #kid_birthdate_1i, #kid_birthdate_2i, #post_date_said_1i, #post_date_said_2i {
     margin-bottom: 10px;
-  }
-
-  .kid-buttons {
-    margin-right: 70px;
   }
 }
