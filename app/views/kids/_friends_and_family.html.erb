@@ -1,0 +1,13 @@
+<div class="card card-block">
+
+  <div class="row question">
+    <h4 class="card-title post-show-title"><%= @kid.first_name.titleize %>'s friends & family</h4>
+
+    <% @friends_and_family.each do |family| %>
+      <div><%= family.full_name %></div>
+    <% end %>
+
+  </div>
+
+
+</div>
