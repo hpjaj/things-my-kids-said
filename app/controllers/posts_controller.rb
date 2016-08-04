@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 
     @posts = Post.user_can_see_for(@kid, current_user).order('date_said DESC').paginate(:page => params[:page], :per_page => 20)
 
-    @pictures = Picture.where(kid: @kid)
+    @pictures = Picture.where(kid: @kid).order(created_at: :desc)
     @friends_and_family = @kid.followers.order(:last_name)
   end
 
