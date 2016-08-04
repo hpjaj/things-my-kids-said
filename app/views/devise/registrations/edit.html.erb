@@ -1,10 +1,17 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit Personal Information</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
   <%= f.input :first_name, autofocus: true, required: false %>
   <%= f.input :last_name, required: false %>
+  <%= image_tag resource.photo.url(:thumb, false) if resource.photo? %>
+  <%= f.input :photo, as: :file, required: false, label: 'Add/Change Profile Photo' %>
+
+  <br />
+
+<h2>Change Email or Password</h2>
+
   <%= f.input :email, required: false %>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -18,12 +25,16 @@
 
   <%= f.input :password_confirmation, required: false, autocomplete: "off" %>
 
+  <br />
+
+<h2>Save Updates</h2>
+
   <div class="form-group">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
     <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
   </div>
 
-  <%= f.submit 'Update', class: 'btn btn-info btn-info-outline' %>
+  <%= f.submit 'Update', class: 'btn btn-info solid-button' %>
 <% end %>
 
 <h3 id='cancel-account'>Cancel my account</h3>
