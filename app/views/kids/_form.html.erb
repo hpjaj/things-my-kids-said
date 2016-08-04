@@ -6,7 +6,7 @@
     <%= f.input :last_name, required: false, input_html: { class: 'form-control' } %>
     <%= f.input :birthdate, as: :date, start_year: Date.today.year - 110, end_year: Date.today.year, required: false, input_html: { class: 'form-control' } %>
     <%= f.input :gender, collection: [['Boy', Kid::BOY], ['Girl', Kid::GIRL]], required: false, input_html: { class: 'form-control' } %>
-    <%= image_tag @kid.pictures.last.photo.url(:thumb, false) if @kid.pictures.last %>
+    <%= image_tag @kid.pictures.profile_pictures.last.photo.url(:thumb, false) if @kid.pictures.profile_pictures.last %>
 
     <%= f.fields_for @picture do |pic| %>
       <%= pic.input :photo, as: :file, required: false, label: 'Add/Change Photo' %>
