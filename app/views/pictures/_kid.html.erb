@@ -2,7 +2,7 @@
   <% @pictures.each do |picture| %>
     <%= image_tag picture.photo.url(:medium, false), class: 'picture-board picture-page' %>
 
-    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade bs-example-modal-sm-<%= picture.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
       <div class="modal-dialog modal-sm">
         <div class="modal-content kids-timeline-modal">
           <%= image_tag picture.photo.url(:medium, false) %>
@@ -15,8 +15,17 @@
 
 
 <script>
-  $('.picture-page').on('click', function(e) {
-    $('.bs-example-modal-sm').modal('show');
+  function getClassNames(image) {
+    var classes    = image.next().attr('class');
+    var classArray = classes.split(" ");
+    var withDots   = _.map(classArray, function(str){ return "." + str });
+
+    return withDots.join("");
+  }
+
+  $('.picture-page').on('click', function() {
+    var picture = getClassNames($(this));
+
+    $(picture).modal('show');
   });
 </script>
-
