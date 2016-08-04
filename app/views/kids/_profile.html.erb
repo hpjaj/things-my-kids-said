@@ -1,0 +1,25 @@
+<ul class="nav nav-tabs"  role="tablist">
+  <li role="presentation" class="active">
+    <a href="#quotes" aria-controls="quotes" role="tab" data-toggle="tab">Quotes</a>
+  </li>
+  <li role="presentation">
+    <a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a>
+  </li>
+  <li role="presentation">
+    <a href="#f_and_f" aria-controls="f_and_f" role="tab" data-toggle="tab">F & F</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="quotes">
+    <%= render 'layouts/quotes' %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="photos">
+    <%= render 'pictures/kid' %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="f_and_f">
+    <%= render 'kids/friends_and_family' %>
+  </div>
+</div>

@@ -16,6 +16,9 @@
   </div>
 
   <%= f.input :password_confirmation, required: false, autocomplete: "off" %>
+
+  <%= f.input :photo, as: :file, required: false, label: 'Profile Photo (optional)' %>
+
   <%= f.submit 'Sign up', class: 'btn btn-info btn-info-outline devise-buttons' %>
 <% end %>
 

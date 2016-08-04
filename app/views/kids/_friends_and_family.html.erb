@@ -1,0 +1,23 @@
+<div class="card card-block">
+
+  <div class="row question">
+    <h4 class="card-title post-show-title"><%= @kid.first_name.titleize %>'s friends & family</h4>
+
+    <% @friends_and_family.each do |family| %>
+      <div class='row comment-container'>
+        <div class="col-lg-12 col-xs-12">
+          <p class="card-title comment-headline">
+            <% if family.photo? %>
+              <span class='timeline-picture comment-thumbnail'><%= image_tag family.photo.url(:thumb, false), class: 'timeline-photo' %></span>
+            <% end %>
+            <span class="comment-author"><%= family.full_name %></span>
+          </p>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+
+</div>

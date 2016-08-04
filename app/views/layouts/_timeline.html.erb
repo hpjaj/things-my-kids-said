@@ -11,13 +11,11 @@
 <div class="col-lg-8 col-sm-9 timeline-container">
   <% if @kid %>
     <%= render partial: 'posts/timeline_headers/kids', locals: { kid: @kid } %>
+    <%= render 'kids/profile' %>
   <% else %>
     <%= render partial: 'posts/timeline_headers/main' %>
+    <%= render 'layouts/quotes' %>
   <% end %>
-
-  <%= render 'layouts/quotes' %>
-
-  <%= will_paginate @posts %>
 </div>
 
 <div class="col-lg-2 col-sm-1"></div>

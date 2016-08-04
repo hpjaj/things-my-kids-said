@@ -49,3 +49,9 @@
 .help-image-container {
   text-align: center;
 }
+
+.tab-pane .card:first-child {
+  border-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}

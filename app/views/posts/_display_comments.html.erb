@@ -13,7 +13,7 @@
   <% @comments.each do |comment| %>
     <div class='row comment-container'>
       <div class="col-lg-1 col-xs-12 timeline-picture">
-        <%#= image_tag @post.kid.picture.photo.url(:thumb, false), class: 'timeline-photo' if @post.kid.photo? %>
+        <%= image_tag comment.user.photo.url(:thumb, false), class: 'timeline-photo' if comment.user.photo? %>
       </div>
 
       <div class="col-lg-11 col-xs-12">
