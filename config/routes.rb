@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :kids do
     resources :posts, only: :index, path: 'quotes'
+    resources :pictures, only: :index
   end
 
   resources :posts, only: :show, path: 'quotes' do
@@ -41,4 +42,5 @@ Rails.application.routes.draw do
 
   get 'settings' => 'settings#index'
 
+  resources :pictures, only: [:destroy]
 end

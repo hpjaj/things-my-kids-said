@@ -1,16 +1,9 @@
 <div class="card card-block">
-  <% @pictures.each do |picture| %>
-    <%= image_tag picture.photo.url(:medium, false), class: 'picture-board picture-page' %>
-
-    <div class="modal fade bs-example-modal-sm-<%= picture.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content kids-timeline-modal">
-          <%= image_tag picture.photo.url(:medium, false) %>
-        </div>
-      </div>
-    </div>
-
+  <% if @pictures.present? && !edit_pictures && can_destroy_any?(@pictures) %>
+    <span class="pull-right"><%= link_to 'Edit', kid_pictures_path(@kid), class: 'pink-link' %></span>
   <% end %>
+
+  <%= render partial: 'pictures/photo_album', locals: { edit_pictures: edit_pictures } %>
 </div>
 
 

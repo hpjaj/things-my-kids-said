@@ -1,0 +1,28 @@
+<% if @pictures.present? %>
+  <% @pictures.each do |picture| %>
+    <% if edit_pictures && can?(:destroy, picture) %>
+      <div class='remove-picture-container'>
+        <span class="remove-picture-button-container">
+          <%= link_to(picture_path(picture), method: :delete, data: { confirm: 'Delete this picture?' }, class: 'remove-picture-link') do %>
+            <i class="fa fa-times" aria-hidden="true"></i>
+          <% end %>
+        </span>
+
+      <%= image_tag picture.photo.url(:medium, false), class: 'picture-board picture-page' %>
+      <%= render partial: 'pictures/modal', locals: { picture: picture } %>
+    </div>
+    <% else %>
+      <%= image_tag picture.photo.url(:medium, false), class: 'picture-board picture-page' %>
+      <%= render partial: 'pictures/modal', locals: { picture: picture } %>
+    <% end %>
+  <% end %>
+
+  <% if edit_pictures %>
+    <div>
+      <%= link_to 'Back To Profile', kid_posts_path(@kid), class: 'btn btn-info solid-button devise-buttons' %>
+    </div>
+  <% end %>
+
+<% else %>
+  <%= @kid.first_name.titleize %> does not have any photos yet
+<% end %>
