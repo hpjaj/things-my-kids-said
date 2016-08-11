@@ -1,28 +1,35 @@
-<% @posts.each do |post| %>
-  <% if can? :read, post %>
-    <div class="card card-block">
-      <div class='row'>
-        <div class="col-lg-1 col-xs-12 timeline-picture">
-          <% if post.picture %>
-            <%= link_to((image_tag post.picture.photo.url(:thumb, false), class: 'timeline-photo'), post) %>
-          <% end %>
-        </div>
-        <div class="col-lg-11 col-xs-12">
-          <p class="card-title"><%= link_to(headline(post), post, class: 'text-muted') %></p>
-          <%= link_to(post, class: 'post-body') do %>
-            <%= highlight_kids_quote post %>
-          <% end %>
+<% if @posts.present? %>
+  <% @posts.each do |post| %>
+    <% if can? :read, post %>
+      <div class="card card-block">
+        <div class='row'>
+          <div class="col-lg-1 col-xs-12 timeline-picture">
+            <% if post.picture %>
+              <%= link_to((image_tag post.picture.photo.url(:thumb, false), class: 'timeline-photo'), post) %>
+            <% end %>
+          </div>
+          <div class="col-lg-11 col-xs-12">
+            <p class="card-title"><%= link_to(headline(post), post, class: 'text-muted') %></p>
+            <%= link_to(post, class: 'post-body') do %>
+              <%= highlight_kids_quote post %>
+            <% end %>
 
-          <%= link_to comment_link_and_count(post), post, class: 'card-link comment text-muted' %>
-          <span class="pull-right text-muted post-author">captured by <%= friendly_name post.user, post.kid %></span>
+            <%= link_to comment_link_and_count(post), post, class: 'card-link comment text-muted' %>
+            <span class="pull-right text-muted post-author">captured by <%= friendly_name post.user, post.kid %></span>
 
-          <% if post.parents_eyes_only? %>
-            <p class='parents-eyes'>parents eyes only</p>
-          <% end %>
+            <% if post.parents_eyes_only? %>
+              <p class='parents-eyes'>parents eyes only</p>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= will_paginate @posts %>
+  <%= will_paginate @posts %>
+
+<% else %>
+  <div class="card card-block">
+    <%= @kid.first_name.titleize %> does not have any quotes yet
+  </div>
+<% end %>

@@ -7,3 +7,23 @@
   border-width: 5px;
   box-shadow: 2px 2px 2px #888888;
 }
+
+.remove-picture-button-container {
+  vertical-align: 40px;
+}
+
+.remove-picture-container {
+  display: inline-block;
+}
+
+.remove-picture-button-container .fa-times {
+  color: #555;
+}
+
+.remove-picture-button-container .fa-times:hover {
+  color: $pink;
+}
+
+.remove-picture-link:hover {
+  text-decoration: none;
+}

@@ -80,6 +80,23 @@ RSpec.describe KidsController, type: :controller do
         expect(Picture.first.profile_picture).to be true
       end
     end
+
+    context "with a picture and an empty last_name" do
+      let(:attrs) { params_from_kid_controller(user, dispatch_upload, nil) }
+
+      before do
+        sign_in user
+        post :create, kid: attrs
+      end
+
+      it "does not creates a new kid" do
+        expect(Kid.count).to eq 0
+      end
+
+      it "does not create a new Picture" do
+        expect(Picture.count).to eq 0
+      end
+    end
   end
 
   describe "PATCH :update" do
@@ -116,6 +133,16 @@ RSpec.describe KidsController, type: :controller do
 
       it "creates a new profile picture" do
         expect(son.pictures.first.profile_picture).to be true
+      end
+    end
+
+    context "with a new picture and an empty last_name" do
+      before do
+        patch :update, id: son.id.to_s, kid: { first_name: 'Jack', last_name: nil, birthdate: date + 1.month, gender: Kid::BOY, created_by: dad.id, picture: { photo: dispatch_upload } }
+      end
+
+      it "does not create a new Picture" do
+        expect(Picture.count).to eq 0
       end
     end
   end

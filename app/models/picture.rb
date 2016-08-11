@@ -27,4 +27,8 @@ class Picture < ActiveRecord::Base
       profile_picture: value
     )
   end
+
+  def self.for(kid)
+    self.where(kid: kid).order(created_at: :desc)
+  end
 end

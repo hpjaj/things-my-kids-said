@@ -12,10 +12,10 @@ def dispatch_upload
   ActionDispatch::Http::UploadedFile.new(tempfile: image_path, filename: 'person-placeholder.jpg', type: "image/jpg")
 end
 
-def params_from_kid_controller(user, dispatch_upload)
+def params_from_kid_controller(user, dispatch_upload, last_name='smith')
   {
     'first_name' => 'jack',
-    'last_name' => 'smith',
+    'last_name' => last_name,
     'birthdate(1i)' => '2014',
     'birthdate(2i)' => '7',
     'birthdate(3i)' => '30',

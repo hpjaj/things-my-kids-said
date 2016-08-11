@@ -134,6 +134,21 @@ RSpec.describe PostsController, type: :controller do
           expect(Post.first.picture.profile_picture).to be false
         end
       end
+
+      context "uploads a new picture with blank Post body" do
+        before do
+          post :create, post: { kids_age: age, body: nil, kid_id: kid.id.to_s, picture: { photo: dispatch_upload } }
+        end
+
+        it "does not create a new post" do
+          expect(Post.count).to eq 0
+        end
+
+        it "does not create a new picture" do
+          expect(Picture.count).to eq 1
+          expect(Kid.first.pictures.count).to eq 1
+        end
+      end
     end
   end
 
@@ -215,6 +230,22 @@ RSpec.describe PostsController, type: :controller do
 
       it "creates a picture with profile_picture == false" do
         expect(Post.first.picture.profile_picture).to be false
+      end
+    end
+
+    context "replaces picture on post with a new picture with blank Post body" do
+      before do
+        create_profile_picture_for(kid_2, user)
+        expect(kid_2.pictures.profile_pictures.count).to eq 1
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: nil, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+      end
+
+      it "does not change the post.kid_id to kid_2" do
+        expect(quote.kid_id).to eq kid.id
+      end
+
+      it "does not add a picture to the Post" do
+        expect(quote.picture_id).to be nil
       end
     end
   end

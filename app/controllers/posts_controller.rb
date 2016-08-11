@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 
     @posts = Post.user_can_see_for(@kid, current_user).order('date_said DESC').paginate(:page => params[:page], :per_page => 20)
 
-    @pictures = Picture.where(kid: @kid).order(created_at: :desc)
+    @pictures = Picture.for @kid
     @friends_and_family = @kid.followers.order(:last_name)
   end
 
@@ -21,14 +21,10 @@ class PostsController < ApplicationController
 
   def create
     authorize! :create, Post
+    @picture = Picture.new
+    @post    = current_user.posts.build(post_params)
 
-    @post           = current_user.posts.build(post_params)
-    @post.date_said = determine_date_said(params)
-    @picture        = Picture.new
-
-    set_picture_id
-
-    if @post.save
+    if post_creation_transaction
       redirect_to post_path(@post)
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
@@ -59,13 +55,10 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
+    authorize! :update, @post
     @picture = @post.picture || Picture.new
 
-    authorize! :update, @post
-
-    set_picture_id
-
-    if @post.update(post_params)
+    if post_update_transaction
       redirect_to post_path(@post)
     else
       flash[:error] = 'There was a problem saving your quote.  Please try again.'
@@ -144,6 +137,38 @@ class PostsController < ApplicationController
       picture.id
     else
       nil
+    end
+  end
+
+  def post_creation_transaction
+    ActiveRecord::Base.transaction do
+      begin
+        @post.date_said = determine_date_said(params)
+        @post.save!
+
+        set_picture_id
+
+        @post.save!
+      rescue Exception => e
+        @post.kid_id = nil
+        logger.error "User #{current_user.id} experienced #{e.message} when trying to create a new post"
+        false
+      end
+    end
+  end
+
+  def post_update_transaction
+    ActiveRecord::Base.transaction do
+      begin
+        @post.update!(post_params)
+
+        set_picture_id
+
+        @post.save!
+      rescue Exception => e
+        logger.error "User #{current_user.id} experienced #{e.message} when trying to update post #{@post}"
+        false
+      end
     end
   end
 

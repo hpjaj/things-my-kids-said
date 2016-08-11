@@ -37,6 +37,12 @@ class Ability
       end
 
       can :manage, FilteredKid, user_id: user.id
+
+      can :manage, Picture, user_id: user.id
+
+      can :destroy, Picture do |picture|
+        user.kids.pluck(:id).include?(picture.kid_id) || picture.user_id == user.id
+      end
     end
       # end
     #
