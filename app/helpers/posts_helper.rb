@@ -67,6 +67,13 @@ module PostsHelper
     end
   end
 
+  def save_button
+    button_tag "Save",
+      id: 'post-submit-button',
+      class: 'pull-right btn solid-button devise-buttons',
+      data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." }
+  end
+
   private
 
   def kids_gender(kid)

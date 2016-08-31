@@ -177,7 +177,7 @@
   border-color: $blue;
 }
 
-.solid-button {
+.solid-button, .solid-button:active, .solid-button:focus {
   color: white;
   background-color: $blue;
   background-image: none;
