@@ -274,5 +274,45 @@ RSpec.describe PostsController, type: :controller do
         expect(response.body).to have_content "can't be blank"
       end
     end
+
+    context "User has three posts, each one with a unique picture." do
+      let(:kid_2) { create :kid, users: [user] }
+
+      before do
+        # create kid's profile picture
+        create_profile_picture_for(kid_2, user)
+        expect(kid_2.pictures.profile_pictures.count).to eq 1
+
+        # create first post, which inherits the profile picture
+        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s }
+        expect(Post.first.picture_id).to eq Picture.first.id
+
+        # create second post with a new picture
+        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+        expect(kid_2.pictures.count).to eq 2
+        expect(Post.last.picture_id).to eq Picture.last.id
+
+        # create third post with another new picture
+        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+        expect(kid_2.pictures.count).to eq 3
+        expect(Post.last.picture_id).to eq Picture.last.id
+      end
+
+      let(:todays_post) { Post.last }
+      let(:todays_picture) { Picture.last }
+      let(:yesterdays_post) { Post.second }
+      let(:yesterdays_picture) { Picture.second }
+      let(:two_days_ago_post) { Post.first }
+      let(:two_days_ago_picture) { Picture.first }
+      let(:new_body) { "new and improved" }
+
+      it "after saving yesterday's post, it still has yeseterday's picture on it" do
+        patch :update, id: yesterdays_post.id.to_s, post: { kids_age: age, body: new_body, kid_id: kid_2.id.to_s }
+        yesterdays_post.reload
+
+        expect(yesterdays_post.body).to eq new_body
+        expect(yesterdays_post.picture_id).to eq yesterdays_picture.id
+      end
+    end
   end
 end

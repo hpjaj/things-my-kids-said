@@ -101,9 +101,23 @@ class PostsController < ApplicationController
     new_picture.try(:id)
   end
 
-  def set_picture_id
+  def picture_already_present?
+    @post.picture.present?
+  end
+
+  def new_valid_picture_id
     if params[:post][:picture].present? && (id = create_post_picture)
+      id
+    else
+      false
+    end
+  end
+
+  def set_picture_id
+    if id = new_valid_picture_id
       @post.picture_id = id
+    elsif picture_already_present?
+      return
     else
       quotes_photo     = determine_quotes_picture(params[:post][:kid_id])
       @post.picture_id = quotes_photo
