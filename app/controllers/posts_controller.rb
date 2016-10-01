@@ -81,7 +81,7 @@ class PostsController < ApplicationController
   end
 
   def select_picture
-    picture_id = determine_quotes_picture(params[:kid_id])
+    picture_id = PostPicture.new(params, @post, current_user).determine_quotes_picture(params[:kid_id])
     @photo     = picture_id ? Picture.find(picture_id).photo : nil
 
     respond_to do |format|
@@ -93,35 +93,6 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, pictures_attributes: [:picture])
-  end
-
-  def create_post_picture
-    new_picture = Picture.add_picture(current_user, params[:post], params[:post][:kid_id])
-
-    new_picture.try(:id)
-  end
-
-  def picture_already_present?
-    @post.picture.present?
-  end
-
-  def new_valid_picture_id
-    if params[:post][:picture].present? && (id = create_post_picture)
-      id
-    else
-      false
-    end
-  end
-
-  def set_picture_id
-    if id = new_valid_picture_id
-      @post.picture_id = id
-    elsif picture_already_present?
-      return
-    else
-      quotes_photo     = determine_quotes_picture(params[:post][:kid_id])
-      @post.picture_id = quotes_photo
-    end
   end
 
   def determine_date_said(params)
@@ -138,29 +109,13 @@ class PostsController < ApplicationController
     end
   end
 
-  def determine_quotes_picture(kid_id)
-    kid = Kid.find_by(id: kid_id)
-
-    return unless kid
-
-    last_post_with_photo = kid.posts.most_recent_with_picture
-
-    if last_post_with_photo
-      last_post_with_photo.picture_id
-    elsif picture = kid.pictures.profile_pictures.last
-      picture.id
-    else
-      nil
-    end
-  end
-
   def post_creation_transaction
     ActiveRecord::Base.transaction do
       begin
         @post.date_said = determine_date_said(params)
         @post.save!
 
-        set_picture_id
+        PostPicture.new(params, @post, current_user).set_picture_id
 
         @post.save!
       rescue Exception => e
@@ -176,7 +131,7 @@ class PostsController < ApplicationController
       begin
         @post.update!(post_params)
 
-        set_picture_id
+        PostPicture.new(params, @post, current_user).set_picture_id
 
         @post.save!
       rescue Exception => e

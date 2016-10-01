@@ -6,7 +6,7 @@ describe Age do
   let(:born_three_years_ago) { Date.new(2013, 5, 14) }
   let(:born_ten_years_ago)   { Date.new(2006, 5, 14) }
 
-  describe "##calculate" do
+  describe ".calculate" do
     it "returns the age in months when kid is less than 2 years old" do
       results = Age.new(born_one_year_ago, date_said).calculate
 
