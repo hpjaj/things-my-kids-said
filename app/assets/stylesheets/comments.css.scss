@@ -4,9 +4,6 @@
   font-weight: 400;
 }
 
-.comment-count-container {
-}
-
 .comment-header {
   padding: 0 15px
 }
@@ -16,7 +13,7 @@
   padding: 10px;
   border-radius: 4px;
   margin: 15px 0;
-  color: rgba(0,39,59,.35);
+  color: $black;
 }
 
 .comment-created-at {
@@ -33,11 +30,24 @@
   padding: 5px 0;
 }
 
-.comment-delete-button {
+.comment-edit-buttons {
   font-weight: 300;
   color: rgba(0, 39, 59, 0.5);
 }
 
 .comment-thumbnail {
   padding-right: 10px;
+}
+
+@media only screen and (max-width: 544px) {
+  .comment-edit-buttons {
+    padding-left: 20px;
+  }
+}
+
+a.comment-edit-buttons {
+  &:hover, &:focus {
+    text-decoration: none;
+    outline: 0;
+  }
 }

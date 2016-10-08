@@ -13,8 +13,22 @@ class CommentsController < ApplicationController
       flash[:error] = 'There was a problem creating your comment.  Please try again.'
     end
 
-    # render nothing: true
     redirect_to post_path(post.id)
+  end
+
+  def edit
+    @comment = Comment.find(params[:id])
+    @post    = Post.find(params[:post_id])
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+
+    unless @comment.update(comment_params)
+      flash[:error] = 'There was a problem updating your comment.  Please try again.'
+    end
+
+    redirect_to post_path(params[:post_id])
   end
 
   def destroy

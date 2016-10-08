@@ -5,7 +5,14 @@
         <p class='comment-count-area'><%= pluralize(@comments.count, 'comment') %></p>
       </div>
       <div>
-        <%= render 'comments/form' %>
+        <%= render partial: 'comments/form', locals: {
+            url: post_comments_path(@post),
+            http_verb: :post,
+            button_name: 'Post',
+            button_class: 'btn-info btn-info-outline'
+          }
+        %>
+
       </div>
     </div>
   </div>
@@ -21,10 +28,17 @@
           <span class="comment-author"><%= friendly_name comment.user, @post.kid %></span>
           <span class="comment-created-at"><%= time_ago_in_words comment.created_at %> ago</span>
         <% if (can? :manage, comment) || (can? :destroy, comment) %>
-          <span>
-            <%= link_to(post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete this comment?' }, class: 'comment comment-delete-button text-muted post-show-buttons pull-right') do %>
-              <i class="fa fa-times" aria-hidden="true"></i>
-            <% end %>
+          <span class="pull-right">
+            <span>
+              <%= link_to edit_post_comment_path(@post, comment), class: 'comment-edit-buttons text-muted post-show-buttons' do %>
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              <% end %>
+            </span>
+            <span>
+              <%= link_to(post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete this comment?' }, class: 'comment comment-edit-buttons text-muted post-show-buttons') do %>
+                <i class="fa fa-times" aria-hidden="true"></i>
+              <% end %>
+            </span>
           </span>
         <% end %>
         </p>
