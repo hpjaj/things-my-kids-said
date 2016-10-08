@@ -27,20 +27,22 @@
         <p class="card-title comment-headline">
           <span class="comment-author"><%= friendly_name comment.user, @post.kid %></span>
           <span class="comment-created-at"><%= time_ago_in_words comment.created_at %> ago</span>
-        <% if (can? :manage, comment) || (can? :destroy, comment) %>
           <span class="pull-right">
-            <span>
-              <%= link_to edit_post_comment_path(@post, comment), class: 'comment-edit-buttons text-muted post-show-buttons' do %>
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-              <% end %>
-            </span>
-            <span>
-              <%= link_to(post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete this comment?' }, class: 'comment comment-edit-buttons text-muted post-show-buttons') do %>
-                <i class="fa fa-times" aria-hidden="true"></i>
-              <% end %>
-            </span>
+            <% if (can? :manage, comment) %>
+              <span>
+                <%= link_to edit_post_comment_path(@post, comment), class: 'comment-edit-buttons text-muted post-show-buttons' do %>
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                <% end %>
+              </span>
+            <% end %>
+            <% if (can? :manage, comment) || (can? :destroy, comment) %>
+              <span>
+                <%= link_to(post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete this comment?' }, class: 'comment comment-edit-buttons text-muted post-show-buttons') do %>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                <% end %>
+              </span>
+            <% end %>
           </span>
-        <% end %>
         </p>
         <p><%= comment.body %></p>
       </div>
