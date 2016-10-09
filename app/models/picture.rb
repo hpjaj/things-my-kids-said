@@ -31,4 +31,8 @@ class Picture < ActiveRecord::Base
   def self.for(kid)
     self.where(kid: kid).order(created_at: :desc)
   end
+
+  def self.last_updated
+    self.order(:updated_at).try(:last) || nil
+  end
 end

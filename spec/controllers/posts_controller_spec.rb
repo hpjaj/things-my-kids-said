@@ -104,7 +104,7 @@ RSpec.describe PostsController, type: :controller do
         end
 
         it "links the kid's profile picture to the new post" do
-          kid_picture_id = kid.pictures.profile_pictures.last.id
+          kid_picture_id = kid.pictures.profile_pictures.last_updated.id
 
           expect(Post.first.picture_id).to eq kid_picture_id
         end

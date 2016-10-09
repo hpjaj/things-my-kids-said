@@ -26,7 +26,7 @@ class PostPicture
 
     if last_post_with_photo
       last_post_with_photo.picture_id
-    elsif picture = kid.pictures.profile_pictures.last
+    elsif picture = kid.pictures.profile_pictures.last_updated
       picture.id
     else
       nil
