@@ -38,6 +38,7 @@ class PostsController < ApplicationController
     authorize! :read, @post
 
     @comments = @post.comments.order('created_at DESC')
+    @kid = Kid.find(@post.kid_id)
   end
 
   def display_comments

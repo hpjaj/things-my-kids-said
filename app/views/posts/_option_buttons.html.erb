@@ -1,0 +1,25 @@
+<% if can_view_options_button? @post, @kid, current_user %>
+  <span class="comment text-muted post-show-buttons">
+    <a class="accordian-toggle text-muted" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Options <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+  </span>
+
+  <div id="collapseOne" class="panel-collapse collapse">
+    <div class="option-buttons-container">
+      <% if can? :manage, @post %>
+        <%= edit_post_button @post %>
+        <%= delete_post_button @post %>
+      <% end %>
+
+      <% if can_update_profile_pic? @post, @kid, current_user %>
+        <%= make_profile_pic_button @post, @kid %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+
+<script>
+  $('.accordian-toggle').click(function() {
+    $('.fa-angle-right').toggleClass('fa-rotate-90');
+  });
+</script>

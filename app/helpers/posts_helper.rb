@@ -88,6 +88,37 @@ module PostsHelper
       )
     )
   end
+
+  def delete_post_button(post)
+    content_tag(:span,
+      link_to(
+        'Delete',
+        post_path(post),
+        method: :delete,
+        data: { confirm: 'Delete this quote?' },
+        class: 'comment text-muted post-show-buttons'
+      )
+    )
+  end
+
+  def edit_post_button(post)
+    content_tag(:span,
+      link_to(
+        'Edit',
+        edit_post_path(post),
+        class: 'comment text-muted post-show-buttons'
+      )
+    )
+  end
+
+  def can_update_profile_pic?(post, kid, user)
+    post.picture_id && user.parent_of?(kid)
+  end
+
+  def can_view_options_button?(post, kid, user)
+    can?(:manage, post) || can_update_profile_pic?(post, kid, user)
+  end
+
   private
 
   def kids_gender(kid)
