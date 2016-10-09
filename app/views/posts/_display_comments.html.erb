@@ -30,14 +30,14 @@
           <span class="pull-right">
             <% if (can? :manage, comment) %>
               <span>
-                <%= link_to edit_post_comment_path(@post, comment), class: 'comment-edit-buttons text-muted post-show-buttons' do %>
+                <%= link_to edit_post_comment_path(@post, comment), class: 'comment-edit-buttons text-muted' do %>
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 <% end %>
               </span>
             <% end %>
             <% if (can? :manage, comment) || (can? :destroy, comment) %>
               <span>
-                <%= link_to(post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete this comment?' }, class: 'comment comment-edit-buttons text-muted post-show-buttons') do %>
+                <%= link_to(post_comment_path(@post, comment), method: :delete, data: { confirm: 'Delete this comment?' }, class: 'comment comment-edit-buttons text-muted') do %>
                   <i class="fa fa-times" aria-hidden="true"></i>
                 <% end %>
               </span>

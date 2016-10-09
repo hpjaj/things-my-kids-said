@@ -39,9 +39,13 @@
   padding-right: 10px;
 }
 
-@media only screen and (max-width: 544px) {
+.comment-edit-buttons {
+  padding-left: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
   .comment-edit-buttons {
-    padding-left: 20px;
+    padding-left: 25px;
   }
 }
 
