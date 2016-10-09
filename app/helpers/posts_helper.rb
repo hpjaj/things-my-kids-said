@@ -74,6 +74,20 @@ module PostsHelper
       data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." }
   end
 
+  def make_profile_pic_button(post, kid)
+    content_tag(:span,
+      link_to(
+        'Make profile pic',
+        picture_path(
+          post.picture_id,
+          picture: { profile_picture: true }
+        ),
+        method: :patch,
+        data: { confirm: "Make this #{kid.first_name.titleize}'s profile picture?" },
+        class: 'comment text-muted post-show-buttons'
+      )
+    )
+  end
   private
 
   def kids_gender(kid)

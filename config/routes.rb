@@ -42,5 +42,5 @@ Rails.application.routes.draw do
 
   get 'settings' => 'settings#index'
 
-  resources :pictures, only: [:destroy]
+  resources :pictures, only: [:destroy, :update]
 end

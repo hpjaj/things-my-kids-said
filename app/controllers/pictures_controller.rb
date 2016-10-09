@@ -23,7 +23,24 @@ class PicturesController < ApplicationController
     end
   end
 
+  def update
+    @picture = Picture.find(params[:id])
+
+    if @picture.update picture_params
+      # ensures @picture.updated_at updates so that Picture.last_updated sorts as desired
+      @picture.touch
+    else
+      flash[:error] = 'There was a problem setting the profile picture.  Please try again.'
+    end
+
+    redirect_to kid_posts_path @picture.kid_id
+  end
+
   private
+
+  def picture_params
+    params.require(:picture).permit(:profile_picture)
+  end
 
   def picture_destroying_transaction
     ActiveRecord::Base.transaction do
