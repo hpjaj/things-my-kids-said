@@ -3,7 +3,7 @@
     <% if edit_pictures && can?(:destroy, picture) %>
       <div class='remove-picture-container'>
         <span class="remove-picture-button-container">
-          <%= link_to(picture_path(picture), method: :delete, data: { confirm: 'Delete this picture?' }, class: 'remove-picture-link') do %>
+          <%= link_to(picture_path(picture), method: :delete, data: { confirm: delete_picture_confirmation(picture) }, class: 'remove-picture-link') do %>
             <i class="fa fa-times" aria-hidden="true"></i>
           <% end %>
         </span>

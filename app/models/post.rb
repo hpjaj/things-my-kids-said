@@ -84,6 +84,10 @@ class Post < ActiveRecord::Base
     .first
   end
 
+  def self.using_picture(picture_id)
+    self.where(picture_id: picture_id).count
+  end
+
   def to_param
     "#{id}-#{Kid.find(kid_id).first_name.downcase}"
   end
