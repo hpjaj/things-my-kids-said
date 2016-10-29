@@ -58,12 +58,6 @@
                 <%= content_tag :li, link_to("Add / Manage Parents", parents_path), class: "#{css_class_active_for(parents_path)}" %>
               </ul>
             </li>
-
-            <li class="<%= css_class_active_for(search_path) %>">
-              <%= link_to(search_path, class: 'top-navbar-links') do %>
-                <i class="fa fa-search" aria-hidden="true"></i>
-              <% end %>
-            </li>
           <% end %>
 
           <% if current_user.admin? %>
@@ -80,6 +74,14 @@
               <%= content_tag :li, link_to("Sign out", destroy_user_session_path), method: :delete, class: "#{css_class_active_for(destroy_user_session_path)}" %>
             </ul>
           </li>
+
+          <% if kids %>
+            <li class="<%= css_class_active_for(search_path) %>">
+              <%= link_to(search_path, class: 'top-navbar-links') do %>
+                <i class="fa fa-search" aria-hidden="true"></i>
+              <% end %>
+            </li>
+          <% end %>
 
         <% else %>
           <%= content_tag :li, link_to('Log In', new_user_session_path, class: 'top-navbar-links'), class: "#{css_class_active_for(new_user_session_path)}" %>
