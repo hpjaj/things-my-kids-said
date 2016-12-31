@@ -15,14 +15,7 @@
     <div class="card-block" id="accordion">
       <%= highlight_kids_quote @post %>
 
-      <span> <%= link_to 'Back', :back, class: 'comment text-muted post-show-buttons' %> </span>
-      <span>
-        <%= mail_to nil, "Share",
-          class: 'comment text-muted post-show-buttons',
-          subject: "Funny thing #{@kid.first_name.titleize} said...",
-          body: request.original_url
-        %>
-      </span>
+      <span><%= share_post_button @kid %></span>
 
       <span class="pull-right text-muted post-author">captured by <%= friendly_name @post.user, @post.kid %></span>
 

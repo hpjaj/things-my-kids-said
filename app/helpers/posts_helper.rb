@@ -111,6 +111,16 @@ module PostsHelper
     )
   end
 
+  def share_post_button(kid)
+    content_tag(:span,
+      mail_to(nil, "Share",
+        class: 'comment text-muted post-show-buttons',
+        subject: "Funny thing #{kid.first_name.titleize} said...",
+        body: request.original_url
+      )
+    )
+  end
+
   def can_update_profile_pic?(post, kid, user)
     post.picture_id && user.parent_of?(kid)
   end
