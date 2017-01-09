@@ -15,6 +15,7 @@ describe 'Creating a new post' do
       click_link '+ Add Quote'
       find('#post_kids_age').find(:xpath, 'option[2]').select_option
       fill_in 'Quote', with: 'you go baffroom?'
+      find('#post_visible_to').find(:xpath, 'option[1]').select_option
 
       expect{ click_button 'Save' }.to change{ Post.count }.by(1)
     end
@@ -29,6 +30,7 @@ describe 'Creating a new post' do
       it "sets the kid as the default for the post" do
         find('#post_kids_age').find(:xpath, 'option[2]').select_option
         fill_in 'Quote', with: 'you go baffroom?'
+        find('#post_visible_to').find(:xpath, 'option[1]').select_option
         click_button 'Save'
 
         expect(Post.first.kid).to eq kid
@@ -49,6 +51,7 @@ describe 'Creating a new post' do
         page.select(kid.first_name, :from => "post_kid_id")
         find('#post_kids_age').find(:xpath, 'option[2]').select_option
         fill_in 'Quote', with: 'you go baffroom?'
+        find('#post_visible_to').find(:xpath, 'option[1]').select_option
         click_button 'Save'
 
         expect(Post.first.kid).to eq kid

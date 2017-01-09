@@ -1,8 +1,8 @@
 require 'faker'
 
-Post.destroy_all
 Kid.destroy_all
 User.destroy_all
+Post.destroy_all
 
 
 harry = User.create(
@@ -165,7 +165,8 @@ Post.create(
   user_id: paula.id,
   kid_id: janie.id,
   date_said: Date.current,
-  created_at: Date.current
+  created_at: Date.current,
+  visible_to: Visibility::FRIENDS
 )
 
 Post.create(
@@ -173,7 +174,8 @@ Post.create(
   user_id: paula.id,
   kid_id: jackie.id,
   date_said: Date.current,
-  created_at: Date.current
+  created_at: Date.current,
+  visible_to: Visibility::FRIENDS
 )
 
 Post.create(
@@ -181,7 +183,8 @@ Post.create(
   user_id: harry.id,
   kid_id: jackie.id,
   date_said: Date.current - 3.weeks,
-  created_at: Date.current - 3.weeks
+  created_at: Date.current - 3.weeks,
+  visible_to: Visibility::FRIENDS
 )
 
 Post.create(
@@ -189,7 +192,8 @@ Post.create(
   user_id: paula.id,
   kid_id: janie.id,
   date_said: Date.current - 1.month,
-  created_at: Date.current - 1.month
+  created_at: Date.current - 1.month,
+  visible_to: Visibility::FRIENDS
 )
 
 Post.create(
@@ -197,7 +201,8 @@ Post.create(
   user_id: paula.id,
   kid_id: janie.id,
   date_said: Date.current - 2.months,
-  created_at: Date.current - 2.months
+  created_at: Date.current - 2.months,
+  visible_to: Visibility::FRIENDS
 )
 
 #######################################
@@ -207,7 +212,8 @@ Post.create(
   user_id: susan.id,
   kid_id: tyler.id,
   date_said: Date.current - 18.days,
-  created_at: Date.current - 18.days
+  created_at: Date.current - 18.days,
+  visible_to: Visibility::FRIENDS
 )
 
 Post.create(
@@ -215,7 +221,8 @@ Post.create(
   user_id: john.id,
   kid_id: tyler.id,
   date_said: Date.current - 2.days,
-  created_at: Date.current - 2.days
+  created_at: Date.current - 2.days,
+  visible_to: Visibility::FRIENDS
 )
 
 Post.create(
@@ -223,7 +230,8 @@ Post.create(
   user_id: paula.id,
   kid_id: tyler.id,
   date_said: Date.current - 2.months,
-  created_at: Date.current - 2.months
+  created_at: Date.current - 2.months,
+  visible_to: Visibility::FRIENDS
 )
 
 

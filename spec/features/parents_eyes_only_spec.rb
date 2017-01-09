@@ -13,13 +13,13 @@ describe 'Making a quote parents eyes only' do
     context "creating a quote marked 'parents eyes only'" do
       before { sign_into_app parent }
 
-      it "with one kid, a parent should see the 'parents eyes only' checkbox" do
+      xit "with one kid, a parent should see the 'parents eyes only' checkbox" do
         click_link '+ Add Quote'
 
         expect(page).to have_content 'Parents eyes only'
       end
 
-      it "parent can set 'parents eyes only'" do
+      xit "parent can set 'parents eyes only'" do
         click_link '+ Add Quote'
         find('#post_kids_age').find(:xpath, 'option[2]').select_option
         fill_in 'Quote', with: 'you go baffroom?'
@@ -29,7 +29,7 @@ describe 'Making a quote parents eyes only' do
         expect(Post.first.parents_eyes_only).to be true
       end
 
-      it "parent should see 'parents eyes only' quotes" do
+      xit "parent should see 'parents eyes only' quotes" do
         create :post, user_id: parent.id, kid_id: kid.id, parents_eyes_only: true, body: 'Hi mom'
         create :post, user_id: parent.id, kid_id: kid.id, parents_eyes_only: false, body: 'I did not'
 
@@ -56,7 +56,7 @@ describe 'Making a quote parents eyes only' do
         sign_into_app family
       end
 
-      it "friend/family member should not see 'parents eyes only' quotes" do
+      xit "friend/family member should not see 'parents eyes only' quotes" do
         visit home_path
 
         expect(page).to have_content 'I did not'

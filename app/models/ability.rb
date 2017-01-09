@@ -2,12 +2,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-      # user ||= User.new # guest user (not logged in)
-    if user.try(:admin?)
+    # Define abilities for the passed in user here
+    user ||= User.new # guest user (not logged in)
+
+    if user.admin?
       can :manage, :all
-    elsif user
+    elsif user.persisted?
       can :manage, User, id: user.id
 
       can :manage, Post, user_id: user.id
@@ -42,6 +42,10 @@ class Ability
 
       can :destroy, Picture do |picture|
         user.kids.pluck(:id).include?(picture.kid_id) || picture.user_id == user.id
+      end
+    else
+      can :read, Post do |post|
+        post.visible_to == Visibility::PUBLIC
       end
     end
       # end

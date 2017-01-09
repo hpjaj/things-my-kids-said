@@ -19,15 +19,15 @@
 
       <span class="pull-right text-muted post-author">captured by <%= friendly_name @post.user, @post.kid %></span>
 
-      <%= render 'option_buttons' %>
+      <%= render 'option_buttons' if current_user %>
 
-      <% if @post.parents_eyes_only? %>
-        <p class='parents-eyes'>parents eyes only</p>
+      <% unless @post.visibile_to_friends_and_family? %>
+        <p class='parents-eyes'><%= visibility_level_for @post %></p>
       <% end %>
     </div>
   </div>
 
-  <%= render 'posts/display_comments' %>
+  <%= render 'posts/display_comments' if current_user %>
 
 </div>
 

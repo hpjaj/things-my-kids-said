@@ -16,6 +16,7 @@ class Post < ActiveRecord::Base
   validates :kid_id, presence: true
   validates :user_id, presence: true
   validates :date_said, presence: true
+  validates :visible_to, presence: true
 
   pg_search_scope :search_by_body,
                   against: :body,
@@ -43,7 +44,13 @@ class Post < ActiveRecord::Base
   def self.parents_can_see(user)
     kid_ids = user.kids.pluck(:id)
 
-    self.where('kid_id in (?)', kid_ids)
+    self
+      .where('(kid_id in (?) AND visible_to in (?)) OR (visible_to = ? AND user_id = ?)',
+        kid_ids,
+        Visibility.all_levels_without_me,
+        Visibility::ME_ONLY,
+        user.id
+      )
   end
 
   def self.friends_family_can_see(user)
@@ -51,7 +58,11 @@ class Post < ActiveRecord::Base
 
     self
       .where('kid_id in (?)', kid_ids)
-      .where(parents_eyes_only: false)
+      .where('visible_to in (?) OR (visible_to = ? AND user_id = ?)',
+        Visibility.friends_and_public,
+        Visibility::ME_ONLY,
+        user.id
+      )
   end
 
   def self.filter_kids_settings(user)
@@ -122,6 +133,10 @@ class Post < ActiveRecord::Base
 
   def for_parents_only
     parents_eyes_only ? 'yes' : 'no'
+  end
+
+  def visibile_to_friends_and_family?
+    visible_to == Visibility::FRIENDS
   end
 
   def self.to_csv

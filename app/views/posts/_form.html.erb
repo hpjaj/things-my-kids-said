@@ -15,7 +15,7 @@
       <% if new_post %>
         <div>
           <div>
-            <%= f.input :kids_age, label: 'When did they say this?', collection: timing_choices, input_html: { class: 'form-control' } %>
+            <%= f.input :kids_age, label: 'When did they say this?', collection: timing_choices, include_blank: false, input_html: { class: 'form-control' } %>
           </div>
           <div class="custom-age hide-posts-custom-age">
             <h3 class="custom-fields">How old were they?</h3>
@@ -51,6 +51,8 @@
         <%= f.input :parents_eyes_only, label: 'Parents eyes only', required: false %>
       </div>
 
+      <%= f.input :visible_to, label: 'Who can see this quote', collection: parent_visibility_choices, include_blank: false, required: false %>
+
       <%= link_to 'Cancel', :back, class: 'btn btn-secondary btn-secondary-outline devise-buttons' %>
       <%= save_button %>
     <% end %>
@@ -63,11 +65,15 @@
 <script>
   var age             = $('#post_kids_age');
   var kid             = $('#post_kid_id');
-  var submitButton    = $('#post-submit-button');
-  var parentsEyesOnly = $("#post_parents_eyes_only");
   var parentsKidsIds  = "<%= current_user.kids.pluck(:id).join(' ') %>".split(' ');
   var kidCount        = "<%= current_user.kids.count %>";
   var hiddenKidVal    = $("input[name='post[kid_id]']").val();
+
+  var visibilitySelect = $("#post_visible_to");
+  var publicOption     = 'option[value="<%= Visibility::PUBLIC %>"]';
+  var parentsOption    = 'option[value="<%= Visibility::PARENTS_ONLY %>"]';
+  var public           = visibilitySelect.find(publicOption);
+  var parents          = visibilitySelect.find(parentsOption);
 
   age.on( "change", function() {
     if (age.val() === 'custom_age') {
@@ -79,9 +85,11 @@
 
   kid.on( "change", function() {
     if ( _.contains(parentsKidsIds, kid.val()) ) {
-      $('div.form-parents-eyes-only').show();
-    } else  {
-      $('div.form-parents-eyes-only').hide();
+      public.attr("disabled", false);
+      parents.attr("disabled", false);
+    } else {
+      public.attr("disabled", true).prop("selected", false);
+      parents.attr("disabled", true).prop("selected", false);
     }
 
     $.ajax({
@@ -92,29 +100,11 @@
 
   });
 
-  if ( kid.val() !== '' && _.contains(parentsKidsIds, kid.val()) ) {
-    $('div.form-parents-eyes-only').show();
-  }
-
   if ( kidCount === '1' ) {
-    $('div.form-parents-eyes-only').show();
-
     $.ajax({
       method: "POST",
       url: "/select_picture",
       data: { kid_id: hiddenKidVal }
     });
   }
-
-  submitButton.on('click', function() {
-    if ( (_.contains(parentsKidsIds, kid.val()) === false) && (parentsKidsIds.length > 1) ) {
-      parentsEyesOnly.attr('checked', false);
-    }
-  });
-
-  submitButton.on('click', function() {
-    if ( (_.contains(parentsKidsIds, hiddenKidVal) === false ) && (parentsKidsIds.length === 1) ) {
-      parentsEyesOnly.attr('checked', false);
-    }
-  });
 </script>

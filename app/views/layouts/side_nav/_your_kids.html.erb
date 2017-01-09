@@ -1,21 +1,28 @@
-<% if kids = your_kids %>
-  <h5 class="card-title side-nav-sub-titles"><%= link_to 'Yours', kids_path, class: 'text-muted' %></h5>
+<% if current_user %>
 
-  <ul class="side-nav-kids">
-    <%= render partial: 'layouts/side_nav/kid_link', locals: { kids: kids, my_kids: true } %>
-  </ul>
-<% end %>
+  <% if kids = your_kids %>
+    <h5 class="card-title side-nav-sub-titles"><%= link_to 'Yours', kids_path, class: 'text-muted' %></h5>
 
-<% if kids = your_friends_and_family %>
-  <% if your_kids %>
-    <h5 class="card-title side-nav-sub-titles"><%= link_to 'Friends & Family', friend_and_families_path, class: 'text-muted' %></h5>
-  <% else %>
-    <h5 class="card-title side-nav-sub-titles text-muted">Friends & Family</h5>
+    <ul class="side-nav-kids">
+      <%= render partial: 'layouts/side_nav/kid_link', locals: { kids: kids, my_kids: true } %>
+    </ul>
   <% end %>
 
-  <ul class="side-nav-kids">
-    <%= render partial: 'layouts/side_nav/kid_link', locals: { kids: kids, my_kids: false } %>
-  </ul>
+  <% if kids = your_friends_and_family %>
+    <% if your_kids %>
+      <h5 class="card-title side-nav-sub-titles"><%= link_to 'Friends & Family', friend_and_families_path, class: 'text-muted' %></h5>
+    <% else %>
+      <%= friends_and_family_header %>
+    <% end %>
+
+    <ul class="side-nav-kids">
+      <%= render partial: 'layouts/side_nav/kid_link', locals: { kids: kids, my_kids: false } %>
+    </ul>
+  <% end %>
+
+<% else %>
+  <%= friends_and_family_header %>
+  <%= content_tag(:span, @kid.full_name, class: 'side-nav-kids') %>
 <% end %>
 
 

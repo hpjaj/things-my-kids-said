@@ -1,14 +1,15 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource
-
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
 
   def index
     @kid = Kid.find(params[:kid_id])
 
     authorize! :read, @kid
 
-    @posts = Post.user_can_see_for(@kid, current_user).order('date_said DESC').paginate(:page => params[:page], :per_page => 20)
+    @posts = Post
+      .user_can_see_for(@kid, current_user)
+      .order('date_said DESC')
+      .paginate(:page => params[:page], :per_page => 20)
 
     @pictures = Picture.for @kid
     @friends_and_family = @kid.followers.order(:last_name)
@@ -37,8 +38,12 @@ class PostsController < ApplicationController
 
     authorize! :read, @post
 
-    @comments = @post.comments.order('created_at DESC')
     @kid = Kid.find(@post.kid_id)
+
+    if current_user
+      authenticate_user!
+      @comments = @post.comments.order('created_at DESC')
+    end
   end
 
   def display_comments
@@ -93,7 +98,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, pictures_attributes: [:picture])
+    params.require(:post).permit(:body, :user_id, :kid_id, :kids_age, :years_old, :months_old, :date_said, :parents_eyes_only, :visible_to, pictures_attributes: [:picture])
   end
 
   def determine_date_said(params)

@@ -17,8 +17,8 @@
             <%= link_to comment_link_and_count(post), post, class: 'card-link comment text-muted' %>
             <span class="pull-right text-muted post-author">captured by <%= friendly_name post.user, post.kid %></span>
 
-            <% if post.parents_eyes_only? %>
-              <p class='parents-eyes'>parents eyes only</p>
+            <% unless post.visibile_to_friends_and_family? %>
+              <p class='parents-eyes'><%= visibility_level_for post %></p>
             <% end %>
           </div>
         </div>

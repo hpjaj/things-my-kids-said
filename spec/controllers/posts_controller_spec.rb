@@ -8,13 +8,14 @@ RSpec.describe PostsController, type: :controller do
   let!(:kid) { create :kid, users: [user] }
   let(:body) { "blah blah teleblah" }
   let(:age)  { Date.current }
+  let(:friends) { Visibility::FRIENDS }
 
   before { sign_in user }
 
   describe "POST :create" do
     context "user has one kid" do
       before do
-        post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s }
+        post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, visible_to: friends }
       end
 
       it "creates associations between the user and the user's post" do
@@ -37,7 +38,7 @@ RSpec.describe PostsController, type: :controller do
       let!(:kid_2) { create :kid, users: [user] }
 
       before do
-        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id }
+        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id, visible_to: friends }
       end
 
       it "user has two kids" do
@@ -55,7 +56,7 @@ RSpec.describe PostsController, type: :controller do
 
     context "user selects custom_age" do
       before do
-        post :create, post: { kids_age: 'custom_age', body: body, kid_id: kid.id.to_s, years_old: '4', months_old: '11' }
+        post :create, post: { kids_age: 'custom_age', body: body, kid_id: kid.id.to_s, years_old: '4', months_old: '11', visible_to: friends }
       end
 
       it "creates a post with a custom age" do
@@ -67,7 +68,7 @@ RSpec.describe PostsController, type: :controller do
 
     context "with an uploaded picture" do
       before do
-        post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, picture: { photo: dispatch_upload } }
+        post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, visible_to: friends, picture: { photo: dispatch_upload } }
       end
 
       it "creates a post" do
@@ -96,7 +97,7 @@ RSpec.describe PostsController, type: :controller do
 
       context "no new picture is uploaded" do
         before do
-          post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s }
+          post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, visible_to: friends }
         end
 
         it "creates a post" do
@@ -112,7 +113,7 @@ RSpec.describe PostsController, type: :controller do
 
       context "uploads a new picture" do
         before do
-          post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, picture: { photo: dispatch_upload } }
+          post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, visible_to: friends, picture: { photo: dispatch_upload } }
         end
 
         it "creates a post" do
@@ -137,7 +138,7 @@ RSpec.describe PostsController, type: :controller do
 
       context "uploads a new picture with blank Post body" do
         before do
-          post :create, post: { kids_age: age, body: nil, kid_id: kid.id.to_s, picture: { photo: dispatch_upload } }
+          post :create, post: { kids_age: age, body: nil, kid_id: kid.id.to_s, visible_to: friends, picture: { photo: dispatch_upload } }
         end
 
         it "does not create a new post" do
@@ -158,7 +159,7 @@ RSpec.describe PostsController, type: :controller do
 
     context "happy path" do
       before do
-        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s }
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s, visible_to: friends }
         quote.reload
       end
 
@@ -173,7 +174,7 @@ RSpec.describe PostsController, type: :controller do
 
     context "user changes date the quote was said" do
       before do
-        patch :update, id: quote.id.to_s, post: { date_said: Date.current, body: body, kid_id: kid.id.to_s }
+        patch :update, id: quote.id.to_s, post: { date_said: Date.current, body: body, kid_id: kid.id.to_s, visible_to: friends }
       end
 
       it "updates a post with a custom age" do
@@ -183,7 +184,7 @@ RSpec.describe PostsController, type: :controller do
 
     context "adds a picture to a picture-less post" do
       before do
-        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", visible_to: friends, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
       end
 
       it "updates the current post" do
@@ -209,7 +210,7 @@ RSpec.describe PostsController, type: :controller do
       before do
         create_profile_picture_for(kid_2, user)
         expect(kid_2.pictures.profile_pictures.count).to eq 1
-        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: "new and improved", visible_to: friends, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
       end
 
       it "updates the current post" do
@@ -237,7 +238,7 @@ RSpec.describe PostsController, type: :controller do
       before do
         create_profile_picture_for(kid_2, user)
         expect(kid_2.pictures.profile_pictures.count).to eq 1
-        patch :update, id: quote.id.to_s, post: { kids_age: age, body: nil, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+        patch :update, id: quote.id.to_s, post: { kids_age: age, body: nil, visible_to: friends, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
       end
 
       it "does not change the post.kid_id to kid_2" do
@@ -264,12 +265,12 @@ RSpec.describe PostsController, type: :controller do
 
       it "does not create a new Post" do
         expect{
-          post :create, post: { kids_age: 'custom_age', body: body, kid_id: '', years_old: '4', months_old: '11' }
+          post :create, post: { kids_age: 'custom_age', body: body, kid_id: '', years_old: '4', months_old: '11', visible_to: friends }
         }.to change{ Post.count }.by(0)
       end
 
       it "displays error 'Must choose a kid'" do
-        post :create, post: { kids_age: 'custom_age', body: body, kid_id: '', years_old: '4', months_old: '11' }
+        post :create, post: { kids_age: 'custom_age', body: body, kid_id: '', years_old: '4', months_old: '11', visible_to: friends }
 
         expect(response.body).to have_content "can't be blank"
       end
@@ -284,16 +285,16 @@ RSpec.describe PostsController, type: :controller do
         expect(kid_2.pictures.profile_pictures.count).to eq 1
 
         # create first post, which inherits the profile picture
-        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s }
+        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s, visible_to: friends }
         expect(Post.first.picture_id).to eq Picture.first.id
 
         # create second post with a new picture
-        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s, visible_to: friends, picture: { photo: dispatch_upload } }
         expect(kid_2.pictures.count).to eq 2
         expect(Post.last.picture_id).to eq Picture.last.id
 
         # create third post with another new picture
-        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s, picture: { photo: dispatch_upload } }
+        post :create, post: { kids_age: age, body: body, kid_id: kid_2.id.to_s, visible_to: friends, picture: { photo: dispatch_upload } }
         expect(kid_2.pictures.count).to eq 3
         expect(Post.last.picture_id).to eq Picture.last.id
       end
@@ -307,7 +308,7 @@ RSpec.describe PostsController, type: :controller do
       let(:new_body) { "new and improved" }
 
       it "after saving yesterday's post, it still has yeseterday's picture on it" do
-        patch :update, id: yesterdays_post.id.to_s, post: { kids_age: age, body: new_body, kid_id: kid_2.id.to_s }
+        patch :update, id: yesterdays_post.id.to_s, post: { kids_age: age, body: new_body, kid_id: kid_2.id.to_s, visible_to: friends }
         yesterdays_post.reload
 
         expect(yesterdays_post.body).to eq new_body

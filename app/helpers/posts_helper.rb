@@ -113,7 +113,7 @@ module PostsHelper
 
   def share_post_button(kid)
     content_tag(:span,
-      mail_to(nil, "Share",
+      mail_to(nil, "<span class='glyphicon glyphicon-share' aria-hidden='true'></span>Share".html_safe,
         class: 'comment text-muted post-show-buttons',
         subject: "Funny thing #{kid.first_name.titleize} said...",
         body: request.original_url
@@ -127,6 +127,24 @@ module PostsHelper
 
   def can_view_options_button?(post, kid, user)
     can?(:manage, post) || can_update_profile_pic?(post, kid, user)
+  end
+
+  def friends_and_family_header
+    content_tag(
+      :h5,
+      'Friends & Family',
+      class: "card-title side-nav-sub-titles text-muted"
+    )
+  end
+
+  def parent_visibility_choices
+    Visibility.all_levels.map do |level|
+      [level.titleize, level]
+    end
+  end
+
+  def visibility_level_for(post)
+    post.visible_to.titleize.downcase
   end
 
   private

@@ -8,7 +8,7 @@ describe 'Editing a new post' do
   context "happy path" do
     let(:user)   { create :user }
     let(:kid)    { create :kid, users: [user] }
-    let(:quote)  { create :post, user: user, kid: kid }
+    let!(:quote)  { create :post, user: user, kid: kid }
     let!(:kid_2) { create :kid, users: [user], first_name: 'Jackie' }
 
     before { sign_into_app user }
