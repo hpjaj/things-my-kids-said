@@ -65,6 +65,26 @@ class Post < ActiveRecord::Base
       )
   end
 
+  def self.parent_can_see_for_their_kid(kid, user)
+    self
+      .where('(kid_id = ? AND visible_to in (?)) OR (visible_to = ? AND user_id = ?)',
+        kid.id,
+        Visibility.all_levels_without_me,
+        Visibility::ME_ONLY,
+        user.id
+      )
+  end
+
+  def self.friends_family_can_see_for_this_kid(kid, user)
+    self
+      .where('kid_id = ?', kid.id)
+      .where('visible_to in (?) OR (visible_to = ? AND user_id = ?)',
+        Visibility.friends_and_public,
+        Visibility::ME_ONLY,
+        user.id
+      )
+  end
+
   def self.filter_kids_settings(user)
     kid_ids = user.filtered_kids.pluck(:kid_id)
 
@@ -73,9 +93,9 @@ class Post < ActiveRecord::Base
 
   def self.user_can_see_for(kid, user)
     if user.kids.pluck(:id).include?(kid.id)
-      kid.posts
+      parent_can_see_for_their_kid(kid, user)
     else
-      kid.posts.where(parents_eyes_only: false)
+      friends_family_can_see_for_this_kid(kid, user)
     end
   end
 
