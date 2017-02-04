@@ -13,7 +13,16 @@ class Ability
       can :manage, Post, user_id: user.id
 
       can [:index, :read], Post do |post|
-        user.kids.pluck(:id).include?(post.kid.id) || user.following.pluck(:id).include?(post.kid.id)
+        post.author?(user) ||
+        post.visible_to == Visibility::PUBLIC ||
+        (
+          user.kids.pluck(:id).include?(post.kid.id) &&
+          Visibility.all_levels_without_me.include?(post.visible_to)
+        ) ||
+        (
+          user.following.pluck(:id).include?(post.kid.id) &&
+          Visibility.friends_and_public.include?(post.visible_to)
+        )
       end
 
       can :create, Kid

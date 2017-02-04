@@ -159,6 +159,10 @@ class Post < ActiveRecord::Base
     visible_to == Visibility::FRIENDS
   end
 
+  def author?(user)
+    user_id == user.id
+  end
+
   def self.to_csv
     attributes = %w{ kids_name said_on age_when_said quote captured_by created_on for_parents_only }
 
