@@ -10,9 +10,232 @@ RSpec.describe PostsController, type: :controller do
   let(:age)  { Date.current }
   let(:friends) { Visibility::FRIENDS }
 
-  before { sign_in user }
+  describe "GET :show" do
+    let(:mom) { create :user }
+    let(:friend) { create :user }
+    let(:non_friend) { create :user }
+
+    context "Visibility" do
+      let!(:post) { create :post, user: user, kid: kid, visible_to: visibility_level }
+
+      before do
+        kid.parents << mom
+        friend.following << kid
+      end
+
+      context "post.visible_to == FRIENDS" do
+        let(:visibility_level) { Visibility::FRIENDS }
+
+        context "author is signed in" do
+          before { sign_in user }
+
+          it "author can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "parent is signed in" do
+          before { sign_in mom }
+
+          it "parent can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "friend is signed in" do
+          before { sign_in friend }
+
+          it "friend can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "non-friend user is signed in" do
+          before { sign_in non_friend }
+
+          it "non-friend user cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+
+        context "non-user" do
+          it "cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+      end
+
+      context "post.visible_to == PARENTS_ONLY" do
+        let(:visibility_level) { Visibility::PARENTS_ONLY }
+
+        context "author is signed in" do
+          before { sign_in user }
+
+          it "author can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "parent is signed in" do
+          before { sign_in mom }
+
+          it "parent can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "friend is signed in" do
+          before { sign_in friend }
+
+          it "friend cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+
+        context "non-friend user is signed in" do
+          before { sign_in non_friend }
+
+          it "non-friend user cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+
+        context "non-user" do
+          it "cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+      end
+
+      context "post.visible_to == ME_ONLY" do
+        let(:visibility_level) { Visibility::ME_ONLY }
+
+        context "author is signed in" do
+          before { sign_in user }
+
+          it "author can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "parent is signed in" do
+          before { sign_in mom }
+
+          it "parent cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+
+        context "friend is signed in" do
+          before { sign_in friend }
+
+          it "friend cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+
+        context "non-friend user is signed in" do
+          before { sign_in non_friend }
+
+          it "non-friend user cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+
+        context "non-user" do
+          it "cannot see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 302
+          end
+        end
+      end
+
+      context "post.visible_to == PUBLIC" do
+        let(:visibility_level) { Visibility::PUBLIC }
+
+        context "author is signed in" do
+          before { sign_in user }
+
+          it "author can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "parent is signed in" do
+          before { sign_in mom }
+
+          it "parent can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "friend is signed in" do
+          before { sign_in friend }
+
+          it "friend can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "non-friend user is signed in" do
+          before { sign_in non_friend }
+
+          it "non-friend user can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+
+        context "non-user" do
+          it "can see the post" do
+            get :show, id: post.id
+
+            expect(response.status).to eq 200
+          end
+        end
+      end
+    end
+  end
 
   describe "POST :create" do
+    before { sign_in user }
+
     context "user has one kid" do
       before do
         post :create, post: { kids_age: age, body: body, kid_id: kid.id.to_s, visible_to: friends }
@@ -154,6 +377,8 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "PATCH :update" do
+    before { sign_in user }
+
     let(:quote) { create :post, user: user, kid: kid }
     let(:kid_2) { create :kid, users: [user] }
 
@@ -252,6 +477,8 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "DELETE :destroy" do
+    before { sign_in user }
+
     let!(:quote) { create :post, user: user, kid: kid }
 
     it "successfully deletes a Post" do
@@ -260,6 +487,8 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "edge cases" do
+    before { sign_in user }
+
     context "custom_age is selected, and kid_id is left blank" do
       let!(:kid_2) { create :kid, users: [user] }
 
