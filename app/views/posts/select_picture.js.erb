@@ -1,7 +1,7 @@
 $('#photo-goes-here').html("");
 
 if ("<%= @photo.present? %>" === 'true') {
-  $('#photo-goes-here').append( "<%= escape_javascript(image_tag @photo.url(:thumb, false)) if @photo.present? %>" );
+  $('#photo-goes-here').append( "<%= escape_javascript(image_tag @photo.url(:medium, false)) if @photo.present? %>" );
 } else {
   $('#photo-goes-here').append( "<%= escape_javascript(image_tag('person-placeholder.jpg', height: '100', width: '100')) %>" );
 }

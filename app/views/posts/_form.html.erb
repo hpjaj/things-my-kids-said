@@ -37,7 +37,7 @@
 
       <div id="photo-goes-here">
         <% if @post.picture %>
-          <%= image_tag @post.picture.photo.url(:thumb, false) %>
+          <%= image_tag @post.picture.photo.url(:medium, false) %>
         <% else %>
           <%= image_tag("person-placeholder.jpg", height: '100', width: '100')  %>
         <% end %>
