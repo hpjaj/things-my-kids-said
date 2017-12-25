@@ -20,3 +20,5 @@
 
 # Ignore all test pictures
 /public/system/pictures/*
+
+spec/examples.txt
