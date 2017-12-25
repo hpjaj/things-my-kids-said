@@ -6,7 +6,7 @@ gem 'rails', '4.2.10'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 
-ruby '2.3.0'
+ruby '2.3.3'
 
 group :production do
   gem 'rails_12factor'
